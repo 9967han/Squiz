@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="swp3.skku.edu.squiz.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#8e88ff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:textColor="#ffffff"
+                android:text="카드 만들기" />
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.constraint.ConstraintLayout
+            android:background="#ffffff"
+            android:padding="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:gravity="center"
+                android:hint="카드제목을 입력해주세요"
+                android:backgroundTint="#fec77d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.constraint.ConstraintLayout>
+
+        <!--파일불러오기는 왜있는건지 모르겠다.-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#9ed1f6"
+            android:text="파일 불러오기"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/make_card_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintVertical_bias="0.95"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="#9cd3fb"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+</android.support.constraint.ConstraintLayout>
+

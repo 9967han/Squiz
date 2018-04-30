@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8e88ff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:text="낱말카드제목" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.constraint.ConstraintLayout
+        android:background="#7dbeed"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:elevation="20dp">
+        <!--그림자효과를 줬는데 안들어간다. 실행해봐야 알듯??-->
+        <TextView
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toTopOf="@id/end_replay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/welldone"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textColor="#ffe17d"
+            android:text="Well Done !"/>
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:id="@+id/end_replay"
+            android:paddingVertical="20dp"
+            android:background="@drawable/silver_round_border"
+            app:layout_constraintBottom_toTopOf="@id/end_star"
+            app:layout_constraintTop_toBottomOf="@id/welldone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다시 시작하기"/>
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_replay_black_24dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:id="@+id/end_star"
+            android:paddingVertical="20dp"
+            android:background="@drawable/silver_round_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end_replay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="표시한 단어만 보기"/>
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star_border_yellow_24dp"/>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
