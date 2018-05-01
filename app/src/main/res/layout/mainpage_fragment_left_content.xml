@@ -7,7 +7,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:padding="10dp"
-        android:background="@drawable/purple_border2"
+        android:background="@drawable/purple_border"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="10dp">
