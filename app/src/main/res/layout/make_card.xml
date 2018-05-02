@@ -35,13 +35,13 @@
 
             <EditText
                 android:gravity="center"
-                android:hint="카드제목을 입력해주세요"
+                android:hint="카드제목을  입력해주세요"
                 android:backgroundTint="#fec77d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.constraint.ConstraintLayout>
 
-        <!--파일불러오기는 왜있는건지 모르겠다.-->
+        <!--파일불러오기는 왜있는건지 모르겠다. 발표 안들었지 임마-->
 
         <TextView
             android:layout_width="wrap_content"

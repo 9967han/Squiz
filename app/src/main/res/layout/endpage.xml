@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipToPadding="false">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -13,13 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:text="낱말카드제목" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.constraint.ConstraintLayout
         android:background="#7dbeed"
+        android:elevation="20dp"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,8 +29,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="340dp"
         android:layout_height="340dp"
-        android:elevation="20dp">
-        <!--그림자효과를 줬는데 안들어간다. 실행해봐야 알듯??-->
+        >
+        <!--그림자효과를 줬는데 안들어간다. 실행해봐야 알듯?? 므엥 왜 안도ㅣ는겨ㅕ-->
         <TextView
             android:layout_marginTop="30dp"
             app:layout_constraintBottom_toTopOf="@id/end_replay"
