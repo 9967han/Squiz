@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8e88ff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:text="객관식" />
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="[\t 이론리더십 : 전통 리더십 \t]"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/silver_round_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/objectivepage_content"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
