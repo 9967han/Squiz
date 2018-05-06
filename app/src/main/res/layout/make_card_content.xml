@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp">
     <LinearLayout
+        android:id="@+id/card_content_layout"
         android:orientation="vertical"
         android:background="@drawable/silver_round_border"
         android:padding="10dp"
@@ -11,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/card_content_word"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="3dp"
             android:gravity="center"
@@ -20,6 +22,7 @@
             android:drawableRight="@drawable/ic_camera_alt_black_24dp"/>
 
         <EditText
+            android:id="@+id/card_content_mean"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="3dp"
             android:gravity="center"
@@ -35,11 +38,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/card_content_rewrite"
                 android:textColor="#9ed1f6"
                 android:text="다시쓰기"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/card_content_delete"
                 android:layout_marginHorizontal="10dp"
                 android:textColor="#9ed1f6"
                 android:text="삭제하기"

@@ -29,13 +29,16 @@
                 android:textColor="#ffffff"
                 android:text= "카드" />
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginVertical="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/purple_background"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 >
                 <EditText
                     app:layout_constraintTop_toTopOf="parent"
@@ -43,19 +46,18 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:drawablePadding="40dp"
                     android:hint="세트검색"
                     android:background="@null"
                     android:drawableRight="@drawable/ic_search_black_24dp"
                     />
-            </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
+                android:id="@+id/main_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#8e88ff"
@@ -70,13 +72,15 @@
                     android:icon="@drawable/ic_folder_black_24dp"/>
             </android.support.design.widget.TabLayout>
             <android.support.v4.view.ViewPager
+                android:id="@+id/main_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/tab_layout">
+                android:layout_below="@id/main_tab_layout">
             </android.support.v4.view.ViewPager>
         </RelativeLayout>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_fb"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -86,6 +90,8 @@
         android:src="@drawable/ic_add_black_24dp"
         app:backgroundTint="#9cd3fb"
         android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:onClick="onMainFloatingClick"
+        />
 
 </android.support.constraint.ConstraintLayout>
