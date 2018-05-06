@@ -30,7 +30,7 @@
                     android:layout_gravity="center"
                     android:textSize="24sp"
                     android:textColor="#ffffff"
-                    android:text="카드 만들기" />
+                    android:text="폴더에 추가" />
                 <ImageView
                     app:layout_constraintHorizontal_bias="0.9"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -41,57 +41,22 @@
                     android:src="@drawable/ic_save_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onMakeCardSaveButtonClick"/>
+                    android:onClick="onAddCardToFolderSaveButtonClick"/>
+
+                <!--todo: onclick 만들기-->
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.Toolbar>
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/focus"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="#ffffff"
-            android:padding="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/makeCardTitle"
-                android:gravity="center"
-                android:hint="카드제목을  입력해주세요"
-                android:backgroundTint="#fec77d"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.constraint.ConstraintLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textColor="#9ed1f6"
-            android:text="파일 불러오기"/>
-
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/makeCardRV"
+            android:id="@+id/FolderRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/make_card_content"
+            tools:listitem="@layout/mainpage_fragment_right_content"
             >
+        <!--Todo: 폴더 선택해서 position 값 넘겨주는 식으로 처리-->
+
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:onClick="onMakeCardFloatingClick"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintVertical_bias="0.95"
-        android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="#9cd3fb"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
 
 </android.support.constraint.ConstraintLayout>
 
