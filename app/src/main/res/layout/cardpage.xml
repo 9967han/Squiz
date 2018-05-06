@@ -14,12 +14,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:text="내가 만든 카드" />
     </android.support.v7.widget.Toolbar>
 
-    <!--꼭 []이걸 멀리떨어뜨려놔야하나여;;;-->
+    <!--꼭 []이걸 멀리떨어뜨려놔야하나여;;; 아녀ㄷㄷㄷㄷㄷ 근데 제가 멀리 떨어뜨려 놓고싶어여 ㅎ-->
     <TextView
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="20dp"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="[\t 이론리더십 : 전통 리더십 \t]"
         />
     <LinearLayout
