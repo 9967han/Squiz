@@ -49,6 +49,7 @@ public class InsideFolder extends AppCompatActivity{
         alert.show();
 
         //folder_name 따로 저장해야함
+        //이거 이용해서 right fragment
         //todo 김하은: 이거 나중에 마저 작성해야함
 
     }
