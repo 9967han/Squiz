@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import swp3.skku.edu.squiz.R;
+
 /**
  * A simple {@link Fragment} subclass.
  */

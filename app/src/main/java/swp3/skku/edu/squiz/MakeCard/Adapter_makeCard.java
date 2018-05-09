@@ -12,9 +12,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.model.CardItem;
@@ -24,9 +26,11 @@ import swp3.skku.edu.squiz.model.CardItem;
  */
 
 public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> {
-    ArrayList<CardItem> cardItemList = new ArrayList();
+    private ArrayList<CardItem> cardItemList = new ArrayList<>();
     private int contentLayout;
     private Context context;
+    final static String foldername = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz";
+
 
     public Adapter_makeCard(int contentLayout, Context context) {
         this.contentLayout = contentLayout;
@@ -119,19 +123,26 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
     //아이템을 파일에 저장하는 함수(아직 되는지 모르겠음)
     //파일저장방식 : 1. 단어수(1번만), 2. 단어 3. 뜻
     public void saveCardData(String title){
-        File file = new File(context.getFilesDir(), title);
+        File dir = new File(foldername);
+        //디렉터리가 없을 시 폴더 생성
+        if(!dir.exists()){
+            dir.mkdir();
+        }
         try {
-            BufferedWriter bfw = new BufferedWriter(new FileWriter(file));
-            bfw.write(cardItemList.size());
+            //Output Stream 생성
+            FileOutputStream fos = new FileOutputStream(foldername+"/"+title, true);
+            //파일쓰기
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+            writer.write(title);
+            writer.write(String.valueOf(cardItemList.size()*2));
             for(CardItem cardItem : cardItemList){
-                bfw.write(cardItem.getWord());
-                bfw.newLine();
-                bfw.write(cardItem.getMeaning());
+                    writer.write(cardItem.getWord());
+                    writer.newLine();
+                    writer.write(cardItem.getMeaning());
             }
-            if(bfw != null){
-                bfw.flush();
-                bfw.close();
-            }
+            writer.flush();
+            writer.close();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
