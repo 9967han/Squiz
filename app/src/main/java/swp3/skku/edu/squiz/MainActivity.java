@@ -6,11 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import swp3.skku.edu.squiz.Left.LeftFragment;
 import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
+import swp3.skku.edu.squiz.MakeFolder.MakeFolderActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMainFloatingClick(View view) {
-        Log.d("Number", String.valueOf(viewPager.getCurrentItem()));
         if(viewPager.getCurrentItem() == 0){
             Toast.makeText(getApplicationContext(), "카드만들기", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
+            startActivity(intent);
+        }else if(viewPager.getCurrentItem() == 1){
+            Toast.makeText(getApplicationContext(), "폴더만들기", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, MakeFolderActivity.class);
             startActivity(intent);
         }
     }
