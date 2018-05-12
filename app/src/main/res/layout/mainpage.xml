@@ -1,101 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+    android:orientation="vertical">
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer">
+
+    </android.support.design.widget.NavigationView>
+
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#8e88ff">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_black_24dp"/>
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:textSize="20sp"
-                android:textColor="#ffffff"
-                android:text= "카드" />
-
-            <LinearLayout
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginVertical="12dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/purple_background"
-                android:gravity="center"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                >
-                <EditText
+                android:layout_height="?attr/actionBarSize"
+                android:background="#8e88ff">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu_black_24dp"
+                    android:onClick="onOptionItemSelected"/>
+                <TextView
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="40dp"
-                    android:hint="세트 검색"
-                    android:background="@null"
-                    android:drawableRight="@drawable/ic_search_black_24dp"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                    android:layout_marginLeft="40dp"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"
+                    android:text= "카드" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/main_tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#8e88ff"
-                app:tabIndicatorColor="#fec77d">
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_message_black_24dp" />
-
-                <android.support.design.widget.TabItem
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginVertical="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:icon="@drawable/ic_folder_black_24dp" />
-            </android.support.design.widget.TabLayout>
-            <android.support.v4.view.ViewPager
-                android:id="@+id/main_view_pager"
+                    android:background="@drawable/purple_background"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    >
+                    <EditText
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="40dp"
+                        android:hint="세트 검색"
+                        android:background="@null"
+                        android:drawableRight="@drawable/ic_search_black_24dp"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/main_tab_layout"
-                android:background="#37e0e0e0">
-            </android.support.v4.view.ViewPager>
-        </RelativeLayout>
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_fb"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintVertical_bias="0.95"
-        android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="#9cd3fb"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:onClick="onMainFloatingClick"
-        />
+                android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/main_tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#8e88ff"
+                    app:tabIndicatorColor="#fec77d">
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:icon="@drawable/ic_message_black_24dp" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:icon="@drawable/ic_folder_black_24dp" />
+                </android.support.design.widget.TabLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/main_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/main_tab_layout"
+                    android:background="#37e0e0e0">
+                </android.support.v4.view.ViewPager>
+            </RelativeLayout>
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_fb"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintVertical_bias="0.95"
+            android:src="@drawable/ic_add_black_24dp"
+            app:backgroundTint="#9cd3fb"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="onMainFloatingClick" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
+

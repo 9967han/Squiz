@@ -40,8 +40,12 @@ public class MakeCardActivity extends AppCompatActivity {
         constraintLayout.setFocusableInTouchMode(true);
         constraintLayout.requestFocus();
         String title = cardTitle.getText().toString();
-        Toast.makeText(this, title+"카드 저장완료", Toast.LENGTH_SHORT).show();
-        adapter_makeCard.saveCardData(title);
-        this.finish();
+        if(title != null && !title.equals("")){
+            Toast.makeText(this, title+"카드 저장완료", Toast.LENGTH_SHORT).show();
+            adapter_makeCard.saveCardData(title);
+            this.finish();
+            } else {
+            Toast.makeText(this, "카드제목을 입력하세요", Toast.LENGTH_SHORT).show();
+        }
     }
 }
