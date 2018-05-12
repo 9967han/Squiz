@@ -21,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ViewPager viewPager;
+    Fragment[] fragments_array;
+    LeftFragment leftFragment;
+    RightFragment rightFragment;
+    final static int REQUEST_DataItemSet = 1;
+    String cardTitle;
+    int cardCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.main_view_pager);
         TabLayout tabLayout = findViewById(R.id.main_tab_layout);
 
-        Fragment[] fragments_array = new Fragment[2];
+        fragments_array = new Fragment[2];
         fragments_array[0] = new LeftFragment();
         fragments_array[1] = new RightFragment();
+        leftFragment = (LeftFragment) fragments_array[0];
+        rightFragment = (RightFragment) fragments_array[1];
 
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), fragments_array);
         viewPager.setAdapter(adapter);
@@ -48,15 +56,30 @@ public class MainActivity extends AppCompatActivity {
         if(viewPager.getCurrentItem() == 0){
             Toast.makeText(getApplicationContext(), "카드만들기", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_DataItemSet);
         }else if(viewPager.getCurrentItem() == 1){
             Toast.makeText(getApplicationContext(), "폴더만들기", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, MakeFolderActivity.class);
             startActivity(intent);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK){
+            return;
+        }
+        if(requestCode == REQUEST_DataItemSet){
+            cardTitle = data.getStringExtra("title");
+            cardCount = Integer.valueOf(data.getStringExtra("count"));
+            leftFragment.addCardSetData(cardTitle, cardCount);
+        }
+    }
+
     public void onOptionItemSelected(View view) {
         drawerLayout.openDrawer(GravityCompat.START);
-
     }
+
+
 }

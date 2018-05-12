@@ -21,6 +21,7 @@
 
     <!--꼭 []이걸 멀리떨어뜨려놔야하나여;;; 아녀ㄷㄷㄷㄷㄷ 근데 제가 멀리 떨어뜨려 놓고싶어여 ㅎ-->
     <TextView
+        android:id="@+id/cardpage_title"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="20dp"
         android:layout_width="match_parent"
@@ -68,6 +69,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/cardpage_count"
         android:text="26 단어, 발표 10 단어"
         android:textColor="#9ed1f6"
         android:layout_marginVertical="5dp"
@@ -76,6 +78,7 @@
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardpage_RV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/cardpage_content">

@@ -1,5 +1,7 @@
 package swp3.skku.edu.squiz.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by LG on 2018-05-07.
  */
@@ -7,6 +9,15 @@ package swp3.skku.edu.squiz.model;
 public class CardSetItem {
     int count;
     String title;
+    ArrayList<CardItem> cardItems;
+
+    public ArrayList<CardItem> getCardItems() {
+        return cardItems;
+    }
+
+    public void setCardItems(ArrayList<CardItem> cardItems) {
+        this.cardItems = cardItems;
+    }
 
     public int getCount() {
         return count;
