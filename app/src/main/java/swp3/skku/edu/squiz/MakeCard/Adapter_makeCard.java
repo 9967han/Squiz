@@ -1,24 +1,16 @@
 package swp3.skku.edu.squiz.MakeCard;
 
 import android.content.Context;
-import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.model.CardItem;
 
 /**
@@ -29,14 +21,13 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
     private ArrayList<CardItem> cardItemList = new ArrayList<>();
     private int contentLayout;
     private Context context;
-    final static String foldername = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz";
-
-
-    public Adapter_makeCard(int contentLayout, Context context) {
+    AppCompatActivity appCompatActivity;
+    public Adapter_makeCard(int contentLayout, Context context, AppCompatActivity appCompatActivity) {
         this.contentLayout = contentLayout;
         this.context = context;
         CardItem cardItem = new CardItem(null, null);
         cardItemList.add(cardItem);
+        this.appCompatActivity = appCompatActivity;
     }
 
     //뷰 생성
@@ -91,6 +82,11 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         return viewHolder_makeCard;
     }
 
+    public int cardItemListSize(){
+        return cardItemList.size();
+    }
+
+
     public void removeItem(int position) {
         cardItemList.remove(position);
         this.notifyItemRemoved(position);
@@ -120,31 +116,14 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         return cardItemList.size();
     }
 
-    //아이템을 파일에 저장하는 함수(아직 되는지 모르겠음)
     //파일저장방식 : 1. 단어수(1번만), 2. 단어 3. 뜻
-    public void saveCardData(String title){
-        File dir = new File(foldername);
-        //디렉터리가 없을 시 폴더 생성
-        if(!dir.exists()){
-            dir.mkdir();
-        }
-        try {
-            //Output Stream 생성
-            FileOutputStream fos = new FileOutputStream(foldername+"/"+title, true);
-            //파일쓰기
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-            writer.write(title);
-            writer.write(String.valueOf(cardItemList.size()*2));
-            for(CardItem cardItem : cardItemList){
-                    writer.write(cardItem.getWord());
-                    writer.newLine();
-                    writer.write(cardItem.getMeaning());
-            }
-            writer.flush();
-            writer.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveCardData(String title) throws IOException {
+        FileOutTask fileTask = new FileOutTask(appCompatActivity, cardItemList, title);
+        fileTask.execute();
     }
+
+
+
+
 }
+

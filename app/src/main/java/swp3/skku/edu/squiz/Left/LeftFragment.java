@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import swp3.skku.edu.squiz.R;
+import swp3.skku.edu.squiz.model.CardSetItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,18 +24,23 @@ public class LeftFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mainpage_fragment_left, container, false);
-        adapter_left = new Adapter_left(R.layout.mainpage_fragment_left_content, this.context);
+        adapter_left = new Adapter_left(R.layout.mainpage_fragment_left_content, this.context, getActivity());
+        adapter_left.initCardSetData();
+
         RecyclerView leftFragmentRV = view.findViewById(R.id.leftFragmentRV);
         leftFragmentRV.setLayoutManager(new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false));
         leftFragmentRV.setAdapter(adapter_left);
-
-        adapter_left.initCardSetData();
         return view;
     }
+
+    public void addCardSetData(String title, int count){
+        CardSetItem cardSetItem = new CardSetItem(count, title);
+        adapter_left.addCardSetData(cardSetItem);
+    }
+
 
 }

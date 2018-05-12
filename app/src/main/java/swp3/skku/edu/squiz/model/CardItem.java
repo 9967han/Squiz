@@ -7,7 +7,7 @@ package swp3.skku.edu.squiz.model;
 public class CardItem {
     String word;
     String meaning;
-
+    Boolean like = false;
 
     public CardItem(String word, String meaning){
         this.word = word;
@@ -16,6 +16,14 @@ public class CardItem {
 
     public String getWord() {
         return word;
+    }
+
+    public Boolean getLike() {
+        return like;
+    }
+
+    public void setLike(Boolean like) {
+        this.like = like;
     }
 
     public void setWord(String word) {
