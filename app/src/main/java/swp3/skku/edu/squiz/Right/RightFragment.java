@@ -26,7 +26,7 @@ public class RightFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mainpage_fragment_right, container, false);
-        adapter_right = new Adapter_right(R.layout.mainpage_fragment_right_content, this.context);
+        adapter_right = new Adapter_right(R.layout.mainpage_fragment_right_content, this.context, getActivity());
         RecyclerView rightFragmentRV = view.findViewById(R.id.rightFragmentRV);
         rightFragmentRV.setLayoutManager(new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false));
         rightFragmentRV.setAdapter(adapter_right);

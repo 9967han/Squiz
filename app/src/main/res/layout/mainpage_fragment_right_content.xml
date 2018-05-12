@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/right_layout"
         android:background="@drawable/ic_folder_black_24dp"
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/right_card_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

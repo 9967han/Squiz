@@ -14,4 +14,5 @@
         android:text="Squiz"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
+    <!--Todo: 지우야 이거 색 좀 다른 메뉴보다 살짝 어두운 보라색으로 해줭-->
 </LinearLayout>
