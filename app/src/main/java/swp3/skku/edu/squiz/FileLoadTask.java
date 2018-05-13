@@ -38,10 +38,16 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 load_title = words[0];
                 if(load_title.equals(title)){
                     CardItem cardItem = new CardItem(words[1], words[2]);
-                    //TODO 상욱 : if(words[3].equals("false"))?
+                    if(words[3].equals("false")){
+                        cardItem.setLike(false);
+                    }else if(words[3].equals("true")){
+                        cardItem.setLike(true);
+                    }
                     cardPageItemList.add(cardItem);
                 }
             }
+            reader.close();
+            is.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }

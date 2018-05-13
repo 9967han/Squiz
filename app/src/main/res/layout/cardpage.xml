@@ -77,6 +77,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/cardpage__like_count"
+        android:text="26 단어, 발표 10 단어"
+        android:textColor="#9ed1f6"
+        android:layout_marginVertical="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardpage_RV"
         android:layout_width="match_parent"
