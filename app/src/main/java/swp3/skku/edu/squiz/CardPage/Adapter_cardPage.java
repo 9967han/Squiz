@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.FileLoadTask;
+import swp3.skku.edu.squiz.FileModifyTask;
 import swp3.skku.edu.squiz.model.CardItem;
 
 /**
@@ -35,10 +37,14 @@ public class Adapter_cardPage extends RecyclerView.Adapter<ViewHolder_cardPage>{
             @Override
             public void onClick(View view) {
                 int position = viewHolder_cardPage.position;
+                Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                String word = String.valueOf(viewHolder_cardPage.cardPage_word.getText());
+                String mean = String.valueOf(viewHolder_cardPage.cardPage_mean.getText());
+                FileModifyTask fileModifyTask = new FileModifyTask(cardPageItemList, word, mean);
+                fileModifyTask.execute();
                 //TODO 상욱 : FileModifyTask
             }
         });
-
 
         return viewHolder_cardPage;
     }
