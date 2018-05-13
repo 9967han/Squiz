@@ -1,4 +1,4 @@
-package swp3.skku.edu.squiz;
+package swp3.skku.edu.squiz.Right;
 
 import android.content.DialogInterface;
 import android.support.constraint.ConstraintLayout;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import swp3.skku.edu.squiz.MakeCard.Adapter_makeCard;
+import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardItem;
 
 public class InsideFolder extends AppCompatActivity{

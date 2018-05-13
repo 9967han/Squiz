@@ -1,5 +1,7 @@
 package swp3.skku.edu.squiz;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -7,14 +9,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.Left.LeftFragment;
 import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
-import swp3.skku.edu.squiz.MakeFolder.MakeFolderActivity;
+import swp3.skku.edu.squiz.Right.RightFragment;
+import swp3.skku.edu.squiz.model.FolderItem;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     final static int REQUEST_DataItemSet = 1;
     String cardTitle;
     int cardCount;
+
+    final Context context=this;
+    private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
+    AppCompatActivity appCompatActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +69,51 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "카드만들기", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
             startActivityForResult(intent, REQUEST_DataItemSet);
-        }else if(viewPager.getCurrentItem() == 1){
-            Toast.makeText(getApplicationContext(), "폴더만들기", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, MakeFolderActivity.class);
-            startActivity(intent);
+        }
+
+        else if(viewPager.getCurrentItem() == 1){
+            Toast.makeText(getApplicationContext(), "폴더추가", Toast.LENGTH_SHORT).show();
+            final EditText FolderName=new EditText(this);
+            AlertDialog.Builder alert=new AlertDialog.Builder(this);
+            alert.setTitle("폴더 추가");
+            alert.setMessage("새로운 폴더명을 입력하세요");
+            alert.setCancelable(false);
+            alert.setView(FolderName);
+
+            alert.setPositiveButton("저장",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String folder_name=FolderName.getText().toString();
+
+                            if(folder_name != null && !folder_name.equals("")){
+                                 try {
+                                     //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                            //makefolderactivity.checkVerify();
+                                            //Todo: checkverify 김하은 0513
+                                     //}else{
+                                           saveFolderData(folder_name);
+                                      //}
+                                    } catch (IOException e) {
+                                        Toast.makeText(getApplicationContext(),"폴더저장실패", Toast.LENGTH_SHORT).show();
+                                 }
+                                  Toast.makeText(getApplicationContext(),"폴더 저장완료", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                 Toast.makeText(getApplicationContext(), "폴더 제목을 입력하세요", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+            });
+            alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            alert.show();
+            //Intent intent = new Intent(MainActivity.this, MakeFolderActivity.class);
+            //startActivity(intent);
         }
     }
 
@@ -81,5 +134,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-
+    public void saveFolderData(String folder_name) throws IOException {
+        FileOutTask fileTask = new FileOutTask(appCompatActivity, FolderItemList, folder_name,1);
+        fileTask.execute();
+    }
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import swp3.skku.edu.squiz.model.CardSetItem;
+import swp3.skku.edu.squiz.model.FolderItem;
 
 /**
  * Created by LG on 2018-05-12.
@@ -22,8 +23,19 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
     final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squiz.txt";
     ArrayList<CardSetItem> cardSetItemList;
 
+    final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
+    ArrayList<FolderItem> folderItemList;
+
+    int idx=0;
+
     public FileInitTask(ArrayList<CardSetItem> cardSetItemList) {
         this.cardSetItemList = cardSetItemList;
+        this.idx=0;
+    }
+
+    public FileInitTask(ArrayList<FolderItem> folderItemList, int i){
+        this.folderItemList=folderItemList;
+        this.idx=1;
     }
 
     @Override
@@ -31,28 +43,58 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
         //Log.d("Read path", filePath);
         int count = 0;
         int check = 0;
-        try {
-            InputStream is = new FileInputStream(filePath);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String line = "";
-            String title = "";
-            while((line=reader.readLine())!=null) {
-                String[] words = line.split(",");
-                title = words[0];
-                count = Integer.valueOf(words[4]);
-                CardSetItem cardSetItem = new CardSetItem(count, title);
-                for(CardSetItem cardSetItem1 : cardSetItemList){
-                    if(cardSetItem1.getTitle().equals(cardSetItem.getTitle()))  check++;
+
+        if(idx==0){
+            check=0;
+            try {
+                InputStream is = new FileInputStream(filePath);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                String line = "";
+                String title = "";
+                while((line=reader.readLine())!=null) {
+                    String[] words = line.split(",");
+                    title = words[0];
+                    count = Integer.valueOf(words[4]);
+                    CardSetItem cardSetItem = new CardSetItem(count, title);
+                    for(CardSetItem cardSetItem1 : cardSetItemList){
+                        if(cardSetItem1.getTitle().equals(cardSetItem.getTitle()))  check++;
+                    }
+                    if(check == 0) cardSetItemList.add(cardSetItem);
+                    check = 0;
+                    for(int i=0; i<count-1; i++) reader.readLine();
                 }
-                if(check == 0) cardSetItemList.add(cardSetItem);
-                check = 0;
-                for(int i=0; i<count-1; i++) reader.readLine();
+                reader.close();
+                is.close();
+            } catch (IOException e) {
+                Log.d("dir", "read path error");
+                e.printStackTrace();
             }
-            reader.close();
-            is.close();
-        } catch (IOException e) {
-            Log.d("dir", "read path error");
-            e.printStackTrace();
+
+        }
+        else if(idx==1){
+            check=0;
+            try {
+                InputStream is = new FileInputStream(filePathfolder);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                String line = "";
+                String title = "";
+                while((line=reader.readLine())!=null) {
+                    String[] words = line.split("\n");
+                    title = words[0];
+                    FolderItem folderItem = new FolderItem(title);
+                    for(FolderItem folderItem1 : folderItemList){
+                        if(folderItem1.getWord().equals(folderItem.getWord()))  check++;
+                    }
+                    if(check == 0) folderItemList.add(folderItem);
+                    check = 0;
+                    for(int i=0; i<count-1; i++) reader.readLine();
+                }
+                reader.close();
+                is.close();
+            } catch (IOException e) {
+                Log.d("dir", "read path error");
+                e.printStackTrace();
+            }
         }
         return null;
     }
