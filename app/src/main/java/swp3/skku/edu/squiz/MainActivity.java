@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import swp3.skku.edu.squiz.Left.LeftFragment;
 import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
 import swp3.skku.edu.squiz.Right.RightFragment;
+import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
 
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     final Context context=this;
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
+    private ArrayList<CardSetItem> CardSetItemList = new ArrayList<>();
     AppCompatActivity appCompatActivity;
 
     @Override
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveFolderData(String folder_name) throws IOException {
-        FileOutTask fileTask = new FileOutTask(appCompatActivity, FolderItemList, folder_name,1);
+        FileOutTask fileTask = new FileOutTask(appCompatActivity, FolderItemList, null, folder_name);
         fileTask.execute();
     }
 }

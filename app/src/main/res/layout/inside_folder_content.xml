@@ -18,7 +18,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/CardSet_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이론리더십 : 전통적 리더십 이론"
@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/left_word_count"
+                android:id="@+id/CardSetItem_Count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -34,12 +34,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="306dp"
-                tools:layout_editor_absoluteY="0dp" />
         </android.support.constraint.ConstraintLayout>
     </RadioGroup>
 

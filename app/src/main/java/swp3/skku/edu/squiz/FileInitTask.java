@@ -73,11 +73,11 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
         else if(idx==1){
             check=0;
             try {
-                InputStream is = new FileInputStream(filePathfolder);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                InputStream is1 = new FileInputStream(filePathfolder);
+                BufferedReader reader1 = new BufferedReader(new InputStreamReader(is1));
                 String line = "";
                 String title = "";
-                while((line=reader.readLine())!=null) {
+                while((line=reader1.readLine())!=null) {
                     String[] words = line.split("\n");
                     title = words[0];
                     FolderItem folderItem = new FolderItem(title);
@@ -86,10 +86,10 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                     }
                     if(check == 0) folderItemList.add(folderItem);
                     check = 0;
-                    for(int i=0; i<count-1; i++) reader.readLine();
+                    for(int i=0; i<count-1; i++) reader1.readLine();
                 }
-                reader.close();
-                is.close();
+                reader1.close();
+                is1.close();
             } catch (IOException e) {
                 Log.d("dir", "read path error");
                 e.printStackTrace();

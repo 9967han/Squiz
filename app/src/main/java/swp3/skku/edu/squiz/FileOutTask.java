@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.model.CardItem;
+import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
 
 /**
@@ -28,6 +29,8 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
     String folder_name;
     int idx=0;
 
+    ArrayList<CardSetItem> cardSetItems;
+
     public FileOutTask(AppCompatActivity appCompatActivity, ArrayList<CardItem> cardItemList, String title) {
         this.cardItemList = cardItemList;
         this.title = title;
@@ -35,19 +38,20 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         this.idx=0;
     }
 
-    public FileOutTask(AppCompatActivity appCompatActivity, ArrayList<FolderItem> folderItemList, String folder_name, int idx){
+    public FileOutTask(AppCompatActivity appCompatActivity, ArrayList<FolderItem> folderItemList, ArrayList<CardSetItem> cardSetItems, String folder_name){
         this.folderItemList=folderItemList;
         this.folder_name=folder_name;
+        this.cardSetItems=cardSetItems;
         this.appCompatActivity=appCompatActivity;
         this.idx=1;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
+        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Squiz");
+        //디렉터리가 없을 시 폴더 생성
+        if(!dir.exists()) dir.mkdirs();
         if(idx==0){
-            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Squiz");
-            //디렉터리가 없을 시 폴더 생성
-            if(!dir.exists()) dir.mkdirs();
             File squiz = new File(dir, "squiz.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
@@ -70,22 +74,28 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
             }
         }
         else if(idx==1){
-            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Squiz");
-            //디렉터리가 없을 시 폴더 생성
-            if(!dir.exists()) dir.mkdirs();
             File squizfolder = new File(dir, "squizfolder.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
             try {
-                //Todo: 김하은 0513
                 fos = new FileOutputStream(squizfolder, true);  //파일쓰기
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-                for(FolderItem folderItem : folderItemList){
-                    writer.write(folderItem.getWord());
-                    writer.newLine();
+                BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(fos));
+                if(cardSetItems==null){
+                    writer1.write(folder_name);
                 }
-                writer.flush();
-                writer.close();
+                else{
+                    for(FolderItem folderItem : folderItemList){
+                        writer1.write(folderItem.getWord()+",");
+                        for(CardSetItem cardSetItem : cardSetItems){
+                            writer1.write(cardSetItem.getTitle()+",");
+                        }
+                        writer1.write(folderItemList.size());
+                        writer1.newLine();
+                    }
+                }
+
+                writer1.flush();
+                writer1.close();
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();

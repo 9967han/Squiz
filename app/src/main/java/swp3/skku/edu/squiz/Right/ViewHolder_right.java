@@ -9,7 +9,6 @@ import swp3.skku.edu.squiz.R;
 
 public class ViewHolder_right extends RecyclerView.ViewHolder {
     public TextView title;
-    public TextView word_count;
     public ConstraintLayout right_layout;
     int position;
 

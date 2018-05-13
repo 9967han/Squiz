@@ -3,7 +3,6 @@ package swp3.skku.edu.squiz.Right;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +11,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import swp3.skku.edu.squiz.CardPage.CardPageActivity;
 import swp3.skku.edu.squiz.FileInitTask;
-import swp3.skku.edu.squiz.Left.ViewHolder_left;
-import swp3.skku.edu.squiz.model.CardSetItem;
+import swp3.skku.edu.squiz.FolderPage.InsideFolder;
 import swp3.skku.edu.squiz.model.FolderItem;
 
 public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
@@ -23,10 +20,9 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     private int contentLayout;
     private Context context;
     Activity activity;
-    final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/logfile.txt";
+    //final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/logfile.txt";
 
     public Adapter_right(int contentLayout, Context context, FragmentActivity activity){
-        //this.FolderSetItemList = folderSetItemList;
         this.contentLayout = contentLayout;
         this.context = context;
         this.activity=activity;
@@ -41,10 +37,12 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
         viewHolder_right.right_layout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int position = viewHolder_right.position;
+               int position = viewHolder_right.position;
                 String title = folderItemList.get(position).getWord();
-                Intent intent = new Intent(activity, CardPageActivity.class);
+                String count = String.valueOf(folderItemList.get(position).getCount());
+                Intent intent = new Intent(activity, InsideFolder.class);
                 intent.putExtra("title", title);
+                intent.putExtra("count", count);
                 activity.startActivity(intent);
             }
         });
@@ -54,7 +52,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     @Override
     public void onBindViewHolder(ViewHolder_right holder, int position) {
         FolderItem folderItem = folderItemList.get(position);
-        holder.title.setText("폴더제목 : "+folderItem.getWord());
+        holder.title.setText(folderItem.getWord());
         holder.position = position;
     }
 

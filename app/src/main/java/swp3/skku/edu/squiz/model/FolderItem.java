@@ -6,6 +6,8 @@ public class FolderItem {
 
     String folder_name;
     ArrayList<CardSetItem> cardsetitems;
+    int count;
+
     public ArrayList<CardSetItem> getCardSetItems() {
         return cardsetitems;
     }
@@ -19,5 +21,22 @@ public class FolderItem {
     public void setWord(String word) {
         this.folder_name = word;
     }
-    //Todo: 김하은 0513
+
+    public void setCardSetItems(ArrayList<CardSetItem> cardSetItems) {
+        this.cardsetitems = cardSetItems;
+        this.count=cardsetitems.size();
+    }
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public FolderItem(int count, String title) {
+
+        this.count = count;
+        this.folder_name = title;
+    }
 }
