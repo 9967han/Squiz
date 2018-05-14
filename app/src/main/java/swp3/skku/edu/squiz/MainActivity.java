@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -41,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
     private ArrayList<CardSetItem> CardSetItemList = new ArrayList<>();
     AppCompatActivity appCompatActivity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainpage);
 
+        final TextView MainTitle=(TextView)findViewById(R.id.main_title);
+        MainTitle.setText("카드");
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
 
@@ -59,11 +61,34 @@ public class MainActivity extends AppCompatActivity {
         leftFragment = (LeftFragment) fragments_array[0];
         rightFragment = (RightFragment) fragments_array[1];
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position=tab.getPosition();
+                if(position==0){
+                    MainTitle.setText("카드");
+                }
+                else if(position==1){
+                    MainTitle.setText("폴더");
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), fragments_array);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_black_24dp);
+
     }
 
     public void onMainFloatingClick(View view) {
@@ -114,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
             alert.show();
-            //Intent intent = new Intent(MainActivity.this, MakeFolderActivity.class);
-            //startActivity(intent);
         }
     }
 
