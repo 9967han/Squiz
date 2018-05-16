@@ -2,11 +2,15 @@ package swp3.skku.edu.squiz.CardPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
@@ -27,6 +31,24 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     TextView cardpage_learning;
     String title;
 
+    Toolbar myToolbar;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.add_card_to_folder, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.add_to_folder:{
+                //Todo: 폴더에 추가하기
+                break;
+            }
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +57,8 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         title = intent.getStringExtra("title");
         String count = intent.getStringExtra("count");
 
+        myToolbar=findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         findViews();
 
         cardpage_title.setText("[\t\t\t"+title+"\t\t\t]");
@@ -47,6 +71,10 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         adapter_cardPage.loadItemData(title);
         cardpage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         cardpage_RV.setAdapter(adapter_cardPage);
+    }
+
+    public void setSupportActionBar(Toolbar myToolbar) {
+        super.setSupportActionBar(myToolbar);
     }
 
     @Override
