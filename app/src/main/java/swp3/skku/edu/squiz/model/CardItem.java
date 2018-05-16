@@ -1,10 +1,12 @@
 package swp3.skku.edu.squiz.model;
 
+import java.io.Serializable;
+
 /**
  * Created by LG on 2018-05-02.
  */
 
-public class CardItem {
+public class CardItem implements Serializable {
     String word;
     String meaning;
     Boolean like = false;

@@ -37,6 +37,7 @@ public class LeftFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+
     public void addCardSetData(String title, int count){
         CardSetItem cardSetItem = new CardSetItem(count, title);
         adapter_left.addCardSetData(cardSetItem);

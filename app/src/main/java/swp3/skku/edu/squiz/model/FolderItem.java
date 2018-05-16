@@ -8,35 +8,31 @@ public class FolderItem {
     ArrayList<CardSetItem> cardsetitems;
     int count;
 
-    public ArrayList<CardSetItem> getCardSetItems() {
-        return cardsetitems;
-    }
-    public FolderItem(String folder_name){
+    public FolderItem(String folder_name) {
         this.folder_name = folder_name;
     }
 
-    public String getWord() {
+    public String getFolder_name() {
         return folder_name;
     }
-    public void setWord(String word) {
-        this.folder_name = word;
+
+    public void setFolder_name(String folder_name) {
+        this.folder_name = folder_name;
     }
 
-    public void setCardSetItems(ArrayList<CardSetItem> cardSetItems) {
-        this.cardsetitems = cardSetItems;
-        this.count=cardsetitems.size();
+    public ArrayList<CardSetItem> getCardsetitems() {
+        return cardsetitems;
     }
+
+    public void setCardsetitems(ArrayList<CardSetItem> cardsetitems) {
+        this.cardsetitems = cardsetitems;
+    }
+
     public int getCount() {
         return count;
     }
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public FolderItem(int count, String title) {
-
-        this.count = count;
-        this.folder_name = title;
     }
 }

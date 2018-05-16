@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation_view);
 
         viewPager = findViewById(R.id.main_view_pager);
-        TabLayout tabLayout = findViewById(R.id.main_tab_layout);
+        final TabLayout tabLayout = findViewById(R.id.main_tab_layout);
 
         fragments_array = new Fragment[2];
         fragments_array[0] = new LeftFragment();
@@ -67,9 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 int position=tab.getPosition();
                 if(position==0){
                     MainTitle.setText("카드");
+                    tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
                 }
                 else if(position==1){
                     MainTitle.setText("폴더");
+                    tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_notselected_24dp);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_black_24dp);
                 }
             }
 
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
 
     }
 
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                             //makefolderactivity.checkVerify();
                                             //Todo: checkverify 김하은 0513
                                      //}else{
-                                           saveFolderData(folder_name);
+                                           savefolder_data(folder_name);
                                       //}
                                     } catch (IOException e) {
                                         Toast.makeText(getApplicationContext(),"폴더저장실패", Toast.LENGTH_SHORT).show();
@@ -159,8 +163,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void saveFolderData(String folder_name) throws IOException {
-        FileOutTask fileTask = new FileOutTask(appCompatActivity, FolderItemList, null, folder_name);
-        fileTask.execute();
+    public void savefolder_data(String folder_name) throws IOException {
+        rightFragment.saveFolderData(folder_name);
     }
 }

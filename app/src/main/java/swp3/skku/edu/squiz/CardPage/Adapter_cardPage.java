@@ -84,4 +84,9 @@ public class Adapter_cardPage extends RecyclerView.Adapter<ViewHolder_cardPage>{
         fileLoadTask.execute();
     }
 
+    public ArrayList<CardItem> getCardPageItemList(){
+        return cardPageItemList;
+    }
+
+
 }

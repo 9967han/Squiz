@@ -10,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+
+import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.R;
+import swp3.skku.edu.squiz.model.FolderItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +37,17 @@ public class RightFragment extends android.support.v4.app.Fragment {
         RecyclerView rightFragmentRV = view.findViewById(R.id.rightFragmentRV);
         rightFragmentRV.setLayoutManager(new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false));
         rightFragmentRV.setAdapter(adapter_right);
+
         return view;
     }
+
+
+    public void saveFolderData(String folder_name){
+        FolderItem folderItem = new FolderItem(folder_name);
+        adapter_right.addFolderData(folderItem);
+        FileOutTask fileTask = new FileOutTask(folder_name);
+        fileTask.execute();
+    }
+
 
 }
