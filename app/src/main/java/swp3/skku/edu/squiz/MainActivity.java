@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                             //makefolderactivity.checkVerify();
                                             //Todo: checkverify 김하은 0513
                                      //}else{
-                                           saveFolderData(folder_name);
+                                           savefolder_data(folder_name);
                                       //}
                                     } catch (IOException e) {
                                         Toast.makeText(getApplicationContext(),"폴더저장실패", Toast.LENGTH_SHORT).show();
@@ -159,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void saveFolderData(String folder_name) throws IOException {
-        FileOutTask fileTask = new FileOutTask(appCompatActivity, FolderItemList, null, folder_name);
-        fileTask.execute();
+    public void savefolder_data(String folder_name) throws IOException {
+        rightFragment.saveFolderData(folder_name);
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import swp3.skku.edu.squiz.R;
+import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
 import swp3.skku.edu.squiz.WordCardPage.WordCardActivity;
 
 /**
@@ -24,13 +25,14 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     TextView cardpage_word_card;
     TextView cardpage_subjective;
     TextView cardpage_learning;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardpage);
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
+        title = intent.getStringExtra("title");
         String count = intent.getStringExtra("count");
 
         findViews();
@@ -51,11 +53,15 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.cardpage_word_card:
-                Intent intent = new Intent(CardPageActivity.this, WordCardActivity.class);
-                intent.putExtra("list", adapter_cardPage.getCardPageItemList());
-                startActivity(intent);
+                Intent wordCardIntent = new Intent(CardPageActivity.this, WordCardActivity.class);
+                wordCardIntent.putExtra("list", adapter_cardPage.getCardPageItemList());
+                startActivity(wordCardIntent);
                 break;
             case R.id.cardpage_subjective:
+                Intent subjectiveIntent = new Intent(CardPageActivity.this, SubjectiveCardActivity.class);
+                subjectiveIntent.putExtra("list", adapter_cardPage.getCardPageItemList());
+                subjectiveIntent.putExtra("title", title);
+                startActivity(subjectiveIntent);
                 break;
             case R.id.cardpage_learning:
                 break;

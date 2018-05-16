@@ -19,6 +19,7 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
+        android:id="@+id/subjective_title"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="20dp"
         android:layout_width="match_parent"
@@ -29,6 +30,7 @@
         android:text="[\t 이론리더십 : 전통 리더십 \t]"
         />
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/subjectiveRV"
         android:layout_marginHorizontal="15dp"
         android:background="@drawable/silver_round_border"
         android:layout_width="match_parent"

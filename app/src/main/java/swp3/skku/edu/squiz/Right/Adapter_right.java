@@ -38,7 +38,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
             @Override
             public void onClick(View view) {
                int position = viewHolder_right.position;
-                String title = folderItemList.get(position).getWord();
+                String title = folderItemList.get(position).getFolder_name();
                 String count = String.valueOf(folderItemList.get(position).getCount());
                 Intent intent = new Intent(activity, InsideFolder.class);
                 intent.putExtra("title", title);
@@ -52,7 +52,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     @Override
     public void onBindViewHolder(ViewHolder_right holder, int position) {
         FolderItem folderItem = folderItemList.get(position);
-        holder.title.setText(folderItem.getWord());
+        holder.title.setText(folderItem.getFolder_name());
         holder.position = position;
     }
 
@@ -65,6 +65,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
         FileInitTask fileInitTask = new FileInitTask(folderItemList,1);
         fileInitTask.execute();
     }
+
     public void addFolderData(FolderItem folderItem) {
         folderItemList.add(folderItem);
         notifyItemInserted(folderItemList.size()-1);

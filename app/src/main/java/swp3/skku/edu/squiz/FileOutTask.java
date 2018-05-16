@@ -38,11 +38,8 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         this.idx=0;
     }
 
-    public FileOutTask(AppCompatActivity appCompatActivity, ArrayList<FolderItem> folderItemList, ArrayList<CardSetItem> cardSetItems, String folder_name){
-        this.folderItemList=folderItemList;
+    public FileOutTask(String folder_name){
         this.folder_name=folder_name;
-        this.cardSetItems=cardSetItems;
-        this.appCompatActivity=appCompatActivity;
         this.idx=1;
     }
 
@@ -81,19 +78,8 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
                 fos = new FileOutputStream(squizfolder, true);  //파일쓰기
                 BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(fos));
                 if(cardSetItems==null){
-                    writer1.write(folder_name);
+                    writer1.write(folder_name+"\n");
                 }
-                else{
-                    for(FolderItem folderItem : folderItemList){
-                        writer1.write(folderItem.getWord()+",");
-                        for(CardSetItem cardSetItem : cardSetItems){
-                            writer1.write(cardSetItem.getTitle()+",");
-                        }
-                        writer1.write(folderItemList.size());
-                        writer1.newLine();
-                    }
-                }
-
                 writer1.flush();
                 writer1.close();
                 fos.close();

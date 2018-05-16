@@ -82,7 +82,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                     title = words[0];
                     FolderItem folderItem = new FolderItem(title);
                     for(FolderItem folderItem1 : folderItemList){
-                        if(folderItem1.getWord().equals(folderItem.getWord()))  check++;
+                        if(folderItem1.getFolder_name().equals(folderItem.getFolder_name()))  check++;
                     }
                     if(check == 0) folderItemList.add(folderItem);
                     check = 0;

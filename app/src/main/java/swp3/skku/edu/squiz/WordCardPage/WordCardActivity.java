@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,9 +23,10 @@ public class WordCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_card);
         Intent intent = getIntent();
-        cardPageItemList = (ArrayList<CardItem>) intent.getSerializableExtra("list");
-        adapter_wordCard = new Adapter_wordCard(R.layout.word_card_content, this, cardPageItemList, getResources());
         findViews();
+        cardPageItemList = (ArrayList<CardItem>) intent.getSerializableExtra("list");
+
+        adapter_wordCard = new Adapter_wordCard(R.layout.word_card_content, this, cardPageItemList, getResources());
         wordCardRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         wordCardRV.setAdapter(adapter_wordCard);
     }
@@ -33,6 +35,4 @@ public class WordCardActivity extends AppCompatActivity {
     private void findViews() {
         wordCardRV = findViewById(R.id.wordCardRV);
     }
-
-
 }
