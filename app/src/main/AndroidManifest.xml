@@ -21,11 +21,12 @@
         </activity>
         <activity android:name=".CardPage.CardPageActivity" />
         <activity android:name=".MakeCard.MakeCardActivity" />
-        <activity android:name=".SubjectiveCardPage.SubjectiveCardActivity"/>
+        <activity android:name=".SubjectiveCardPage.SubjectiveCardActivity" />
         <activity
-            android:label="@string/app_name"
             android:name=".WordCardPage.WordCardActivity"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".EndPageActivity"/>
     </application>
 
 </manifest>
