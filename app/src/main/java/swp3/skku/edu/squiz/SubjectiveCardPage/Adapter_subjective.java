@@ -3,6 +3,7 @@ package swp3.skku.edu.squiz.SubjectiveCardPage;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,9 +86,12 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
         if(userAnswerItem.getCorrect().equals(true)){
             holder.correct.setVisibility(View.VISIBLE);
             holder.meaning.setFocusable(false);
+            Log.i(getClass().getSimpleName(), String.format("Index : %d, Correctness : %b, Focusable : %b\n", position, holder.correct, holder.meaning.isFocusable()));
         }else{
             holder.correct.setVisibility(View.INVISIBLE);
             holder.meaning.setFocusable(true);
+            holder.meaning.setFocusableInTouchMode(true);
+            Log.i(getClass().getSimpleName(), String.format("Index : %d, Correctness : %b, Focusable : %b\n", position, holder.correct, holder.meaning.isFocusable()));
         }
 
     }
