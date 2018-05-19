@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardItem;
+import swp3.skku.edu.squiz.model.UserAnswerItem;
 
 /**
  * Created by LG on 2018-05-15.
@@ -20,6 +21,7 @@ public class SubjectiveCardActivity extends AppCompatActivity {
 
     private RecyclerView subjectiveRV;
     private ArrayList<CardItem> subjectiveItemList = new ArrayList<>();
+    private ArrayList<UserAnswerItem> userAnswerList = new ArrayList<>();
     Adapter_subjective adapter_subjective;
     TextView subjective_title;
 
@@ -33,7 +35,12 @@ public class SubjectiveCardActivity extends AppCompatActivity {
         subjective_title.setText(title);
         subjectiveItemList = (ArrayList<CardItem>) intent.getSerializableExtra("list");
 
-        adapter_subjective = new Adapter_subjective(R.layout.subjectivepage_content, this, subjectiveItemList);
+        for(int i=0; i<subjectiveItemList.size(); i++){
+            UserAnswerItem userAnswerItem = new UserAnswerItem(null, false);
+            userAnswerList.add(userAnswerItem);
+        }
+
+        adapter_subjective = new Adapter_subjective(R.layout.subjectivepage_content, this, subjectiveItemList, userAnswerList, SubjectiveCardActivity.this);
         subjectiveRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         subjectiveRV.setAdapter(adapter_subjective);
     }
