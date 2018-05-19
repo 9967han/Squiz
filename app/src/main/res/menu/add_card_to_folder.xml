@@ -10,4 +10,11 @@
 
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/edit_card"
+        android:title="카드 수정하기"
+        android:orderInCategory="200"
+
+        app:showAsAction="never"/>
+
 </menu>
