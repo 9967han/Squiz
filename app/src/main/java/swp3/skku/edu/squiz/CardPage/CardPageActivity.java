@@ -2,7 +2,6 @@ package swp3.skku.edu.squiz.CardPage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
@@ -44,6 +44,14 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         switch (item.getItemId()){
             case R.id.add_to_folder:{
                 //Todo: 폴더에 추가하기
+                break;
+            }
+            case R.id.edit_card:{
+                //setContentView(R.layout.edit_cardpage);
+                Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
+             //   Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
+             //   editIntent.putExtra("title", title);
+              //  startActivity(editIntent);
                 break;
             }
         }

@@ -33,6 +33,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintVertical_bias="0.0001"
         android:background="@drawable/ic_radio_button_unchecked_black_24dp"
+        android:visibility="invisible"
         />
 
 
