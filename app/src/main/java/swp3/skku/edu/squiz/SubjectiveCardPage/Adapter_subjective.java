@@ -66,7 +66,6 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
                      }else{
                          Toast.makeText(context, "오답입니다", Toast.LENGTH_SHORT).show();
                          userAnswerList.get(position).setAnswer(userMean);
-                         userAnswerList.get(position).setCorrect(false);
                      }
                      return true;
                 }
@@ -86,6 +85,8 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
         if(userAnswerItem.getCorrect().equals(true)){
             holder.correct.setVisibility(View.VISIBLE);
             holder.meaning.setFocusable(false);
+            holder.meaning.setFocusableInTouchMode(false);
+        }else if(userAnswerItem.getCorrect().equals(false)){
             Log.i(getClass().getSimpleName(), String.format("Index : %d, Correctness : %b, Focusable : %b\n", position, holder.correct, holder.meaning.isFocusable()));
         }else{
             holder.correct.setVisibility(View.INVISIBLE);
