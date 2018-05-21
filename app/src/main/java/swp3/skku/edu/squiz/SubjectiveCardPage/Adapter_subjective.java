@@ -87,12 +87,9 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
             holder.meaning.setFocusable(false);
             holder.meaning.setFocusableInTouchMode(false);
         }else if(userAnswerItem.getCorrect().equals(false)){
-            Log.i(getClass().getSimpleName(), String.format("Index : %d, Correctness : %b, Focusable : %b\n", position, holder.correct, holder.meaning.isFocusable()));
-        }else{
             holder.correct.setVisibility(View.INVISIBLE);
             holder.meaning.setFocusable(true);
             holder.meaning.setFocusableInTouchMode(true);
-            Log.i(getClass().getSimpleName(), String.format("Index : %d, Correctness : %b, Focusable : %b\n", position, holder.correct, holder.meaning.isFocusable()));
         }
 
     }
