@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import swp3.skku.edu.squiz.EditCard.EditCardActivity;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
 import swp3.skku.edu.squiz.WordCardPage.WordCardActivity;
@@ -47,11 +48,11 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             }
             case R.id.edit_card:{
-                //setContentView(R.layout.edit_cardpage);
+                setContentView(R.layout.edit_cardpage);
                 Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
-             //   Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
-             //   editIntent.putExtra("title", title);
-              //  startActivity(editIntent);
+                Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
+                editIntent.putExtra("title", title);
+                startActivity(editIntent);
                 break;
             }
         }
