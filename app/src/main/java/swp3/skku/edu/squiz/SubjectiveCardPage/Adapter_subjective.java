@@ -3,6 +3,7 @@ package swp3.skku.edu.squiz.SubjectiveCardPage;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,6 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
                      }else{
                          Toast.makeText(context, "오답입니다", Toast.LENGTH_SHORT).show();
                          userAnswerList.get(position).setAnswer(userMean);
-                         userAnswerList.get(position).setCorrect(false);
                      }
                      return true;
                 }
@@ -85,9 +85,11 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
         if(userAnswerItem.getCorrect().equals(true)){
             holder.correct.setVisibility(View.VISIBLE);
             holder.meaning.setFocusable(false);
-        }else{
+            holder.meaning.setFocusableInTouchMode(false);
+        }else if(userAnswerItem.getCorrect().equals(false)){
             holder.correct.setVisibility(View.INVISIBLE);
             holder.meaning.setFocusable(true);
+            holder.meaning.setFocusableInTouchMode(true);
         }
 
     }

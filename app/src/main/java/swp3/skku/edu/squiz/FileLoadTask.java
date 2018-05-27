@@ -5,6 +5,8 @@ import android.os.Environment;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -26,6 +28,12 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
     String foldertitle;
     int idx;
 
+    final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
+
+
+    ArrayList<ArrayList<String>> folderItemList;
+    ArrayList<String> folderItem;
+
     public FileLoadTask(ArrayList<CardItem> cardPageItemList, String title) {
         this.cardPageItemList = cardPageItemList;
         this.title = title;
@@ -36,6 +44,11 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
         this.cardSetItems=cardSetItems;
         this.foldertitle=foldertitle;
         this.idx=1;
+    }
+
+    public FileLoadTask(ArrayList<ArrayList<String>> folderItemList){
+        this.folderItemList = folderItemList;
+        this.idx=3;
     }
 
     @Override
@@ -86,6 +99,31 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 reader1.close();
                 is1.close();
             } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if(idx==2){
+            InputStream is2 = null;
+            try{
+                is2 = new FileInputStream(filePathfolderlist);
+                BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
+                String line = "";
+                String title = "";
+                folderItemList = new ArrayList<ArrayList<String>>();
+
+                while ((line=reader2.readLine())!=null){
+                    folderItem = new ArrayList<String>();
+                    String folders[] = line.split("\t");
+                    title = folders [0];
+                    for (int i=0; i<folders.length; i++){
+                        folderItem.add(folders[i]);
+                    }
+                    folderItemList.add(folderItem);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

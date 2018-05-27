@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
@@ -25,7 +26,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
     String title;
     AppCompatActivity appCompatActivity;
 
-    ArrayList<FolderItem> folderItemList;
+    ArrayList<ArrayList<String>> folderItemList;
     String folder_name;
     int idx=0;
 
@@ -41,6 +42,11 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
     public FileOutTask(String folder_name){
         this.folder_name=folder_name;
         this.idx=1;
+    }
+
+    public FileOutTask(ArrayList<ArrayList<String>> folderItemList){
+        this.folderItemList=folderItemList;
+        this.idx=2;
     }
 
     @Override
@@ -75,13 +81,33 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
             //Output Stream 생성
             FileOutputStream fos = null;
             try {
-                fos = new FileOutputStream(squizfolder, true);  //파일쓰기
+                fos = new FileOutputStream(squizfolder, true);
                 BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(fos));
                 if(cardSetItems==null){
                     writer1.write(folder_name+"\n");
                 }
                 writer1.flush();
                 writer1.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (idx==2){
+            File squizfolderlist = new File(dir, "squizfolderlist.txt");
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(squizfolderlist, false);//덮어쓰기
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+                for(ArrayList arrayList : folderItemList){//arraylist에서 arraylist 받아오기
+                    for(int i=0; i<arrayList.size(); i++){//arraylist에서 string 받아오기
+                        writer.write(arrayList.get(i)+"\t");
+                    }
+                    writer.newLine();
+                }
+                writer.flush();
+                writer.close();
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
