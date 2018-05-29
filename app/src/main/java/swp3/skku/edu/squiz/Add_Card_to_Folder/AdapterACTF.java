@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,7 +46,18 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
 
     @Override
     public void onBindViewHolder(ViewHolder_ACTF holder_actf, int position) {
+        final FolderItem folderItem = folderItemList.get(position);
         holder_actf.title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
+        holder_actf.checkBox.setOnCheckedChangeListener(null);
+
+        holder_actf.checkBox.setChecked(folderItem.isSelected());
+        holder_actf.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                folderItem.setSelected(isChecked);
+            }
+        });
+
     }
 
     @Override
