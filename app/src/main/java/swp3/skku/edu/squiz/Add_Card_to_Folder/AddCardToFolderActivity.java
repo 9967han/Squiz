@@ -3,6 +3,8 @@ package swp3.skku.edu.squiz.Add_Card_to_Folder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -33,20 +35,13 @@ import swp3.skku.edu.squiz.model.FolderItem;
 
 
 public class AddCardToFolderActivity extends AppCompatActivity {
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private ViewPager viewPager;
-    Fragment[] fragments_array;
-    LeftFragment leftFragment;
-    RightFragment rightFragment;
-    final static int REQUEST_DataItemSet = 1;
     String cardTitle;
     int cardCount;
 
+    ConstraintLayout constraintLayout;
+
     final Context context=this;
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
-    private ArrayList<CardSetItem> CardSetItemList = new ArrayList<>();
-    AppCompatActivity appCompatActivity;
 
 
     private RecyclerView recyclerView;
@@ -73,5 +68,21 @@ public class AddCardToFolderActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         );
+    }
+
+    public void onACTFButtonClick(View view) {
+
+        String data = "";
+        ArrayList<FolderItem> folderItems = adapter.getFolderItemList();
+
+
+        for(int i=0; i<folderItems.size(); i++){
+            FolderItem folderItem = folderItems.get(i);
+            if(folderItem.isSelected() == true){
+                data = data + folderItem.getFolder_name().toString()+ "\n" ;
+            }
+        }
+
+        Toast.makeText(AddCardToFolderActivity.this, data, Toast.LENGTH_SHORT).show();
     }
 }

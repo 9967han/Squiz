@@ -78,4 +78,7 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         fileInitTask.execute();
     }
 
+    public ArrayList<FolderItem> getFolderItemList(){
+        return  folderItemList;
+    }
 }
