@@ -8,6 +8,7 @@
     android:id="@+id/add_card_to_folder_content">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/actf_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/ic_folder_black_24dp">

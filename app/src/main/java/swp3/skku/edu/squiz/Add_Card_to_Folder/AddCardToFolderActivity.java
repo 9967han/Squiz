@@ -1,52 +1,77 @@
 package swp3.skku.edu.squiz.Add_Card_to_Folder;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import swp3.skku.edu.squiz.CardPage.Adapter_cardPage;
-import swp3.skku.edu.squiz.FileLoadTask;
+import swp3.skku.edu.squiz.Left.LeftFragment;
+import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
 import swp3.skku.edu.squiz.R;
+import swp3.skku.edu.squiz.Right.RightFragment;
+import swp3.skku.edu.squiz.TabPagerAdapter;
+import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
-import swp3.skku.edu.squiz.model.FolderList;
+
 
 public class AddCardToFolderActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ViewPager viewPager;
+    Fragment[] fragments_array;
+    LeftFragment leftFragment;
+    RightFragment rightFragment;
+    final static int REQUEST_DataItemSet = 1;
+    String cardTitle;
+    int cardCount;
+
+    final Context context=this;
+    private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
+    private ArrayList<CardSetItem> CardSetItemList = new ArrayList<>();
+    AppCompatActivity appCompatActivity;
+
+
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private AdapterACTF adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private ArrayList<FolderItem> folderItems;
-
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card_to_folder);
-        toolbar = (Toolbar) findViewById(R.id.actf_toolbar);
-        folderItems = new ArrayList<FolderItem>();
-
-        //folderItems에 folderItems.add("");
-
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle("폴더에 추가");
-        }
-
-        recyclerView = (RecyclerView) findViewById(R.id.FolderRV);
+        final TextView MainTitle=(TextView)findViewById(R.id.actf);
+        MainTitle.setText("폴더에 추가");
+        recyclerView = (RecyclerView) findViewById(R.id.actf_RV);
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdapterACTF(folderItems);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new AdapterACTF(FolderItemList);
+        adapter.initFolderSetData();
 
         recyclerView.setAdapter(adapter);
 
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        );
     }
 }

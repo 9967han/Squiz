@@ -1,84 +1,69 @@
 package swp3.skku.edu.squiz.Add_Card_to_Folder;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
+import swp3.skku.edu.squiz.FileInitTask;
+import swp3.skku.edu.squiz.FolderPage.InsideFolder;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.FolderItem;
-import swp3.skku.edu.squiz.model.FolderList;
 
-public class AdapterACTF extends
-        RecyclerView.Adapter<AdapterACTF.ViewHolder> {
+public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
+    private ArrayList<FolderItem> folderItemList = new ArrayList<>();
+    private int contentLayout;
+    private Context context;
+    Activity activity;
 
-    private ArrayList<FolderItem> myItems = new ArrayList<>();
-    Context context;
-
-
-    public AdapterACTF(ArrayList<FolderItem> folderItems) {
-        myItems = folderItems;
-    }
-
-    @Override
-    public AdapterACTF.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_card_to_folder_content,null);
-
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position){
-        final int pos = position;
-        viewHolder.textView.setText(myItems.get(position).getFolder_name());
-        viewHolder.checkBox.setTag(myItems.get(position));
-
-        viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                CheckBox checkBox = (CheckBox) v;
-                FolderItem folderItem = (FolderItem) checkBox.getTag();
-
-                folderItem.setSelected(checkBox.isChecked());
-                myItems.get(pos).setSelected(checkBox.isChecked());
-
-                Toast.makeText(v.getContext(), checkBox.getText()+"가 선택되었습니다.",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount(){
-        return myItems.size();
-    }
-
-    public List<FolderItem> getFolderList(){
-        return myItems;
-    }
-
-    public static class  ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView textView;
         public CheckBox checkBox;
-
-        public ViewHolder(View itemLayoutView){
-            super(itemLayoutView);
-            textView = (TextView) itemLayoutView.findViewById(R.id.actftitle);
-            checkBox = (CheckBox) itemLayoutView.findViewById(R.id.checkBox);
-
+        public ViewHolder(TextView textView, CheckBox checkBox){
+            super(textView);
+            this.textView = textView;
+            this.checkBox = checkBox;
         }
+    }
+
+    public AdapterACTF(ArrayList<FolderItem> myDataset){
+        folderItemList = myDataset;
+    }
+    @Override
+    public ViewHolder_ACTF onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder_ACTF(LayoutInflater.from(parent.getContext()).inflate(R.layout.add_card_to_folder_content, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder_ACTF holder_actf, int position) {
+        holder_actf.title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return folderItemList !=null ? folderItemList.size() : 0;
+    }
+    //final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/logfile.txt";
+
+    public void updateList(FolderItem folderItem){
+        insertItem(folderItem);
+    }
+    private void insertItem(FolderItem folderItem){
+        folderItemList.add(folderItem);
+        notifyItemInserted(getItemCount());
+    }
+    public void initFolderSetData(){
+        FileInitTask fileInitTask = new FileInitTask(folderItemList,1);
+        fileInitTask.execute();
     }
 
 }
