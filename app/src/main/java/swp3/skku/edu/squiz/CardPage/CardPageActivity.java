@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import swp3.skku.edu.squiz.Add_Card_to_Folder.AddCardToFolderActivity;
 import swp3.skku.edu.squiz.EditCard.EditCardActivity;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
@@ -44,8 +45,13 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.add_to_folder:{
-                //Todo: 폴더에 추가하기
+                setContentView(R.layout.add_card_to_folder);
+                //setContentView(R.layout.add_card_to_folder);
+                Toast.makeText(getApplicationContext(),"카드를 추가할 폴더를 선택하세요", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CardPageActivity.this, AddCardToFolderActivity.class);
+                startActivity(intent);
                 break;
+                //return true;
             }
             case R.id.edit_card:{
                 setContentView(R.layout.edit_cardpage);
