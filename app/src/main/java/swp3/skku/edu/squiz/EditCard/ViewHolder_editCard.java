@@ -23,11 +23,11 @@ public class ViewHolder_editCard extends RecyclerView.ViewHolder {
 
     public ViewHolder_editCard(View itemView) {
         super(itemView);
-        editTextWord = itemView.findViewById(R.id.card_content_word);
-        editTextMean = itemView.findViewById(R.id.card_content_mean);
-        rewrite = itemView.findViewById(R.id.card_content_rewrite);
-        delete = itemView.findViewById(R.id.card_content_delete);
-        contentLayout = itemView.findViewById(R.id.card_content_layout);
+        editTextWord = itemView.findViewById(R.id.edit_card_content_word);
+        editTextMean = itemView.findViewById(R.id.edit_card_content_mean);
+        rewrite = itemView.findViewById(R.id.edit_card_content_rewrite);
+        delete = itemView.findViewById(R.id.edit_card_content_delete);
+        contentLayout = itemView.findViewById(R.id.edit_card_content_layout);
     }
 
 

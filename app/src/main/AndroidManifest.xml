@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".CardPage.CardPageActivity" />
         <activity android:name=".MakeCard.MakeCardActivity" />
+        <activity android:name=".EditCard.EditCardActivity" />
         <activity android:name=".SubjectiveCardPage.SubjectiveCardActivity" />
         <activity
             android:name=".WordCardPage.WordCardActivity"

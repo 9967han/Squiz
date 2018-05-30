@@ -46,6 +46,16 @@ public class EditCardActivity extends AppCompatActivity {
         adapter_editCard = new Adapter_editCard(R.layout.edit_cardpage_content, this, this);
         editCardRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         editCardRecyclerView.setAdapter(adapter_editCard);
+
+        Intent editIntent = getIntent();
+        title = editIntent.getStringExtra("title");
+        cardTitle.setText(title);
+
+        try {
+            adapter_editCard.loadCardData(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onEditCardFloatingClick(View view) {
@@ -56,9 +66,7 @@ public class EditCardActivity extends AppCompatActivity {
     public void onEditCardSaveButtonClick(View view) {
         constraintLayout.setFocusableInTouchMode(true);
         constraintLayout.requestFocus();
-        Intent editIntent = getIntent();
-        title = editIntent.getStringExtra("title");
-        cardTitle.setText(title);
+
         if(title != null && !title.equals("")){
             try {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -69,7 +77,7 @@ public class EditCardActivity extends AppCompatActivity {
             } catch (IOException e) {
                 Toast.makeText(this, "카드저장실패", Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(this, title+"카드 저장완료", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, title+"카드수정 저장완료", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.putExtra("title", title);
             intent.putExtra("count", String.valueOf(adapter_editCard.cardItemListSize()));

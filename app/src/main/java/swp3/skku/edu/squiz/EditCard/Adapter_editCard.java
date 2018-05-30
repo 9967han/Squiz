@@ -1,6 +1,7 @@
 package swp3.skku.edu.squiz.EditCard;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import swp3.skku.edu.squiz.FileEditOutTask;
 import swp3.skku.edu.squiz.FileOutTask;
-import swp3.skku.edu.squiz.MakeCard.ViewHolder_makeCard;
 import swp3.skku.edu.squiz.model.CardItem;
 
 /**
@@ -27,8 +32,8 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
     public Adapter_editCard(int contentLayout, Context context, AppCompatActivity appCompatActivity) {
         this.contentLayout = contentLayout;
         this.context = context;
-        CardItem cardItem = new CardItem(null, null);
-        cardItemList.add(cardItem);
+        //CardItem cardItem = new CardItem(null, null);
+        //cardItemList.add(cardItem);
         this.appCompatActivity = appCompatActivity;
     }
 
@@ -41,11 +46,11 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         final ViewHolder_editCard viewHolder_editCard = new ViewHolder_editCard(editCard_view);
 
         //word 입력 후 focus 변환 시 데이터 입력
-        viewHolder_editCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        viewHolder_editCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 String word = viewHolder_editCard.editTextWord.getText().toString();
-                if(!hasFocus){
+                if(!hasFocus) {
                     int position = viewHolder_editCard.position;
                     Log.w("word", String.valueOf(position));
                     if(position!=-1) {
@@ -120,8 +125,34 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
 
     //파일저장방식 : 1. 단어수(1번만), 2. 단어 3. 뜻
     public void saveCardData(String title) throws IOException {
-        FileOutTask fileTask = new FileOutTask(appCompatActivity, cardItemList, title);
+        FileEditOutTask fileTask = new FileEditOutTask(appCompatActivity, cardItemList, title);
         fileTask.execute();
+    }
+
+    public void loadCardData(String title) throws IOException {
+
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Squiz/squiz.txt";
+
+        InputStream is = new FileInputStream(filePath);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line = "";
+        int count;
+        int i;
+        while((line=reader.readLine())!=null) {
+            String[] words = line.split("[,]");
+            String tempTitle = words[0];
+            Log.d("abcdefg", tempTitle + "//" + title);
+            if(tempTitle.equals(title.trim())) {
+                count = words.length;
+                CardItem cardTemp = new CardItem(words[1], words[2]);
+                cardItemList.add(cardTemp);
+
+                notifyItemRangeChanged(0, count/2);
+            }
+        }
+        reader.close();
+        is.close();
+
     }
 
     /*public String getCardTitle() {
