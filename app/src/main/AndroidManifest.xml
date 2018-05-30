@@ -23,6 +23,8 @@
         <activity android:name=".MakeCard.MakeCardActivity" />
         <activity android:name=".EditCard.EditCardActivity" />
         <activity android:name=".SubjectiveCardPage.SubjectiveCardActivity" />
+        <activity android:name=".Add_Card_to_Folder.AddCardToFolderActivity"></activity>
+
         <activity
             android:name=".WordCardPage.WordCardActivity"
             android:label="@string/app_name"

@@ -13,49 +13,50 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/actf_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#8e88ff">
+
             <android.support.constraint.ConstraintLayout
-                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
+
                 <TextView
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/actf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="24sp"
+                    android:text="폴더에 추가"
                     android:textColor="#ffffff"
-                    android:text="폴더에 추가" />
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
+                    android:id="@+id/actf_savebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_check_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.9"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_gravity="right"
-                    android:src="@drawable/ic_save_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                    //android:onClick="onAddCardToFolderSaveButtonClick"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:onClick="onACTFButtonClick"/>
 
-                <!--todo: onclick 만들기-->
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/FolderRV"
+            android:id="@+id/actf_RV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/mainpage_fragment_right_content"
-            >
-        <!--Todo: 폴더 선택해서 position 값 넘겨주는 식으로 처리-->
+            android:layout_height="match_parent" />
 
-        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
