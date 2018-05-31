@@ -46,7 +46,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
                 Intent intent = new Intent(activity, CardPageActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("count", count);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 2); // 2 is REQUEST_EditItemSet
             }
         });
         return viewHolder_left;
@@ -75,6 +75,17 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
         cardSetItemList.add(cardSetItem);
         notifyItemInserted(cardSetItemList.size()-1);
     }
+    public void editCountCardSet(String title, int count) {
+        int i = 0;
+        while (i < cardSetItemList.size()) {
+            if(cardSetItemList.get(i).getTitle().equals(title)) {
+                cardSetItemList.get(i).setCount(count);
+                break;
+            }
+        }
+        notifyItemChanged(i);
+    }
+
 }
 
 

@@ -81,7 +81,7 @@ public class EditCardActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.putExtra("title", title);
             intent.putExtra("count", String.valueOf(adapter_editCard.cardItemListSize()));
-            setResult(RESULT_OK, intent);
+            setResult(0, intent);
             finish();
         } else {
             Toast.makeText(this, "카드제목을 입력하세요", Toast.LENGTH_SHORT).show();
