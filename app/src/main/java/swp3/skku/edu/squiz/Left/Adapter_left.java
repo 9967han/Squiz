@@ -46,7 +46,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
                 Intent intent = new Intent(activity, CardPageActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("count", count);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 2); // 2 is REQUEST_EditItemSet
             }
         });
         return viewHolder_left;
@@ -83,6 +83,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
                 break;
             }
         }
+        notifyItemChanged(i);
     }
 
 }
