@@ -32,6 +32,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     TextView cardpage_subjective;
     TextView cardpage_learning;
     String title;
+    String cardCount;
 
     Toolbar myToolbar;
 
@@ -41,6 +42,43 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         getMenuInflater().inflate(R.menu.add_card_to_folder, menu);
         return true;
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case 0:
+                if (requestCode == 0) {
+
+                    setContentView(R.layout.cardpage);
+
+                    cardCount = data.getStringExtra("count");
+
+
+                    myToolbar=findViewById(R.id.my_toolbar);
+                    setSupportActionBar(myToolbar);
+                    findViews();
+
+                    cardpage_title.setText("[\t\t\t"+title+"\t\t\t]");
+                    cardpage_count.setText("총 " + cardCount + "단어");
+                    cardpage_word_card.setOnClickListener(this);
+                    cardpage_subjective.setOnClickListener(this);
+                    cardpage_learning.setOnClickListener(this);
+
+                    adapter_cardPage = new Adapter_cardPage(R.layout.cardpage_content, this, cardpage_like_count);
+                    adapter_cardPage.loadItemData(title);
+                    cardpage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    cardpage_RV.setAdapter(adapter_cardPage);
+                }
+
+                break;
+
+
+            default:
+                break;
+        }
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -58,7 +96,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
                 Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
                 editIntent.putExtra("title", title);
-                startActivity(editIntent);
+                startActivityForResult(editIntent, 0);
                 break;
             }
         }
