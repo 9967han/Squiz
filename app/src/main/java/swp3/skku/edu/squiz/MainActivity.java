@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
                 cardCount = Integer.valueOf(data.getStringExtra("count"));
                 leftFragment.EditCountCardSet(cardTitle, cardCount);
             }
+            else if(cardChanged.equals("delete")) {
+                cardTitle = data.getStringExtra("title");
+                leftFragment.DeleteCardSetData(cardTitle);
+            }
         }
     }
 

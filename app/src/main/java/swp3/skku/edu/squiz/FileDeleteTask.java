@@ -40,7 +40,7 @@ public class FileDeleteTask extends AsyncTask<Void, Void, Void> {
         this.title = title;
         this.idx=0;
     }
-
+    /*
     ProgressDialog asyncDialog = new ProgressDialog(
             context);
 
@@ -53,6 +53,7 @@ public class FileDeleteTask extends AsyncTask<Void, Void, Void> {
         asyncDialog.show();
         super.onPreExecute();
     }
+    */
 
 
     @Override
@@ -95,10 +96,11 @@ public class FileDeleteTask extends AsyncTask<Void, Void, Void> {
 
         return null;
     }
-
+    /*
     @Override
     protected void onPostExecute(Void result) {
         asyncDialog.dismiss();
         super.onPostExecute(result);
     }
+    */
 }
