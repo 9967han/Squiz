@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -18,7 +19,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardItem;
@@ -31,10 +38,12 @@ public class MakeCardActivity extends AppCompatActivity {
     String title;
     int count;
     AppCompatActivity MakeCardActivity;
+    //ArrayList<String> titleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.make_card);
         MakeCardActivity = this;
 
@@ -44,7 +53,37 @@ public class MakeCardActivity extends AppCompatActivity {
         adapter_makeCard = new Adapter_makeCard(R.layout.make_card_content, this, this);
         makeCardRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         makeCardRecyclerView.setAdapter(adapter_makeCard);
+
     }
+
+    /*public ArrayList<String> returnTitleList() {
+        ArrayList<String> titleList = new ArrayList<>();
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Squiz/squiz.txt";
+
+        InputStream is = null;
+        try {
+            is = new FileInputStream(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line = "";
+        try {
+            while((line=reader.readLine())!=null) {
+                String[] words = line.split("[,]");
+                String tempTitle = words[0].trim();
+                //Log.d("abcdefg", tempTitle + "//" + title);
+                if(!titleList.contains(tempTitle)) {
+                    titleList.add(tempTitle);
+                }
+            }
+            reader.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return titleList;
+    }*/
 
     public void onMakeCardFloatingClick(View view) {
         CardItem cardItem = new CardItem(null,null);
@@ -60,7 +99,14 @@ public class MakeCardActivity extends AppCompatActivity {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     checkVerify();
                 }else{
-                    adapter_makeCard.saveCardData(title);    
+                    /*returnTitleList();
+                    if(titleList.contains(title)) {
+                        Toast.makeText(this, "이미 있는 카드제목입니다", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+                    }*/
+                    adapter_makeCard.saveCardData(title);
                 }
             } catch (IOException e) {
                 Toast.makeText(this, "카드저장실패", Toast.LENGTH_SHORT).show();
