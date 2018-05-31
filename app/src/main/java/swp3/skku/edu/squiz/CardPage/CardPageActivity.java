@@ -97,7 +97,6 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 //return true;
             }
             case R.id.edit_card:{
-                setContentView(R.layout.edit_cardpage);
                 Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
                 Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
                 editIntent.putExtra("title", title);
