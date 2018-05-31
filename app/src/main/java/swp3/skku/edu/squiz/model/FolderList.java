@@ -2,23 +2,33 @@ package swp3.skku.edu.squiz.model;
 
 import android.widget.RadioButton;
 
+import java.util.ArrayList;
+
 public class FolderList {
-    String radiotext;
-    int position;
+    String foldertitle;
+    ArrayList<String> CardsetInFolder;
 
-    public int getPosition() {
-        return position;
+    public FolderList(String string){
+        foldertitle = string;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public ArrayList<String> getCardsetInFolder() {
+        return CardsetInFolder;
     }
 
-    public String getRadiotext() {
-        return radiotext;
+    public void setCardsetInFolder(ArrayList<String> cardsetInFolder) {
+        CardsetInFolder = cardsetInFolder;
     }
 
-    public void setRadiotext(String radiotext) {
-        this.radiotext = radiotext;
+    public void addCardSetInFolder(String newcard){
+        CardsetInFolder.add(newcard);
+    }
+
+    public String getFoldertitle() {
+        return foldertitle;
+    }
+
+    public void setFoldertitle(String foldertitle) {
+        this.foldertitle = foldertitle;
     }
 }

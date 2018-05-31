@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import swp3.skku.edu.squiz.FileInitTask;
+import swp3.skku.edu.squiz.FileModifyTask;
 import swp3.skku.edu.squiz.FolderPage.InsideFolder;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.FolderItem;
@@ -26,19 +27,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     private Context context;
     Activity activity;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
-        public CheckBox checkBox;
-        public ViewHolder(TextView textView, CheckBox checkBox){
-            super(textView);
-            this.textView = textView;
-            this.checkBox = checkBox;
-        }
-    }
-
-    public AdapterACTF(ArrayList<FolderItem> myDataset){
-        folderItemList = myDataset;
-    }
     @Override
     public ViewHolder_ACTF onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder_ACTF(LayoutInflater.from(parent.getContext()).inflate(R.layout.add_card_to_folder_content, parent, false));
@@ -78,7 +66,14 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         fileInitTask.execute();
     }
 
-    public ArrayList<FolderItem> getFolderItemList(){
-        return  folderItemList;
+    public void addCardSetToFolder(String title) {
+        ArrayList<FolderItem> folderItemCheckedList = new ArrayList<>();
+        for(FolderItem folderItem : folderItemList){
+            if(folderItem.isSelected()){
+                folderItemCheckedList.add(folderItem);
+            }
+        }
+        FileModifyTask fileModifyTask = new FileModifyTask(folderItemCheckedList, title);
+        fileModifyTask.execute();
     }
 }
