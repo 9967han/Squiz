@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -96,7 +97,39 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+
+                int id = item.getItemId();
+                // 각 메뉴 클릭시 이뤄지는 이벤트
+                switch (id){
+                    case R.id.navigation_main:
+                        //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                        break;
+
+                    case R.id.navigation_add_card:
+                        //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                        break;
+
+                    case R.id.navigation_setting:
+                        //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+
+                        break;
+
+                    case R.id.navigation_calling:
+                        //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                        break;
+                }
+
+                return true;
+            }
+        });
     }
+
+
 
     public void onMainFloatingClick(View view) {
         if(viewPager.getCurrentItem() == 0){
@@ -181,4 +214,5 @@ public class MainActivity extends AppCompatActivity {
     public void savefolder_data(String folder_name) throws IOException {
         rightFragment.saveFolderData(folder_name);
     }
+
 }
