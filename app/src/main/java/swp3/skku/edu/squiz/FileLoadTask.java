@@ -61,13 +61,13 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 String line = "";
                 String load_title = "";
                 while((line=reader.readLine())!=null){
-                    String words[] = line.split(",");
+                    String words[] = line.split("[,]");
                     load_title = words[0];
                     if(load_title.equals(title)){
                         CardItem cardItem = new CardItem(words[1], words[2]);
-                        if(words[3].equals("false")){
+                        if(words[3].trim().equals("false")){
                             cardItem.setLike(false);
-                        }else if(words[3].equals("true")){
+                        }else if(words[3].trim().equals("true")){
                             cardItem.setLike(true);
                         }
                         cardPageItemList.add(cardItem);

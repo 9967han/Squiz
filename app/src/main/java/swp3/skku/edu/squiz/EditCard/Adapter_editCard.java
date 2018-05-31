@@ -136,20 +136,29 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         InputStream is = new FileInputStream(filePath);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line = "";
-        int count;
+        int count=0;
         int i;
         while((line=reader.readLine())!=null) {
             String[] words = line.split("[,]");
             String tempTitle = words[0];
-            Log.d("abcdefg", tempTitle + "//" + title);
+            //Log.d("abcdefg", tempTitle + "//" + title);
             if(tempTitle.equals(title.trim())) {
-                count = words.length;
+                count += 1;
+
                 CardItem cardTemp = new CardItem(words[1], words[2]);
+
+                if(words[3].trim().equals("false")){
+                    cardTemp.setLike(false);
+                }
+                else if(words[3].trim().equals("true")){
+                    cardTemp.setLike(true);
+                }
                 cardItemList.add(cardTemp);
 
-                notifyItemRangeChanged(0, count/2);
+
             }
         }
+        notifyItemRangeChanged(0, count);
         reader.close();
         is.close();
 
