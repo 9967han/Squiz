@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     LeftFragment leftFragment;
     RightFragment rightFragment;
     final static int REQUEST_DataItemSet = 1;
+    final static int REQUEST_EditItemSet = 2;
     String cardTitle;
     int cardCount;
 
@@ -156,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
             cardTitle = data.getStringExtra("title");
             cardCount = Integer.valueOf(data.getStringExtra("count"));
             leftFragment.addCardSetData(cardTitle, cardCount);
+        }
+        else if(requestCode == REQUEST_EditItemSet) {
+            cardTitle = data.getStringExtra("title");
+            cardCount = Integer.valueOf(data.getStringExtra("count"));
+            leftFragment.EditCountCardSet(cardTitle, cardCount);
         }
     }
 

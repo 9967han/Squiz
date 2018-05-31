@@ -33,6 +33,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     TextView cardpage_learning;
     String title;
     String cardCount;
+    Intent intent;
 
     Toolbar myToolbar;
 
@@ -68,6 +69,11 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                     adapter_cardPage.loadItemData(title);
                     cardpage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     cardpage_RV.setAdapter(adapter_cardPage);
+
+                    intent = new Intent();
+                    intent.putExtra("title", title);
+                    intent.putExtra("count", cardCount);
+                    setResult(RESULT_OK, intent);
                 }
 
                 break;
@@ -124,6 +130,11 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         adapter_cardPage.loadItemData(title);
         cardpage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         cardpage_RV.setAdapter(adapter_cardPage);
+
+        intent = new Intent();
+        intent.putExtra("title", title);
+        intent.putExtra("count", count);
+        setResult(RESULT_OK, intent);
     }
 
     public void setSupportActionBar(Toolbar myToolbar) {
