@@ -88,6 +88,16 @@ public class EditCardActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("title", title);
+        intent.putExtra("count", String.valueOf(adapter_editCard.cardItemListSize()));
+        setResult(0, intent);
+        super.onBackPressed();
+
+    }
+
     private void checkVerify() {
         //저장소에 Read/Write 권한이 있는지 확인
         if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){

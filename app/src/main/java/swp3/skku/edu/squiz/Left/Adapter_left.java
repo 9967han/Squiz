@@ -77,7 +77,8 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
     }
     public void editCountCardSet(String title, int count) {
         int i = 0;
-        while (i < cardSetItemList.size()) {
+        int size = cardSetItemList.size();
+        while (i < size) {
             if(cardSetItemList.get(i).getTitle().equals(title)) {
                 cardSetItemList.get(i).setCount(count);
                 break;

@@ -1,10 +1,12 @@
 package swp3.skku.edu.squiz.CardPage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +16,12 @@ import android.widget.Toast;
 
 import swp3.skku.edu.squiz.Add_Card_to_Folder.AddCardToFolderActivity;
 import swp3.skku.edu.squiz.EditCard.EditCardActivity;
+import swp3.skku.edu.squiz.FileDeleteTask;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.SubjectiveCardPage.SubjectiveCardActivity;
 import swp3.skku.edu.squiz.WordCardPage.WordCardActivity;
+
+import static java.lang.System.in;
 
 /**
  * Created by LG on 2018-05-12.
@@ -34,6 +39,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     String title;
     String cardCount;
     Intent intent;
+    String cardChanged;
 
     Toolbar myToolbar;
 
@@ -53,6 +59,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                     setContentView(R.layout.cardpage);
 
                     cardCount = data.getStringExtra("count");
+                    cardChanged = "true";
 
 
                     myToolbar=findViewById(R.id.my_toolbar);
@@ -73,7 +80,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                     intent = new Intent();
                     intent.putExtra("title", title);
                     intent.putExtra("count", cardCount);
-                    setResult(RESULT_OK, intent);
+                    intent.putExtra("changed", cardChanged);
                 }
 
                 break;
@@ -82,6 +89,16 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
             default:
                 break;
         }
+
+    }
+    @Override
+    public void onBackPressed() {
+        intent = new Intent();
+        if (cardChanged.equals("false")) {
+            intent.putExtra("changed", cardChanged);
+        }
+        Log.d("cardPage", "Cardpage back button pressed");
+        super.onBackPressed();
 
     }
 
@@ -97,12 +114,19 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 //return true;
             }
             case R.id.edit_card:{
-                Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "카드 수정하기", Toast.LENGTH_SHORT).show();
                 Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
                 editIntent.putExtra("title", title);
                 startActivityForResult(editIntent, 0);
                 break;
             }
+            /*case R.id.delete_card:{
+                Toast.makeText(getApplicationContext(), "카드를 삭제합니다", Toast.LENGTH_SHORT).show();
+                FileDeleteTask fileTask = new FileDeleteTask(getApplicationContext(), title);
+                fileTask.execute();
+                //finish();
+                break;
+            }*/
         }
         return false;
     }
@@ -113,6 +137,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
         String count = intent.getStringExtra("count");
+        cardChanged = "false";
 
         myToolbar=findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -130,8 +155,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
         cardpage_RV.setAdapter(adapter_cardPage);
 
         intent = new Intent();
-        intent.putExtra("title", title);
-        intent.putExtra("count", count);
+        intent.putExtra("changed", cardChanged);
         setResult(RESULT_OK, intent);
     }
 

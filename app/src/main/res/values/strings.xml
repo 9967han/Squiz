@@ -3,10 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nav_menu_1">Home</string>
-    <string name="nav_menu_2">Add new card</string>
-    <string name="nav_menu_3">Folder</string>
-    <string name="nav_menu_4">Setting</string>
+    <string name="nav_menu_1">메인 화면</string>
+    <string name="nav_menu_2">카드 추가</string>
+    <string name="nav_menu_3">설정</string>
+    <string name="nav_menu_4">문의 사항</string>
 
     <string name="title_activity_word_card">WordCardActivity</string>
     <string name="dummy_button">Dummy Button</string>

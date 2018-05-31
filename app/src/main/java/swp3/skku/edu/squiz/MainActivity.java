@@ -38,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
     final static int REQUEST_EditItemSet = 2;
     String cardTitle;
     int cardCount;
+    String cardChanged;
 
     final Context context=this;
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
     private ArrayList<CardSetItem> CardSetItemList = new ArrayList<>();
     AppCompatActivity appCompatActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,9 +161,12 @@ public class MainActivity extends AppCompatActivity {
             leftFragment.addCardSetData(cardTitle, cardCount);
         }
         else if(requestCode == REQUEST_EditItemSet) {
-            cardTitle = data.getStringExtra("title");
-            cardCount = Integer.valueOf(data.getStringExtra("count"));
-            leftFragment.EditCountCardSet(cardTitle, cardCount);
+            cardChanged = data.getStringExtra("changed").trim();
+            if(cardChanged.equals("true")) {
+                cardTitle = data.getStringExtra("title");
+                cardCount = Integer.valueOf(data.getStringExtra("count"));
+                leftFragment.EditCountCardSet(cardTitle, cardCount);
+            }
         }
     }
 
