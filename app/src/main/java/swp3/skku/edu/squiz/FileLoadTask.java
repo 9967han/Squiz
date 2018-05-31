@@ -48,7 +48,7 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
 
     public FileLoadTask(ArrayList<ArrayList<String>> folderItemList){
         this.folderItemList = folderItemList;
-        this.idx=3;
+        this.idx=2;
     }
 
     @Override

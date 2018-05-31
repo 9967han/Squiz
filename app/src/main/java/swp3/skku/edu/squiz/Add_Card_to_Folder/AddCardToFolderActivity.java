@@ -35,8 +35,7 @@ import swp3.skku.edu.squiz.model.FolderItem;
 
 
 public class AddCardToFolderActivity extends AppCompatActivity {
-    String cardTitle;
-    int cardCount;
+    String title;
 
     ConstraintLayout constraintLayout;
 
@@ -65,6 +64,9 @@ public class AddCardToFolderActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
+        Intent editIntent = getIntent();
+        title = editIntent.getStringExtra("title");
+
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         );
@@ -72,16 +74,18 @@ public class AddCardToFolderActivity extends AppCompatActivity {
 
     public void onACTFButtonClick(View view) {
 
-        String data = "";
+        String data = title+"\n";
         ArrayList<FolderItem> folderItems = adapter.getFolderItemList();
 
 
         for(int i=0; i<folderItems.size(); i++){
             FolderItem folderItem = folderItems.get(i);
             if(folderItem.isSelected() == true){
-                data = data + folderItem.getFolder_name().toString()+ "\n" ;
+                data = data + folderItem.getFolder_name().toString() + "\n" ;
             }
         }
+
+
 
         Toast.makeText(AddCardToFolderActivity.this, data, Toast.LENGTH_SHORT).show();
     }
