@@ -83,8 +83,21 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
                 cardSetItemList.get(i).setCount(count);
                 break;
             }
+            i+=1;
         }
         notifyItemChanged(i);
+    }
+    public void deleteCardSetData(String title) {
+        int i = 0;
+        int size = cardSetItemList.size();
+        while (i < size) {
+            if(cardSetItemList.get(i).getTitle().equals(title)) {
+                cardSetItemList.remove(i);
+                break;
+            }
+            i+=1;
+        }
+        notifyItemRemoved(i);
     }
 
 }
