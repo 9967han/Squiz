@@ -25,6 +25,9 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
     final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
     ArrayList<FolderItem> folderItemList;
 
+    final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
+    ArrayList<ArrayList<String>> folderCardsetList;
+
     int idx=0;
 
     public FileInitTask(ArrayList<CardSetItem> cardSetItemList) {
@@ -35,6 +38,11 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
     public FileInitTask(ArrayList<FolderItem> folderItemList, int i){
         this.folderItemList=folderItemList;
         this.idx=1;
+    }
+
+    public FileInitTask(ArrayList<ArrayList<String>> folderCardsetList, int i, boolean a){
+        this.folderCardsetList = folderCardsetList;
+        this.idx = 2;
     }
 
     @Override
@@ -90,6 +98,31 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                 }
                 reader1.close();
                 is1.close();
+            } catch (IOException e) {
+                Log.d("dir", "read path error");
+                e.printStackTrace();
+            }
+        }
+        else if(idx==2){
+            check=0;
+            try {
+                InputStream is2 = new FileInputStream(filePathfolderlist);
+                BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
+                String line = "";
+                String title = "";
+                while((line=reader2.readLine())!=null) {
+                    String[] words = line.split("\n");
+                    title = words[0];
+                    FolderItem folderItem = new FolderItem(title);
+                    for(FolderItem folderItem1 : folderItemList){
+                        if(folderItem1.getFolder_name().equals(folderItem.getFolder_name()))  check++;
+                    }
+                    if(check == 0) folderItemList.add(folderItem);
+                    check = 0;
+                    for(int i=0; i<count-1; i++) reader2.readLine();
+                }
+                reader2.close();
+                is2.close();
             } catch (IOException e) {
                 Log.d("dir", "read path error");
                 e.printStackTrace();

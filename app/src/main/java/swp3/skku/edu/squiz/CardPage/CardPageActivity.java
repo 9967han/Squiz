@@ -89,16 +89,14 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.add_to_folder:{
-                setContentView(R.layout.add_card_to_folder);
-                //setContentView(R.layout.add_card_to_folder);
                 Toast.makeText(getApplicationContext(),"카드를 추가할 폴더를 선택하세요", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CardPageActivity.this, AddCardToFolderActivity.class);
+                intent.putExtra("title",title);
                 startActivity(intent);
                 break;
                 //return true;
             }
             case R.id.edit_card:{
-                setContentView(R.layout.edit_cardpage);
                 Toast.makeText(getApplicationContext(), "카드수정하기", Toast.LENGTH_SHORT).show();
                 Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
                 editIntent.putExtra("title", title);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class CardSetItem {
     int count;
     String title;
+    String folder;
     ArrayList<CardItem> cardItems;
 
     public ArrayList<CardItem> getCardItems() {
@@ -27,9 +28,13 @@ public class CardSetItem {
         return title;
     }
 
+    public String getFolder() {return folder;}
+
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setFolder(String folder) {this.folder = folder;}
 
     public void setCount(int count) {
         this.count = count;
