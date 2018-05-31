@@ -102,7 +102,7 @@ public class FileEditOutTask extends AsyncTask<Void, Void, Void> {
                     writer.write(title+",");
                     writer.write(cardItem.getWord()+",");
                     writer.write(cardItem.getMeaning()+ ",");
-                    writer.write(String.valueOf(false)+",");
+                    writer.write(cardItem.getLike()+",");
                     writer.write(String.valueOf(cardItemList.size()));
                     writer.newLine();
                 }
