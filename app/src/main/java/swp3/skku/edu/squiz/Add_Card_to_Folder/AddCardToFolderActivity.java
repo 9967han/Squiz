@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.R;
@@ -19,6 +21,7 @@ public class AddCardToFolderActivity extends AppCompatActivity {
     private RecyclerView ACTF_RV;
     private AdapterACTF adapter_ACTF;
     private RecyclerView.LayoutManager layoutManager;
+    String TAG = "AddCardToFolderActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +31,28 @@ public class AddCardToFolderActivity extends AppCompatActivity {
         MainTitle.setText("폴더에 추가");
         ACTF_RV = (RecyclerView) findViewById(R.id.actf_RV);
 
+
+        Intent editIntent = getIntent();//
+        title = editIntent.getStringExtra("title");//
+
         ACTF_RV.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        ACTF_RV.setLayoutManager(layoutManager);
+
         adapter_ACTF = new AdapterACTF();
         adapter_ACTF.initFolderSetData();
-        ACTF_RV.setAdapter(adapter_ACTF);
+        adapter_ACTF.initFolderListData();
+        adapter_ACTF.loadItemData();
 
-        Intent editIntent = getIntent();
-        title = editIntent.getStringExtra("title");
+        ACTF_RV.setAdapter(adapter_ACTF);
+        ACTF_RV.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     public void onACTFButtonClick(View view) {
+        //adapter_ACTF.loadItemData();
         adapter_ACTF.addCardSetToFolder(title);
+
+        Toast.makeText(context, "카드 추가 완료", Toast.LENGTH_SHORT).show();
+        this.finish();
 
     }
     public void saveFolderData(String data){

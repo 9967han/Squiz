@@ -2,6 +2,7 @@ package swp3.skku.edu.squiz;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 /**
  * Created by LG on 2018-05-12.
@@ -31,8 +33,7 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
     final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
 
 
-    ArrayList<ArrayList<String>> folderItemList;
-    ArrayList<String> folderItem;
+    ArrayList<FolderList> folderItemList;
 
     public FileLoadTask(ArrayList<CardItem> cardPageItemList, String title) {
         this.cardPageItemList = cardPageItemList;
@@ -46,7 +47,7 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
         this.load_case=1;
     }
 
-    public FileLoadTask(ArrayList<ArrayList<String>> folderItemList){
+    public FileLoadTask( ArrayList<FolderList> folderItemList){
         this.folderItemList = folderItemList;
         this.load_case=2;
     }
@@ -110,16 +111,38 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
                 String line = "";
                 String title = "";
-                folderItemList = new ArrayList<ArrayList<String>>();
+                folderItemList = new  ArrayList<FolderList>();
 
                 while ((line=reader2.readLine())!=null){
-                    folderItem = new ArrayList<String>();
                     String folders[] = line.split("\t");
                     title = folders [0];
-                    for (int i=0; i<folders.length; i++){
-                        folderItem.add(folders[i]);
+                    FolderList folderList= new FolderList(title);
+
+                    for (int i=1; i<folders.length; i++){
+                        folderList.addCardSetInFolder(folders[i]);
                     }
-                    folderItemList.add(folderItem);
+                    folderItemList.add(folderList);
+                }
+
+                if(folderItemList.size()==0){
+                    InputStream is3 = null;
+                    try {
+                        is3 = new FileInputStream(filePathfolder);
+                        BufferedReader reader1 = new BufferedReader(new InputStreamReader(is3));
+                        String line1 = "";
+                        String load_title1="";
+                        while((line1=reader1.readLine())!=null){
+                            String words[] = line1.split("\n");
+                            load_title1 = words[0];//folder name
+                            FolderList folderList = new FolderList(load_title1);
+                            folderItemList.add(folderList);
+                        }
+
+                        reader1.close();
+                        is3.close();
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

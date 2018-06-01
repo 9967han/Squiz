@@ -6,8 +6,12 @@ import java.util.ArrayList;
 
 public class FolderList {
     String foldertitle;
-    ArrayList<String> CardsetInFolder;
+    ArrayList<String> CardsetInFolder = new ArrayList<String>();
+    Boolean isSelected;
 
+    public FolderList(){
+
+    }
     public FolderList(String string){
         foldertitle = string;
     }
@@ -18,6 +22,13 @@ public class FolderList {
 
     public void setCardsetInFolder(ArrayList<String> cardsetInFolder) {
         CardsetInFolder = cardsetInFolder;
+    }
+    public boolean isSelected(){
+        return  isSelected;
+    }
+
+    public void setSelected(boolean isSelected){
+        this.isSelected = isSelected;
     }
 
     public void addCardSetInFolder(String newcard){
@@ -30,5 +41,9 @@ public class FolderList {
 
     public void setFoldertitle(String foldertitle) {
         this.foldertitle = foldertitle;
+    }
+
+    public int getSize(){
+        return CardsetInFolder.size();
     }
 }

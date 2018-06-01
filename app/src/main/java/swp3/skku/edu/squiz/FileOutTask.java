@@ -16,6 +16,7 @@ import java.util.List;
 import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 /**
  * Created by LG on 2018-05-12.
@@ -26,7 +27,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
     String title;
     AppCompatActivity appCompatActivity;
 
-    ArrayList<ArrayList<String>> folderItemList;
+    ArrayList<FolderList> folderItemList;
     String folder_name;
     int idx=0;
 
@@ -44,7 +45,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         this.idx=1;
     }
 
-    public FileOutTask(ArrayList<ArrayList<String>> folderItemList){
+    public FileOutTask(ArrayList<FolderList> folderItemList){
         this.folderItemList=folderItemList;
         this.idx=2;
     }
@@ -100,9 +101,14 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
             try {
                 fos = new FileOutputStream(squizfolderlist, false);//덮어쓰기
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-                for(ArrayList arrayList : folderItemList){//arraylist에서 arraylist 받아오기
-                    for(int i=0; i<arrayList.size(); i++){//arraylist에서 string 받아오기
-                        writer.write(arrayList.get(i)+"\t");
+                for(FolderList folderList : folderItemList){
+                    writer.write(folderList.getFoldertitle());
+
+                    ArrayList<String> arrayList = new ArrayList<String>();
+                    arrayList = folderList.getCardsetInFolder();
+
+                    for(int i=0; i<arrayList.size(); i++){
+                        writer.write(","+arrayList.get(i));
                     }
                     writer.newLine();
                 }

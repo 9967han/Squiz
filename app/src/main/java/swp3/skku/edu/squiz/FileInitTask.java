@@ -104,7 +104,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                 e.printStackTrace();
             }
         }
-/*        else if(idx==2){
+        else if(idx==2){
             check=0;
             try {
                 InputStream is1 = new FileInputStream(filePathfolderlist);
@@ -129,6 +129,6 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                 e.printStackTrace();
             }
         }
-*/        return null;
+       return null;
     }
 }
