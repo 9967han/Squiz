@@ -114,7 +114,7 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 folderItemList = new  ArrayList<FolderList>();
 
                 while ((line=reader2.readLine())!=null){
-                    String folders[] = line.split("\t");
+                    String folders[] = line.split(",");
                     title = folders [0];
                     FolderList folderList= new FolderList(title);
 
