@@ -158,7 +158,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                     }
                     else {
                         folderList1.addCardSetInFolder(title);
-                        Log.d(TAG,"안녕 add : "+title);
                     }
                 }
             }
