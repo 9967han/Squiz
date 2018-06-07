@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class FolderList {
     String foldertitle;
     ArrayList<String> CardsetInFolder = new ArrayList<String>();
+    //ArrayList<Integer> CardsetCount = new ArrayList<>();
     Boolean isSelected;
 
     public FolderList(){
