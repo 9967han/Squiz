@@ -77,15 +77,12 @@ public class AddCardToFolderActivity extends AppCompatActivity {
         String data = title+"\n";
         ArrayList<FolderItem> folderItems = adapter.getFolderItemList();
 
-
         for(int i=0; i<folderItems.size(); i++){
             FolderItem folderItem = folderItems.get(i);
             if(folderItem.isSelected() == true){
                 data = data + folderItem.getFolder_name().toString() + "\n" ;
             }
         }
-
-
 
         Toast.makeText(AddCardToFolderActivity.this, data, Toast.LENGTH_SHORT).show();
     }

@@ -57,7 +57,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 folderItem.setSelected(isChecked);
             }
         });
-
     }
 
     @Override
