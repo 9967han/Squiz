@@ -46,6 +46,10 @@ public class LeftFragment extends android.support.v4.app.Fragment {
     public void EditCountCardSet(String title, int count) {
         adapter_left.editCountCardSet(title, count);
     }
+    public void DeleteCardSetData(String title) {
+        adapter_left.deleteCardSetData(title);
+
+    }
 
 
 }

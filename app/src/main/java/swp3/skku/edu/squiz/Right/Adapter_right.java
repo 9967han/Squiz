@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.FileInitTask;
-import swp3.skku.edu.squiz.FolderPage.InsideFolder;
+import swp3.skku.edu.squiz.FolderPage.InsideFolderActivity;
 import swp3.skku.edu.squiz.model.FolderItem;
 
 public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
@@ -39,10 +39,10 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
             public void onClick(View view) {
                int position = viewHolder_right.position;
                 String title = folderItemList.get(position).getFolder_name();
-                String count = String.valueOf(folderItemList.get(position).getCount());
-                Intent intent = new Intent(activity, InsideFolder.class);
+//                String count = String.valueOf(folderItemList.get(position).getCount());
+                Intent intent = new Intent(activity, InsideFolderActivity.class);
                 intent.putExtra("title", title);
-                intent.putExtra("count", count);
+//                intent.putExtra("count", count);
                 activity.startActivity(intent);
             }
         });

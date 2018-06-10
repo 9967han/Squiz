@@ -15,7 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#8e88ff">
+            android:background="?attr/colorPrimary">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -45,6 +45,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.Toolbar>
 
@@ -74,14 +75,16 @@
                 android:text="이론리더십"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="48dp" />
-
         </LinearLayout>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/InsideFolderRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/inside_folder_content"></android.support.v7.widget.RecyclerView>
+            tools:listitem="@layout/inside_folder_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

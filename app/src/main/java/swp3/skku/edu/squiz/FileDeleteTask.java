@@ -28,37 +28,20 @@ import swp3.skku.edu.squiz.model.CardSetItem;
 
 public class FileDeleteTask extends AsyncTask<Void, Void, Void> {
     final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squiz.txt";
-    ArrayList<CardItem> cardPageItemList;
     String title;
     Context context;
-
-
     int idx;
 
     public FileDeleteTask(Context context, String title) {
         this.context = context;
         this.title = title;
-        this.idx=0;
+        this.idx=OPCode.DELETE_Card_Set;
     }
-
-    ProgressDialog asyncDialog = new ProgressDialog(
-            context);
-
-    @Override
-    protected void onPreExecute() {
-        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        asyncDialog.setMessage("로딩중입니다..");
-
-        // show dialog
-        asyncDialog.show();
-        super.onPreExecute();
-    }
-
 
     @Override
     protected Void doInBackground(Void... voids) {
         InputStream is = null;
-        if (idx==0){
+        if (idx==OPCode.DELETE_Card_Set){
             try {
                 ArrayList<String> prev = new ArrayList<>();
 
@@ -94,11 +77,5 @@ public class FileDeleteTask extends AsyncTask<Void, Void, Void> {
         }
 
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void result) {
-        asyncDialog.dismiss();
-        super.onPostExecute(result);
     }
 }

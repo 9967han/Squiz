@@ -10,16 +10,15 @@ import android.widget.TextView;
 import swp3.skku.edu.squiz.R;
 
 public class ViewHolder_ACTF extends RecyclerView.ViewHolder {
-    public TextView title;
-    public CheckBox checkBox;
-
-    public ConstraintLayout actf_layout;
+    public TextView ACTF_title;
+    public CheckBox ACTF_checkBox;
+    public ConstraintLayout ACTF_layout;
     int position;
 
     public ViewHolder_ACTF(View itemView) {
         super(itemView);
-        actf_layout = itemView.findViewById(R.id.actf_layout);
-        title = itemView.findViewById(R.id.actftitle);
-        checkBox = itemView.findViewById(R.id.checkBox);
+        ACTF_layout = itemView.findViewById(R.id.ACTF_layout);
+        ACTF_title = itemView.findViewById(R.id.ACTF_title);
+        ACTF_checkBox = itemView.findViewById(R.id.ACTF_checkBox);
     }
 }

@@ -81,6 +81,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                     intent.putExtra("title", title);
                     intent.putExtra("count", cardCount);
                     intent.putExtra("changed", cardChanged);
+                    setResult(RESULT_OK, intent);
                 }
 
                 break;
@@ -120,13 +121,19 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 startActivityForResult(editIntent, 0);
                 break;
             }
-            /*case R.id.delete_card:{
+            case R.id.delete_card:{
                 Toast.makeText(getApplicationContext(), "카드를 삭제합니다", Toast.LENGTH_SHORT).show();
                 FileDeleteTask fileTask = new FileDeleteTask(getApplicationContext(), title);
                 fileTask.execute();
-                //finish();
+                cardChanged="delete";
+                intent = new Intent();
+                intent.putExtra("changed", cardChanged);
+                intent.putExtra("title", title);
+                setResult(RESULT_OK, intent);
+                super.onBackPressed();
+
                 break;
-            }*/
+            }
         }
         return false;
     }

@@ -17,5 +17,12 @@
 
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/delete_card"
+        android:title="카드 삭제하기"
+        android:orderInCategory="200"
+
+        app:showAsAction="never"/>
+
 
 </menu>

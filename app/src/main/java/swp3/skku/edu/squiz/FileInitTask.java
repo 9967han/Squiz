@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 /**
  * Created by LG on 2018-05-12.
@@ -26,23 +27,23 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
     ArrayList<FolderItem> folderItemList;
 
     final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
-    ArrayList<ArrayList<String>> folderCardsetList;
+    ArrayList<FolderList> folderCardsetList;
 
     int idx=0;
 
     public FileInitTask(ArrayList<CardSetItem> cardSetItemList) {
         this.cardSetItemList = cardSetItemList;
-        this.idx=0;
+        this.idx=OPCode.INIT_Card_Set_Item_Lists;
     }
 
     public FileInitTask(ArrayList<FolderItem> folderItemList, int i){
         this.folderItemList=folderItemList;
-        this.idx=1;
+        this.idx=OPCode.INIT_Folder_Item_Lists;
     }
 
-    public FileInitTask(ArrayList<ArrayList<String>> folderCardsetList, int i, boolean a){
+    public FileInitTask(ArrayList<FolderList> folderCardsetList, int i, boolean a){
         this.folderCardsetList = folderCardsetList;
-        this.idx = 2;
+        this.idx = OPCode.INIT_Folder_Cardset_Lists;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
         int count = 0;
         int check = 0;
 
-        if(idx==0){
+        if(idx==OPCode.INIT_Card_Set_Item_Lists){
             check=0;
             try {
                 InputStream is = new FileInputStream(filePath);
@@ -78,7 +79,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
             }
 
         }
-        else if(idx==1){
+        else if(idx==OPCode.INIT_Folder_Item_Lists){
             check=0;
             try {
                 InputStream is1 = new FileInputStream(filePathfolder);
@@ -103,31 +104,31 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                 e.printStackTrace();
             }
         }
-        else if(idx==2){
+        else if(idx==OPCode.INIT_Folder_Cardset_Lists){
             check=0;
             try {
-                InputStream is2 = new FileInputStream(filePathfolderlist);
-                BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
+                InputStream is1 = new FileInputStream(filePathfolderlist);
+                BufferedReader reader1 = new BufferedReader(new InputStreamReader(is1));
                 String line = "";
                 String title = "";
-                while((line=reader2.readLine())!=null) {
+                while((line=reader1.readLine())!=null) {
                     String[] words = line.split("\n");
                     title = words[0];
-                    FolderItem folderItem = new FolderItem(title);
-                    for(FolderItem folderItem1 : folderItemList){
-                        if(folderItem1.getFolder_name().equals(folderItem.getFolder_name()))  check++;
+                    FolderList folderList = new FolderList(title);
+                    for(FolderList folderList1 : folderCardsetList){
+                        if(folderList1.getFoldertitle().equals(folderList1.getFoldertitle()))  check++;
                     }
-                    if(check == 0) folderItemList.add(folderItem);
+                    if(check == 0) folderCardsetList.add(folderList);
                     check = 0;
-                    for(int i=0; i<count-1; i++) reader2.readLine();
+                    for(int i=0; i<count-1; i++) reader1.readLine();
                 }
-                reader2.close();
-                is2.close();
+                reader1.close();
+                is1.close();
             } catch (IOException e) {
                 Log.d("dir", "read path error");
                 e.printStackTrace();
             }
         }
-        return null;
+       return null;
     }
 }

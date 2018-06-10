@@ -16,6 +16,7 @@ import java.util.List;
 import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 /**
  * Created by LG on 2018-05-12.
@@ -26,7 +27,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
     String title;
     AppCompatActivity appCompatActivity;
 
-    ArrayList<ArrayList<String>> folderItemList;
+    ArrayList<FolderList> folderItemList;
     String folder_name;
     int idx=0;
 
@@ -36,17 +37,17 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         this.cardItemList = cardItemList;
         this.title = title;
         this.appCompatActivity = appCompatActivity;
-        this.idx=0;
+        this.idx=OPCode.Save_Card_Data;
     }
 
     public FileOutTask(String folder_name){
         this.folder_name=folder_name;
-        this.idx=1;
+        this.idx=OPCode.Save_Folder_Name_Data;
     }
 
-    public FileOutTask(ArrayList<ArrayList<String>> folderItemList){
+    public FileOutTask(ArrayList<FolderList> folderItemList){
         this.folderItemList=folderItemList;
-        this.idx=2;
+        this.idx=OPCode.Save_Folder_Item_Lists;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Squiz");
         //디렉터리가 없을 시 폴더 생성
         if(!dir.exists()) dir.mkdirs();
-        if(idx==0){
+        if(idx==OPCode.Save_Card_Data){
             File squiz = new File(dir, "squiz.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
@@ -76,7 +77,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
         }
-        else if(idx==1){
+        else if(idx==OPCode.Save_Folder_Name_Data){
             File squizfolder = new File(dir, "squizfolder.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
@@ -94,15 +95,20 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
             }
         }
 
-        else if (idx==2){
+        else if (idx==OPCode.Save_Folder_Item_Lists){
             File squizfolderlist = new File(dir, "squizfolderlist.txt");
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(squizfolderlist, false);//덮어쓰기
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-                for(ArrayList arrayList : folderItemList){//arraylist에서 arraylist 받아오기
-                    for(int i=0; i<arrayList.size(); i++){//arraylist에서 string 받아오기
-                        writer.write(arrayList.get(i)+"\t");
+                for(FolderList folderList : folderItemList){
+                    writer.write(folderList.getFoldertitle());
+
+                    ArrayList<String> arrayList = new ArrayList<String>();
+                    arrayList = folderList.getCardsetInFolder();
+
+                    for(int i=0; i<arrayList.size(); i++){
+                        writer.write(","+arrayList.get(i));
                     }
                     writer.newLine();
                 }

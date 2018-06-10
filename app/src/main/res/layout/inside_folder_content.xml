@@ -11,28 +11,35 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/InsideFolderLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:background="@drawable/purple_border"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <TextView
+                android:textSize="15sp"
                 android:id="@+id/CardSet_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이론리더십 : 전통적 리더십 이론"
-                app:layout_constraintBottom_toTopOf="@+id/left_word_count"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:textSize="15sp"
                 android:id="@+id/CardSetItem_Count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="10단어"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title" />
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
     </RadioGroup>

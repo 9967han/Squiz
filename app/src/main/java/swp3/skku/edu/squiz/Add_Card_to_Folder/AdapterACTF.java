@@ -2,56 +2,60 @@ package swp3.skku.edu.squiz.Add_Card_to_Folder;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import swp3.skku.edu.squiz.FileInitTask;
-import swp3.skku.edu.squiz.FolderPage.InsideFolder;
+import swp3.skku.edu.squiz.FileLoadTask;
+import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     private ArrayList<FolderItem> folderItemList = new ArrayList<>();
+    private ArrayList<FolderList> folderLists = new ArrayList<>();
+    String TAG = "Adapter ACTF";
     private int contentLayout;
     private Context context;
-    Activity activity;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
-        public CheckBox checkBox;
-        public ViewHolder(TextView textView, CheckBox checkBox){
-            super(textView);
-            this.textView = textView;
-            this.checkBox = checkBox;
-        }
+    public AdapterACTF(int contentLayout, Context context) {
+        this.contentLayout = contentLayout;
+        this.context = context;
     }
 
-    public AdapterACTF(ArrayList<FolderItem> myDataset){
-        folderItemList = myDataset;
-    }
     @Override
     public ViewHolder_ACTF onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder_ACTF(LayoutInflater.from(parent.getContext()).inflate(R.layout.add_card_to_folder_content, parent, false));
+        View ACTF_view;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        ACTF_view = inflater.inflate(contentLayout, parent, false);
+        ViewHolder_ACTF viewHolder_ACTF = new ViewHolder_ACTF(ACTF_view);
+        return viewHolder_ACTF;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder_ACTF holder_actf, int position) {
+    public void onBindViewHolder(ViewHolder_ACTF holder_ACTF, int position) {
+        holder_ACTF.position = position;
         final FolderItem folderItem = folderItemList.get(position);
-        holder_actf.title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
-        holder_actf.checkBox.setOnCheckedChangeListener(null);
+        holder_ACTF.ACTF_title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
+        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(null);
 
-        holder_actf.checkBox.setChecked(folderItem.isSelected());
-        holder_actf.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder_ACTF.ACTF_checkBox.setChecked(folderItem.isSelected());
+        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 folderItem.setSelected(isChecked);
@@ -68,6 +72,7 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     public void updateList(FolderItem folderItem){
         insertItem(folderItem);
     }
+
     private void insertItem(FolderItem folderItem){
         folderItemList.add(folderItem);
         notifyItemInserted(getItemCount());
@@ -76,8 +81,98 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         FileInitTask fileInitTask = new FileInitTask(folderItemList,1);
         fileInitTask.execute();
     }
+    public void initFolderListData(){
+        FileInitTask fileInitTask = new FileInitTask(folderLists,1,true);
+        fileInitTask.execute();
+    }
+    public void loadItemData() {
+        FileLoadTask fileLoadTask = new FileLoadTask(folderLists);
+        fileLoadTask.execute();
+    }
 
-    public ArrayList<FolderItem> getFolderItemList(){
-        return  folderItemList;
+    public ArrayList<FolderList> readFile(){
+        String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
+        String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
+        InputStream is2 = null;
+        ArrayList<FolderList> folderLists = new  ArrayList<FolderList>();
+
+        try{
+            is2 = new FileInputStream(filePathfolderlist);
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
+            String line = "";
+            String title = "";
+
+            while ((line=reader2.readLine())!=null){
+                String folders[] = line.split(",");
+                title = folders [0];
+                FolderList folderList= new FolderList(title);
+
+                for (int i=1; i<folders.length; i++){
+                    folderList.addCardSetInFolder(folders[i]);
+                }
+                folderLists.add(folderList);
+            }
+
+            if(folderLists.size()==0){
+                InputStream is3 = null;
+                try {
+                    is3 = new FileInputStream(filePathfolder);
+                    BufferedReader reader1 = new BufferedReader(new InputStreamReader(is3));
+                    String line1 = "";
+                    String load_title1="";
+                    while((line1=reader1.readLine())!=null){
+                        String words[] = line1.split("\n");
+                        load_title1 = words[0];//folder name
+                        FolderList folderList = new FolderList(load_title1);
+                        folderLists.add(folderList);
+                    }
+
+                    reader1.close();
+                    is3.close();
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return folderLists;
+    }
+
+    public void addCardSetToFolder(String title) {
+        ArrayList<FolderList> folderItemCheckedList = new ArrayList<>();
+        String data ="";
+        for(FolderItem folderItem : folderItemList){
+            FolderList folderList = new FolderList();
+            if(folderItem.isSelected()){
+                data = folderItem.getFolder_name();
+                folderList.setFoldertitle(data);
+                folderList.addCardSetInFolder(title);
+                folderItemCheckedList.add(folderList);
+            }
+        }
+
+        this.folderLists = readFile();
+
+        for(FolderList folderList : folderItemCheckedList){
+            for(FolderList folderList1 : folderLists){
+
+                if(folderList.getFoldertitle().equals(folderList1.getFoldertitle())){
+                    ArrayList<String> arrayList = new ArrayList<String>();
+                    arrayList = folderList1.getCardsetInFolder();
+                    if(arrayList.contains(title)){
+                    }
+                    else {
+                        folderList1.addCardSetInFolder(title);
+                    }
+                }
+            }
+        }
+
+        FileOutTask fileOutTask = new FileOutTask(folderLists);
+        fileOutTask.execute();
+
     }
 }

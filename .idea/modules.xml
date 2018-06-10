@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SQuiz.iml" filepath="$PROJECT_DIR$/SQuiz.iml" />
-      <module fileurl="file://C:\Users\LG\AndroidStudioProjects\SQuiz\SoftwarePractice3.iml" filepath="C:\Users\LG\AndroidStudioProjects\SQuiz\SoftwarePractice3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

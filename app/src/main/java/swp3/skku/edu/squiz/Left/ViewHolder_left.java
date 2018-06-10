@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import swp3.skku.edu.squiz.R;
+import swp3.skku.edu.squiz.model.CardSetItem;
 
 /**
  * Created by LG on 2018-05-07.

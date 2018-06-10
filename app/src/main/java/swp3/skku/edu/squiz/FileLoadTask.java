@@ -2,6 +2,7 @@ package swp3.skku.edu.squiz;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 /**
  * Created by LG on 2018-05-12.
@@ -26,35 +28,34 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
     ArrayList<CardSetItem> cardSetItems;
     final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
     String foldertitle;
-    int idx;
+    int load_case;
 
     final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
 
 
-    ArrayList<ArrayList<String>> folderItemList;
-    ArrayList<String> folderItem;
+    ArrayList<FolderList> folderItemList;
 
     public FileLoadTask(ArrayList<CardItem> cardPageItemList, String title) {
         this.cardPageItemList = cardPageItemList;
         this.title = title;
-        this.idx=0;
+        this.load_case=0;
     }
 
     public FileLoadTask(ArrayList<CardSetItem> cardSetItems, String foldertitle, int idx){
         this.cardSetItems=cardSetItems;
         this.foldertitle=foldertitle;
-        this.idx=1;
+        this.load_case=1;
     }
 
-    public FileLoadTask(ArrayList<ArrayList<String>> folderItemList){
+    public FileLoadTask( ArrayList<FolderList> folderItemList){
         this.folderItemList = folderItemList;
-        this.idx=2;
+        this.load_case=2;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         InputStream is = null;
-        if (idx==0){
+        if (load_case==0){
             try {
                 is = new FileInputStream(filePath);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -79,7 +80,7 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
         }
-        else if (idx==1){
+        else if (load_case==1){
             InputStream is1 = null;
             try {
                 is1 = new FileInputStream(filePathfolder);
@@ -103,23 +104,45 @@ public class FileLoadTask extends AsyncTask<Void, Void, Void> {
             }
         }
 
-        else if(idx==2){
+        else if(load_case==2){
             InputStream is2 = null;
             try{
                 is2 = new FileInputStream(filePathfolderlist);
                 BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
                 String line = "";
                 String title = "";
-                folderItemList = new ArrayList<ArrayList<String>>();
+                folderItemList = new  ArrayList<FolderList>();
 
                 while ((line=reader2.readLine())!=null){
-                    folderItem = new ArrayList<String>();
-                    String folders[] = line.split("\t");
+                    String folders[] = line.split(",");
                     title = folders [0];
-                    for (int i=0; i<folders.length; i++){
-                        folderItem.add(folders[i]);
+                    FolderList folderList= new FolderList(title);
+
+                    for (int i=1; i<folders.length; i++){
+                        folderList.addCardSetInFolder(folders[i]);
                     }
-                    folderItemList.add(folderItem);
+                    folderItemList.add(folderList);
+                }
+
+                if(folderItemList.size()==0){
+                    InputStream is3 = null;
+                    try {
+                        is3 = new FileInputStream(filePathfolder);
+                        BufferedReader reader1 = new BufferedReader(new InputStreamReader(is3));
+                        String line1 = "";
+                        String load_title1="";
+                        while((line1=reader1.readLine())!=null){
+                            String words[] = line1.split("\n");
+                            load_title1 = words[0];//folder name
+                            FolderList folderList = new FolderList(load_title1);
+                            folderItemList.add(folderList);
+                        }
+
+                        reader1.close();
+                        is3.close();
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

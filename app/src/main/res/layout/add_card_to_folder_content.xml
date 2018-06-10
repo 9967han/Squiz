@@ -8,13 +8,13 @@
     android:id="@+id/add_card_to_folder_content">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/actf_layout"
+        android:id="@+id/ACTF_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/ic_folder_black_24dp">
 
         <TextView
-            android:id="@+id/actftitle"
+            android:id="@+id/ACTF_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,12 +27,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/ACTF_checkBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="317dp"
-            tools:layout_editor_absoluteY="34dp"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="wrap_content"/>
 
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>
