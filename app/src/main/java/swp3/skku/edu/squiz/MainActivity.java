@@ -12,6 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ViewPager viewPager;
+    private EditText searchSet;
     Fragment[] fragments_array;
     LeftFragment leftFragment;
     RightFragment rightFragment;
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     String cardTitle;
     int cardCount;
     String cardChanged;
+    String searchingStr = "";
+    int position=0;
 
     final Context context=this;
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         MainTitle.setText("카드");
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+        searchSet = findViewById(R.id.search_set);
 
         viewPager = findViewById(R.id.main_view_pager);
         final TabLayout tabLayout = findViewById(R.id.main_tab_layout);
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                int position=tab.getPosition();
+                position=tab.getPosition();
                 if(position==0){
                     MainTitle.setText("카드");
                     tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
@@ -127,6 +134,47 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        searchSet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                /*if(charSequence.length() == 0) {
+                    leftFragment.notSearchSet();
+                }*/
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                searchingStr = searchSet.getText().toString();
+                if(position == 0) {
+                    leftFragment.searchSet(searchingStr);
+                }
+
+            }
+        });
+
+        /*searchSet.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    searchSet.setText(searchingStr);
+                    Log.w("search", searchingStr);
+                    if(position == 0) {
+                        if(!searchingStr.equals("")) {
+                            leftFragment.searchSet(searchingStr);
+                        }
+                        else {
+                            leftFragment.notSearchSet();
+                        }
+                    }
+                }
+            }
+        });*/
     }
 
 

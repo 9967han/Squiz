@@ -63,6 +63,7 @@
                     android:focusableInTouchMode="true"
                     >
                     <EditText
+                        android:id="@+id/search_set"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -72,6 +73,9 @@
                         android:hint="세트 검색"
                         android:background="@null"
                         android:drawableRight="@drawable/ic_search_black_24dp"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:lines="1"
                         />
                 </LinearLayout>
         </android.support.v7.widget.Toolbar>
