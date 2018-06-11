@@ -33,17 +33,17 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
 
     public FileInitTask(ArrayList<CardSetItem> cardSetItemList) {
         this.cardSetItemList = cardSetItemList;
-        this.idx=0;
+        this.idx=OPCode.INIT_Card_Set_Item_Lists;
     }
 
     public FileInitTask(ArrayList<FolderItem> folderItemList, int i){
         this.folderItemList=folderItemList;
-        this.idx=1;
+        this.idx=OPCode.INIT_Folder_Item_Lists;
     }
 
     public FileInitTask(ArrayList<FolderList> folderCardsetList, int i, boolean a){
         this.folderCardsetList = folderCardsetList;
-        this.idx = 2;
+        this.idx = OPCode.INIT_Folder_Cardset_Lists;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
         int count = 0;
         int check = 0;
 
-        if(idx==0){
+        if(idx==OPCode.INIT_Card_Set_Item_Lists){
             check=0;
             try {
                 InputStream is = new FileInputStream(filePath);
@@ -79,7 +79,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
             }
 
         }
-        else if(idx==1){
+        else if(idx==OPCode.INIT_Folder_Item_Lists){
             check=0;
             try {
                 InputStream is1 = new FileInputStream(filePathfolder);
@@ -104,7 +104,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                 e.printStackTrace();
             }
         }
-        else if(idx==2){
+        else if(idx==OPCode.INIT_Folder_Cardset_Lists){
             check=0;
             try {
                 InputStream is1 = new FileInputStream(filePathfolderlist);

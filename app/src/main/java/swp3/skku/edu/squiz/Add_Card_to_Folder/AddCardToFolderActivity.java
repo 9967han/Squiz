@@ -17,19 +17,17 @@ import swp3.skku.edu.squiz.R;
 
 public class AddCardToFolderActivity extends AppCompatActivity {
     String title;
-    final Context context=this;
+    Context context=this;
     private RecyclerView ACTF_RV;
     private AdapterACTF adapter_ACTF;
-    private RecyclerView.LayoutManager layoutManager;
-    String TAG = "AddCardToFolderActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card_to_folder);
-        final TextView MainTitle=(TextView)findViewById(R.id.actf);
+        final TextView MainTitle= findViewById(R.id.actf);
         MainTitle.setText("폴더에 추가");
-        ACTF_RV = (RecyclerView) findViewById(R.id.actf_RV);
+        ACTF_RV = findViewById(R.id.actf_RV);
 
 
         Intent editIntent = getIntent();//
@@ -37,14 +35,13 @@ public class AddCardToFolderActivity extends AppCompatActivity {
 
         ACTF_RV.setHasFixedSize(true);
 
-        adapter_ACTF = new AdapterACTF();
+        adapter_ACTF = new AdapterACTF(R.layout.add_card_to_folder_content, this);
         adapter_ACTF.initFolderSetData();
         adapter_ACTF.initFolderListData();
         adapter_ACTF.loadItemData();
 
+        ACTF_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ACTF_RV.setAdapter(adapter_ACTF);
-        ACTF_RV.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     public void onACTFButtonClick(View view) {
@@ -53,10 +50,10 @@ public class AddCardToFolderActivity extends AppCompatActivity {
 
         Toast.makeText(context, "카드 추가 완료", Toast.LENGTH_SHORT).show();
         this.finish();
+    }
 
-    }
-    public void saveFolderData(String data){
-        FileOutTask fileTask = new FileOutTask(data);
-        fileTask.execute();
-    }
+//    public void saveFolderData(String data){
+//        FileOutTask fileTask = new FileOutTask(data);
+//        fileTask.execute();
+//    }
 }

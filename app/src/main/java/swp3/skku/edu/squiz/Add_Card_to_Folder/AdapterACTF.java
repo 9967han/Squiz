@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
@@ -31,27 +32,35 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     String TAG = "Adapter ACTF";
     private int contentLayout;
     private Context context;
-    Activity activity;
 
-    @Override
-    public ViewHolder_ACTF onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder_ACTF(LayoutInflater.from(parent.getContext()).inflate(R.layout.add_card_to_folder_content, parent, false));
+    public AdapterACTF(int contentLayout, Context context) {
+        this.contentLayout = contentLayout;
+        this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder_ACTF holder_actf, int position) {
-        final FolderItem folderItem = folderItemList.get(position);
-        holder_actf.title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
-        holder_actf.checkBox.setOnCheckedChangeListener(null);
+    public ViewHolder_ACTF onCreateViewHolder(ViewGroup parent, int viewType) {
+        View ACTF_view;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        ACTF_view = inflater.inflate(contentLayout, parent, false);
+        ViewHolder_ACTF viewHolder_ACTF = new ViewHolder_ACTF(ACTF_view);
+        return viewHolder_ACTF;
+    }
 
-        holder_actf.checkBox.setChecked(folderItem.isSelected());
-        holder_actf.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onBindViewHolder(ViewHolder_ACTF holder_ACTF, int position) {
+        holder_ACTF.position = position;
+        final FolderItem folderItem = folderItemList.get(position);
+        holder_ACTF.ACTF_title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
+        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(null);
+
+        holder_ACTF.ACTF_checkBox.setChecked(folderItem.isSelected());
+        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 folderItem.setSelected(isChecked);
             }
         });
-
     }
 
     @Override
@@ -64,10 +73,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         insertItem(folderItem);
     }
 
-    public void add_folder(String string){
-        FolderList folderList = new FolderList(string);
-
-    }
     private void insertItem(FolderItem folderItem){
         folderItemList.add(folderItem);
         notifyItemInserted(getItemCount());
@@ -83,9 +88,8 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     public void loadItemData() {
         FileLoadTask fileLoadTask = new FileLoadTask(folderLists);
         fileLoadTask.execute();
-
-
     }
+
     public ArrayList<FolderList> readFile(){
         String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
         String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
@@ -134,9 +138,9 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return folderLists;
     }
+
     public void addCardSetToFolder(String title) {
         ArrayList<FolderList> folderItemCheckedList = new ArrayList<>();
         String data ="";
@@ -159,7 +163,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                     ArrayList<String> arrayList = new ArrayList<String>();
                     arrayList = folderList1.getCardsetInFolder();
                     if(arrayList.contains(title)){
-
                     }
                     else {
                         folderList1.addCardSetInFolder(title);
@@ -170,7 +173,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
 
         FileOutTask fileOutTask = new FileOutTask(folderLists);
         fileOutTask.execute();
-
 
     }
 }

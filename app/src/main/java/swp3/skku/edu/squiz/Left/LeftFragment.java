@@ -48,6 +48,7 @@ public class LeftFragment extends android.support.v4.app.Fragment {
     }
     public void DeleteCardSetData(String title) {
         adapter_left.deleteCardSetData(title);
+
     }
 
 

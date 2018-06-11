@@ -14,11 +14,11 @@ public class ViewHolder_InsideFolder extends RecyclerView.ViewHolder {//insidefo
     TextView CardSetCount;
     ConstraintLayout FolderLayout;
     int position;
+
     public ViewHolder_InsideFolder(View itemView) {
         super(itemView);
         FolderLayout = itemView.findViewById(R.id.InsideFolderLayout);
-        CardSetTitle = itemView.findViewById(R.id.cardpage_word);
-        CardSetCount = itemView.findViewById(R.id.cardpage_mean);
-
+        CardSetTitle = itemView.findViewById(R.id.CardSet_Title);
+        CardSetCount = itemView.findViewById(R.id.CardSetItem_Count);
     }
 }

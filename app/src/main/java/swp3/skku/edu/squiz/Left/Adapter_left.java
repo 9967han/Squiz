@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import swp3.skku.edu.squiz.CardPage.CardPageActivity;
 import swp3.skku.edu.squiz.FileInitTask;
@@ -40,7 +42,8 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
         viewHolder_left.left_layout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int position = viewHolder_left.position;
+                int position = viewHolder_left.getAdapterPosition();
+                Log.d("Toast", String.valueOf(position));
                 String title = cardSetItemList.get(position).getTitle();
                 String count = String.valueOf(cardSetItemList.get(position).getCount());
                 Intent intent = new Intent(activity, CardPageActivity.class);
@@ -87,19 +90,20 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
         }
         notifyItemChanged(i);
     }
+
     public void deleteCardSetData(String title) {
-        int i = 0;
-        int size = cardSetItemList.size();
-        while (i < size) {
-            if(cardSetItemList.get(i).getTitle().equals(title)) {
-                cardSetItemList.remove(i);
+        Iterator<CardSetItem> iter = cardSetItemList.iterator();
+        int i=0;
+        while(iter.hasNext()){
+            CardSetItem cardSetItem = iter.next();
+            if(cardSetItem.getTitle().equals(title)){
+                iter.remove();
                 break;
             }
             i+=1;
         }
         notifyItemRemoved(i);
     }
-
 }
 
 

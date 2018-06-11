@@ -38,17 +38,17 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         this.cardItemList = cardItemList;
         this.title = title;
         this.appCompatActivity = appCompatActivity;
-        this.idx=0;
+        this.idx=OPCode.Save_Card_Data;
     }
 
     public FileOutTask(String folder_name){
         this.folder_name=folder_name;
-        this.idx=1;
+        this.idx=OPCode.Save_Folder_Name_Data;
     }
 
     public FileOutTask(ArrayList<FolderList> folderItemList){
         this.folderItemList=folderItemList;
-        this.idx=2;
+        this.idx=OPCode.Save_Folder_Item_Lists;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Squiz");
         //디렉터리가 없을 시 폴더 생성
         if(!dir.exists()) dir.mkdirs();
-        if(idx==0){
+        if(idx==OPCode.Save_Card_Data){
             File squiz = new File(dir, "squiz.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
@@ -78,7 +78,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
         }
-        else if(idx==1){
+        else if(idx==OPCode.Save_Folder_Name_Data){
             File squizfolder = new File(dir, "squizfolder.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
@@ -96,7 +96,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
             }
         }
 
-        else if (idx==2){
+        else if (idx==OPCode.Save_Folder_Item_Lists){
             File squizfolderlist = new File(dir, "squizfolderlist.txt");
             FileOutputStream fos = null;
             try {

@@ -11,10 +11,10 @@ public class FolderList {
     Boolean isSelected;
 
     public FolderList(){
-
     }
-    public FolderList(String string){
-        foldertitle = string;
+
+    public FolderList(String foldertitle){
+        this.foldertitle = foldertitle;
     }
 
     public ArrayList<String> getCardsetInFolder() {

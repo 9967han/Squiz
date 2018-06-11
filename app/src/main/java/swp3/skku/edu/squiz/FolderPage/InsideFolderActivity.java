@@ -27,46 +27,43 @@ import swp3.skku.edu.squiz.CardPage.Adapter_cardPage;
 import swp3.skku.edu.squiz.MakeCard.Adapter_makeCard;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardItem;
+import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderList;
 
-public class InsideFolder extends AppCompatActivity{
+public class InsideFolderActivity extends AppCompatActivity{
     ArrayList<FolderList> folderLists = new ArrayList<FolderList>();
     Toolbar FolderToolbar;
-    TextView FolderTextView;
     TextView TitleTextView;
-    RecyclerView folderpage_rv;
+    RecyclerView FolderPage_RV;
     Adapter_InsideFolder adapter_insideFolder;
     String title;
     Intent myIntent;
-    Intent intent;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inside_folder);
 
-        FolderToolbar=findViewById(R.id.my_toolbar);
         setSupportActionBar(FolderToolbar);
         findViews();
 
         myIntent = getIntent();
         title = myIntent.getStringExtra("title");
+
         TitleTextView.setText(title);
 
-        adapter_insideFolder = new Adapter_InsideFolder(InsideFolder.this, R.layout.inside_folder_content, this, title);
+        adapter_insideFolder = new Adapter_InsideFolder(InsideFolderActivity.this, R.layout.inside_folder_content, this, title);
         adapter_insideFolder.loadFolderData(title);
-        folderpage_rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        folderpage_rv.setAdapter(adapter_insideFolder);
+        adapter_insideFolder.loadFileData();
 
-        intent = new Intent();
-
-        setResult(RESULT_OK, intent);
-
+        FolderPage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        FolderPage_RV.setAdapter(adapter_insideFolder);
     }
 
     private void findViews(){
+        FolderToolbar=findViewById(R.id.my_toolbar);
         TitleTextView = findViewById(R.id.InsideFolderTitle);
-        //cardpage_count = findViewById(R.id.cardpage_count);
-        folderpage_rv = findViewById(R.id.InsideFolderRV);
+        FolderPage_RV = findViewById(R.id.InsideFolderRV);
     }
 }

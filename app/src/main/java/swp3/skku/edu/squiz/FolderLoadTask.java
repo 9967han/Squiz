@@ -2,6 +2,7 @@ package swp3.skku.edu.squiz;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -32,9 +33,37 @@ public class FolderLoadTask extends AsyncTask<Void, Void, Void> {
         this.end = end;
     }
 
+    public FolderLoadTask(String title, ArrayList<FolderList> FolderLists) {
+        this.title = title;
+        this.FolderLists = FolderLists;
+    }
+
     @Override
     protected Void doInBackground(Void... voids) {
-        FolderLists = readFile();
+        String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
+        InputStream is2 = null;
+        try {
+            is2 = new FileInputStream(filePathfolderlist);
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
+            String line = "";
+            while ((line=reader2.readLine())!=null){
+                String folders[] = line.split(",");
+                String folder_title = folders[0];
+                if(folder_title.equals(title)){
+                    for(int i=1; i<folders.length; i++){
+                        FolderList folderList = new FolderList(folders[i]);
+                        FolderLists.add(folderList);
+                    }
+                }
+            }
+            is2.close();
+            reader2.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        FolderLists = readFile();
         return null;
     }
 

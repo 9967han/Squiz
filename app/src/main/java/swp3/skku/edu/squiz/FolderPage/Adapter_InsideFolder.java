@@ -4,29 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import swp3.skku.edu.squiz.CardPage.ViewHolder_cardPage;
-import swp3.skku.edu.squiz.FileLoadTask;
-import swp3.skku.edu.squiz.FileModifyTask;
+import swp3.skku.edu.squiz.CardPage.CardPageActivity;
+import swp3.skku.edu.squiz.FileInitTask;
 import swp3.skku.edu.squiz.FolderLoadTask;
-import swp3.skku.edu.squiz.model.CardItem;
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderList;
 
 public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_InsideFolder>{
-    private ArrayList<CardSetItem> FolderListSet = new ArrayList<>();
-
     private ArrayList<FolderList> FolderLists = new ArrayList<>();
+    private ArrayList<CardSetItem> cardSetItemList = new ArrayList<>();
     private int contentLayout;
     Context context;
-    int count = 0;
-    boolean FolderTaskEnd;
     String title;
     Activity activity;
 
@@ -47,12 +42,12 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
             @Override
             public void onClick(View view) {
                 int position = viewHolderInsideFolder.position;
-                String title = FolderListSet.get(position).getTitle();
-                String count = String.valueOf(FolderListSet.get(position).getCount());
-                Intent intent = new Intent(activity, InsideFolder.class);
+                String title = FolderLists.get(position).getFoldertitle();
+                String count = String.valueOf(viewHolderInsideFolder.CardSetCount.getText().toString().charAt(0));
+                Intent intent = new Intent(activity, CardPageActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("count", count);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 2); // 2 is REQUEST_EditItemSet
             }
         });
         return viewHolderInsideFolder;
@@ -61,48 +56,29 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
 
     @Override
     public void onBindViewHolder(ViewHolder_InsideFolder holder, int position) {
-        CardSetItem titleCount = FolderListSet.get(position);
-        holder.CardSetTitle.setText(titleCount.getTitle());
-        holder.CardSetCount.setText(titleCount.getCount());
+        FolderList folderList = FolderLists.get(position);
+        for (CardSetItem cardSetItem : cardSetItemList){
+            if(cardSetItem.getTitle().equals(folderList.getFoldertitle())){
+                holder.CardSetCount.setText(String.valueOf(cardSetItem.getCount())+"단어");
+            }
+        }
+        holder.CardSetTitle.setText(folderList.getFoldertitle());
         holder.position = position;
     }
 
     @Override
     public int getItemCount() {
-        return FolderListSet.size();
+        return FolderLists.size();
     }
 
     public void loadFolderData(String title) {
-        if (count == 0) {
-            FolderTaskEnd = false;
-            FolderLoadTask folderLoadTask = new FolderLoadTask(FolderLists, title, FolderTaskEnd);
-            folderLoadTask.execute();
-            while(!FolderTaskEnd) {
-
-            }
-
-        }
-        ArrayList<String> temp = new ArrayList<>();
-        int size = FolderLists.size();
-        int i;
-        for(i=0; i<size; i++) {
-            if(FolderLists.get(i).getFoldertitle().equals(title)) {
-                temp = FolderLists.get(i).getCardsetInFolder();
-                break;
-            }
-        }
-        size = temp.size();
-        for(i=0; i<size; i++) {
-            FolderListSet.add(new CardSetItem(0, temp.get(i)));
-        }
-        count = 1;
-        return;
+        FolderLoadTask folderLoadTask = new FolderLoadTask(title, FolderLists);
+        folderLoadTask.execute();
     }
 
-    public ArrayList<CardSetItem> getFolderSetLiset(){
-        return FolderListSet;
+    public void loadFileData() {
+        FileInitTask fileInitTask = new FileInitTask(cardSetItemList);
+        fileInitTask.execute();
     }
-
-
 }
 
