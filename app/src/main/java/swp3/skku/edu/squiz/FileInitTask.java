@@ -22,11 +22,11 @@ import swp3.skku.edu.squiz.model.FolderList;
 public class FileInitTask extends AsyncTask<Void, Void, Void>{
     final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squiz.txt";
     ArrayList<CardSetItem> cardSetItemList;
-    ArrayList<CardSetItem> ori;
+    ArrayList<CardSetItem> ori = new ArrayList<>();
 
     final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
     ArrayList<FolderItem> folderItemList;
-    ArrayList<FolderItem> oriFolderList;
+    ArrayList<FolderItem> oriFolderList = new ArrayList<>();
 
     final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
     ArrayList<FolderList> folderCardsetList;
