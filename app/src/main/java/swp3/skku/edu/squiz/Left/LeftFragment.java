@@ -50,6 +50,12 @@ public class LeftFragment extends android.support.v4.app.Fragment {
         adapter_left.deleteCardSetData(title);
 
     }
+    public void searchSet(String str) {
+        adapter_left.searchSet(str);
+    }
+    /*public void notSearchSet() {
+        adapter_left.notSearchSet();
+    }*/
 
 
 }

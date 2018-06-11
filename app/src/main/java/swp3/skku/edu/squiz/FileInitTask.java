@@ -22,6 +22,7 @@ import swp3.skku.edu.squiz.model.FolderList;
 public class FileInitTask extends AsyncTask<Void, Void, Void>{
     final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squiz.txt";
     ArrayList<CardSetItem> cardSetItemList;
+    ArrayList<CardSetItem> ori;
 
     final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
     ArrayList<FolderItem> folderItemList;
@@ -33,6 +34,12 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
 
     public FileInitTask(ArrayList<CardSetItem> cardSetItemList) {
         this.cardSetItemList = cardSetItemList;
+        this.idx=OPCode.INIT_Card_Set_Item_Lists;
+    }
+
+    public FileInitTask(ArrayList<CardSetItem> cardSetItemList, ArrayList<CardSetItem> ori) {
+        this.cardSetItemList = cardSetItemList;
+        this.ori = ori;
         this.idx=OPCode.INIT_Card_Set_Item_Lists;
     }
 
@@ -71,6 +78,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                     check = 0;
                     for(int i=0; i<count-1; i++) reader.readLine();
                 }
+                ori.addAll(cardSetItemList);
                 reader.close();
                 is.close();
             } catch (IOException e) {
