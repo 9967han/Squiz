@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                                     } catch (IOException e) {
                                         Toast.makeText(getApplicationContext(),"폴더저장실패", Toast.LENGTH_SHORT).show();
                                  }
-                                  Toast.makeText(getApplicationContext(),"폴더 저장완료", Toast.LENGTH_SHORT).show();
+
                             }
                             else{
                                  Toast.makeText(getApplicationContext(), "폴더 제목을 입력하세요", Toast.LENGTH_SHORT).show();
@@ -217,7 +217,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void savefolder_data(String folder_name) throws IOException {
-        rightFragment.saveFolderData(folder_name);
+        boolean success = false;
+        success = rightFragment.saveFolderData(folder_name);
+        if(success){
+            Toast.makeText(getApplicationContext(),"폴더 저장완료", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"이미 존재하는 폴더 명입니다", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

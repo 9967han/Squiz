@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import swp3.skku.edu.squiz.FileInitTask;
 import swp3.skku.edu.squiz.FolderPage.InsideFolderActivity;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.model.FolderList;
 
 public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     private ArrayList<FolderItem> folderItemList = new ArrayList<>();
@@ -66,8 +67,14 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
         fileInitTask.execute();
     }
 
-    public void addFolderData(FolderItem folderItem) {
+    public boolean addFolderData(FolderItem folderItem) {
+        for(FolderItem folderItem1 : folderItemList){
+            if(folderItem.getFolder_name().equals(folderItem1.getFolder_name())){
+                return false;
+            }
+        }
         folderItemList.add(folderItem);
         notifyItemInserted(folderItemList.size()-1);
+        return true;
     }
 }

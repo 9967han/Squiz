@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -44,11 +45,19 @@ public class RightFragment extends android.support.v4.app.Fragment {
     }
 
 
-    public void saveFolderData(String folder_name){
+    public boolean saveFolderData(String folder_name){
+        Boolean add=false;
         FolderItem folderItem = new FolderItem(folder_name);
-        adapter_right.addFolderData(folderItem);
-        FileOutTask fileTask = new FileOutTask(folder_name);
-        fileTask.execute();
+        add = adapter_right.addFolderData(folderItem);
+
+        if(add){
+            FileOutTask fileTask = new FileOutTask(folder_name);
+            fileTask.execute();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

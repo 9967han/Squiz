@@ -48,6 +48,7 @@ public class AddCardToFolderActivity extends AppCompatActivity {
         //adapter_ACTF.loadItemData();
         adapter_ACTF.addCardSetToFolder(title);
 
+
         Toast.makeText(context, "카드 추가 완료", Toast.LENGTH_SHORT).show();
         this.finish();
     }
