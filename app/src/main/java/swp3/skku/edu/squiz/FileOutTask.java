@@ -29,6 +29,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
 
     ArrayList<FolderList> folderItemList;
     String folder_name;
+
     int idx=0;
 
     ArrayList<CardSetItem> cardSetItems;

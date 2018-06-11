@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.io.IOException;
 
+import swp3.skku.edu.squiz.Add_Card_to_Folder.AdapterACTF;
 import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.FolderItem;
@@ -22,6 +23,7 @@ import swp3.skku.edu.squiz.model.FolderItem;
 public class RightFragment extends android.support.v4.app.Fragment {
     private Context context;
     Adapter_right adapter_right;
+    AdapterACTF adapter_ACTF;
 
     public RightFragment() {
         // Required empty public constructor

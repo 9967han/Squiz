@@ -63,6 +63,11 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
     public void updateList(FolderItem folderItem){
         insertItem(folderItem);
     }
+
+    public void add_folder(String string){
+        FolderList folderList = new FolderList(string);
+
+    }
     private void insertItem(FolderItem folderItem){
         folderItemList.add(folderItem);
         notifyItemInserted(getItemCount());
