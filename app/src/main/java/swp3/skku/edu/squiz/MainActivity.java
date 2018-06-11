@@ -1,5 +1,6 @@
 package swp3.skku.edu.squiz;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -102,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
-
+                FragmentManager manager = getFragmentManager();
                 int id = item.getItemId();
                 // 각 메뉴 클릭시 이뤄지는 이벤트
                 switch (id){
                     case R.id.navigation_main:
+                        //manager.beginTransaction().replace(R.id.main_view_pager, new mainpage()).commit();
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
 

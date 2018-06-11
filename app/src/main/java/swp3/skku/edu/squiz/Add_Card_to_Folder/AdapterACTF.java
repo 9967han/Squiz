@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -52,7 +53,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         holder_ACTF.position = position;
         final FolderItem folderItem = folderItemList.get(position);
         holder_ACTF.ACTF_title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
-        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(null);
 
         holder_ACTF.ACTF_checkBox.setChecked(folderItem.isSelected());
         holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -95,7 +95,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
         InputStream is2 = null;
         ArrayList<FolderList> folderLists = new  ArrayList<FolderList>();
-
         try{
             is2 = new FileInputStream(filePathfolderlist);
             BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
@@ -112,8 +111,10 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 }
                 folderLists.add(folderList);
             }
-
+            Log.d("LDLDLD", "WHY?");
+            Log.d("LDLDLD", "asdf"+String.valueOf(folderLists.size()));
             if(folderLists.size()==0){
+                Log.d("LDLDLD", "OK");
                 InputStream is3 = null;
                 try {
                     is3 = new FileInputStream(filePathfolder);
@@ -153,14 +154,14 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 folderItemCheckedList.add(folderList);
             }
         }
-
+        Log.d("LDLDLD", String.valueOf(folderItemList.get(0)));
         this.folderLists = readFile();
-
+        Log.d("LDLDLD", "REadFile_END");
         for(FolderList folderList : folderItemCheckedList){
             for(FolderList folderList1 : folderLists){
 
                 if(folderList.getFoldertitle().equals(folderList1.getFoldertitle())){
-                    ArrayList<String> arrayList = new ArrayList<String>();
+                    ArrayList<String> arrayList = new ArrayList<>();
                     arrayList = folderList1.getCardsetInFolder();
                     if(arrayList.contains(title)){
                     }

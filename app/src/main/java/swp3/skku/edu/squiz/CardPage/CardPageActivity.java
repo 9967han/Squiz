@@ -185,6 +185,9 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(subjectiveIntent);
                 break;
             case R.id.cardpage_learning:
+                Intent editIntent = new Intent(CardPageActivity.this, EditCardActivity.class);
+                editIntent.putExtra("title", title);
+                startActivityForResult(editIntent, 0);
                 break;
         }
     }
