@@ -22,6 +22,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import swp3.skku.edu.squiz.Add_Card_to_Folder.AdapterACTF;
 import swp3.skku.edu.squiz.Left.LeftFragment;
 import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
 import swp3.skku.edu.squiz.Right.RightFragment;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] fragments_array;
     LeftFragment leftFragment;
     RightFragment rightFragment;
+    AdapterACTF adapterACTF;
     final static int REQUEST_DataItemSet = 1;
     final static int REQUEST_EditItemSet = 2;
     String cardTitle;
@@ -205,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
             else if(cardChanged.equals("delete")) {
                 cardTitle = data.getStringExtra("title");
                 leftFragment.DeleteCardSetData(cardTitle);
+                //adapterACTF.deleteCardSetToFolder(cardTitle);//Todo 김하은 0611
             }
         }
     }

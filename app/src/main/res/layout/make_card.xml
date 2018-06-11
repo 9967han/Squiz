@@ -65,13 +65,6 @@
                 android:layout_height="wrap_content" />
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textColor="#9ed1f6"
-            android:text="파일 불러오기"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/makeCardRV"
             android:layout_width="match_parent"

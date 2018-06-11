@@ -92,7 +92,7 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
 
     public ArrayList<FolderList> readFile(){
         String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
-        String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
+
         InputStream is2 = null;
         ArrayList<FolderList> folderLists = new  ArrayList<FolderList>();
         try{
@@ -111,35 +111,30 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 }
                 folderLists.add(folderList);
             }
-            Log.d("LDLDLD", "WHY?");
-            Log.d("LDLDLD", "asdf"+String.valueOf(folderLists.size()));
-            if(folderLists.size()==0){
-                Log.d("LDLDLD", "OK");
-                InputStream is3 = null;
-                try {
-                    is3 = new FileInputStream(filePathfolder);
-                    BufferedReader reader1 = new BufferedReader(new InputStreamReader(is3));
-                    String line1 = "";
-                    String load_title1="";
-                    while((line1=reader1.readLine())!=null){
-                        String words[] = line1.split("\n");
-                        load_title1 = words[0];//folder name
-                        FolderList folderList = new FolderList(load_title1);
-                        folderLists.add(folderList);
-                    }
-
-                    reader1.close();
-                    is3.close();
-                } catch (java.io.IOException e) {
-                    e.printStackTrace();
-                }
-            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return folderLists;
+    }
+
+    public void deleteCardSetToFolder(String title){//Todo 김하은 0611
+        this.folderLists = readFile();
+
+        for(FolderList folderList : folderLists){
+            if(folderList.getFoldertitle().equals(title)){
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList = folderList.getCardsetInFolder();
+                if(arrayList.contains(title)){
+                    int pos = arrayList.indexOf(title);
+                    arrayList.remove(pos);
+                }
+            }
+        }
+        FileOutTask fileOutTask = new FileOutTask(folderLists);
+        fileOutTask.execute();
+
     }
 
     public void addCardSetToFolder(String title) {
@@ -154,9 +149,9 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 folderItemCheckedList.add(folderList);
             }
         }
-        Log.d("LDLDLD", String.valueOf(folderItemList.get(0)));
+
         this.folderLists = readFile();
-        Log.d("LDLDLD", "REadFile_END");
+
         for(FolderList folderList : folderItemCheckedList){
             for(FolderList folderList1 : folderLists){
 
