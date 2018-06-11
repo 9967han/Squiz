@@ -52,8 +52,4 @@ public class AddCardToFolderActivity extends AppCompatActivity {
         this.finish();
     }
 
-//    public void saveFolderData(String data){
-//        FileOutTask fileTask = new FileOutTask(data);
-//        fileTask.execute();
-//    }
 }

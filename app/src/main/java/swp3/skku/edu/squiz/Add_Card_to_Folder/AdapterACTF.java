@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -52,7 +53,6 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         holder_ACTF.position = position;
         final FolderItem folderItem = folderItemList.get(position);
         holder_ACTF.ACTF_title.setText(String.format(Locale.getDefault(), folderItemList.get(position).getFolder_name()));
-        holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(null);
 
         holder_ACTF.ACTF_checkBox.setChecked(folderItem.isSelected());
         holder_ACTF.ACTF_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -92,10 +92,9 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
 
     public ArrayList<FolderList> readFile(){
         String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
-        String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
+
         InputStream is2 = null;
         ArrayList<FolderList> folderLists = new  ArrayList<FolderList>();
-
         try{
             is2 = new FileInputStream(filePathfolderlist);
             BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));
@@ -112,33 +111,30 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
                 }
                 folderLists.add(folderList);
             }
-
-            if(folderLists.size()==0){
-                InputStream is3 = null;
-                try {
-                    is3 = new FileInputStream(filePathfolder);
-                    BufferedReader reader1 = new BufferedReader(new InputStreamReader(is3));
-                    String line1 = "";
-                    String load_title1="";
-                    while((line1=reader1.readLine())!=null){
-                        String words[] = line1.split("\n");
-                        load_title1 = words[0];//folder name
-                        FolderList folderList = new FolderList(load_title1);
-                        folderLists.add(folderList);
-                    }
-
-                    reader1.close();
-                    is3.close();
-                } catch (java.io.IOException e) {
-                    e.printStackTrace();
-                }
-            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return folderLists;
+    }
+
+    public void deleteCardSetToFolder(String title){//Todo 김하은 0611
+        this.folderLists = readFile();
+
+        for(FolderList folderList : folderLists){
+            if(folderList.getFoldertitle().equals(title)){
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList = folderList.getCardsetInFolder();
+                if(arrayList.contains(title)){
+                    int pos = arrayList.indexOf(title);
+                    arrayList.remove(pos);
+                }
+            }
+        }
+        FileOutTask fileOutTask = new FileOutTask(folderLists);
+        fileOutTask.execute();
+
     }
 
     public void addCardSetToFolder(String title) {
@@ -160,7 +156,7 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
             for(FolderList folderList1 : folderLists){
 
                 if(folderList.getFoldertitle().equals(folderList1.getFoldertitle())){
-                    ArrayList<String> arrayList = new ArrayList<String>();
+                    ArrayList<String> arrayList = new ArrayList<>();
                     arrayList = folderList1.getCardsetInFolder();
                     if(arrayList.contains(title)){
                     }

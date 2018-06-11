@@ -72,7 +72,7 @@
             android:layout_height="80dp"
             android:layout_weight="1"
             android:textColor="#000000"
-            android:text="학습 하기"/>
+            android:text="수정 하기"/>
     </LinearLayout>
 
     <TextView
@@ -86,7 +86,7 @@
 
     <TextView
         android:id="@+id/cardpage__like_count"
-        android:text="26 단어, 발표 10 단어"
+        android:text="별표 0단어"
         android:textColor="#9ed1f6"
         android:layout_marginVertical="5dp"
         android:layout_marginLeft="20dp"

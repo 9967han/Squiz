@@ -29,6 +29,7 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
 
     ArrayList<FolderList> folderItemList;
     String folder_name;
+
     int idx=0;
 
     ArrayList<CardSetItem> cardSetItems;
@@ -79,17 +80,25 @@ public class FileOutTask extends AsyncTask<Void, Void, Void> {
         }
         else if(idx==OPCode.Save_Folder_Name_Data){
             File squizfolder = new File(dir, "squizfolder.txt");
+            File squizfolderlist = new File(dir, "squizfolderlist.txt");
             //Output Stream 생성
             FileOutputStream fos = null;
+            FileOutputStream fos2 = null;
             try {
                 fos = new FileOutputStream(squizfolder, true);
+                fos2 = new FileOutputStream(squizfolderlist, true);
                 BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(fos));
+                BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(fos2));
                 if(cardSetItems==null){
                     writer1.write(folder_name+"\n");
+                    writer2.write(folder_name+"\n");
                 }
                 writer1.flush();
+                writer2.flush();
                 writer1.close();
+                writer2.close();
                 fos.close();
+                fos2.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

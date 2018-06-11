@@ -76,6 +76,18 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
             }
         });
 
+        //다시쓰기 누를 시 에딧텍스트 값 비우기
+        viewHolder_editCard.rewrite.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int position = viewHolder_editCard.position;
+                if(position!=-1){
+                    viewHolder_editCard.editTextWord.setText(null);
+                    viewHolder_editCard.editTextMean.setText(null);
+                }
+            }
+        });
+
         //delete 누를 시 삭제
         viewHolder_editCard.delete.setOnClickListener(new View.OnClickListener() {
             @Override

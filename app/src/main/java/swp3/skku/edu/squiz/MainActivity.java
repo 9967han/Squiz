@@ -1,5 +1,6 @@
 package swp3.skku.edu.squiz;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import swp3.skku.edu.squiz.Add_Card_to_Folder.AdapterACTF;
 import swp3.skku.edu.squiz.Left.LeftFragment;
 import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
 import swp3.skku.edu.squiz.Right.RightFragment;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] fragments_array;
     LeftFragment leftFragment;
     RightFragment rightFragment;
+    AdapterACTF adapterACTF;
     final static int REQUEST_DataItemSet = 1;
     final static int REQUEST_EditItemSet = 2;
     String cardTitle;
@@ -109,11 +112,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
-
+                FragmentManager manager = getFragmentManager();
                 int id = item.getItemId();
                 // 각 메뉴 클릭시 이뤄지는 이벤트
                 switch (id){
                     case R.id.navigation_main:
+                        //manager.beginTransaction().replace(R.id.main_view_pager, new mainpage()).commit();
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
 
@@ -251,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
             else if(cardChanged.equals("delete")) {
                 cardTitle = data.getStringExtra("title");
                 leftFragment.DeleteCardSetData(cardTitle);
+                //adapterACTF.deleteCardSetToFolder(cardTitle);//Todo 김하은 0611
             }
         }
     }
