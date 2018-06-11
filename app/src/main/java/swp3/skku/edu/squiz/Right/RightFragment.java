@@ -60,5 +60,9 @@ public class RightFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    public void searchSet(String str) {
+        adapter_right.searchSet(str);
+    }
+
 
 }

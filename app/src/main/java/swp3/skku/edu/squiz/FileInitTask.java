@@ -26,6 +26,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
 
     final static String filePathfolder = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolder.txt";
     ArrayList<FolderItem> folderItemList;
+    ArrayList<FolderItem> oriFolderList;
 
     final static String filePathfolderlist = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/squizfolderlist.txt";
     ArrayList<FolderList> folderCardsetList;
@@ -47,6 +48,13 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
         this.folderItemList=folderItemList;
         this.idx=OPCode.INIT_Folder_Item_Lists;
     }
+
+    public FileInitTask(ArrayList<FolderItem> folderItemList,ArrayList<FolderItem> oriFolderList, int i){
+        this.folderItemList=folderItemList;
+        this.oriFolderList = oriFolderList;
+        this.idx=OPCode.INIT_Folder_Item_Lists;
+    }
+
 
     public FileInitTask(ArrayList<FolderList> folderCardsetList, int i, boolean a){
         this.folderCardsetList = folderCardsetList;
@@ -105,6 +113,7 @@ public class FileInitTask extends AsyncTask<Void, Void, Void>{
                     check = 0;
                     for(int i=0; i<count-1; i++) reader1.readLine();
                 }
+                oriFolderList.addAll(folderItemList);
                 reader1.close();
                 is1.close();
             } catch (IOException e) {

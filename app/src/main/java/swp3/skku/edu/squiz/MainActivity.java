@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     int cardCount;
     String cardChanged;
     String searchingStr = "";
+    String searchStrRight = "";
     int position=0;
 
     final Context context=this;
@@ -81,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 position=tab.getPosition();
                 if(position==0){
                     MainTitle.setText("카드");
+                    searchSet.setText("");
                     tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
                     tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
                 }
                 else if(position==1){
                     MainTitle.setText("폴더");
+                    searchSet.setText("");
                     tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_notselected_24dp);
                     tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_black_24dp);
                 }
@@ -122,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_add_card:
+                        Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
+                        startActivityForResult(intent, REQUEST_DataItemSet);
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
 
@@ -154,9 +159,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                searchingStr = searchSet.getText().toString();
+
                 if(position == 0) {
+                    searchingStr = searchSet.getText().toString();
                     leftFragment.searchSet(searchingStr);
+                }
+                else if(position == 1) {
+                    searchStrRight = searchSet.getText().toString();
+                    rightFragment.searchSet(searchStrRight);
                 }
 
             }
