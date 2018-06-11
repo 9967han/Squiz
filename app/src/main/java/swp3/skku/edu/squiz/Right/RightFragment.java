@@ -46,7 +46,7 @@ public class RightFragment extends android.support.v4.app.Fragment {
 
 
     public boolean saveFolderData(String folder_name){
-        Boolean add=false;
+        Boolean add;
         FolderItem folderItem = new FolderItem(folder_name);
         add = adapter_right.addFolderData(folderItem);
 

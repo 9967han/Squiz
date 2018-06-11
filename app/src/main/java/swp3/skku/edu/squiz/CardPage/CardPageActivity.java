@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import swp3.skku.edu.squiz.Add_Card_to_Folder.AdapterACTF;
 import swp3.skku.edu.squiz.Add_Card_to_Folder.AddCardToFolderActivity;
 import swp3.skku.edu.squiz.EditCard.EditCardActivity;
 import swp3.skku.edu.squiz.FileDeleteTask;
@@ -32,6 +33,7 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
     TextView cardpage_count;
     TextView cardpage_like_count;
     Adapter_cardPage adapter_cardPage;
+    AdapterACTF adapterACTF;
     RecyclerView cardpage_RV;
     TextView cardpage_word_card;
     TextView cardpage_subjective;
@@ -105,6 +107,8 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        adapterACTF = new AdapterACTF(R.layout.add_card_to_folder_content,getApplicationContext());
+
         switch (item.getItemId()){
             case R.id.add_to_folder:{
                 Toast.makeText(getApplicationContext(),"카드를 추가할 폴더를 선택하세요", Toast.LENGTH_SHORT).show();
@@ -123,9 +127,13 @@ public class CardPageActivity extends AppCompatActivity implements View.OnClickL
             }
             case R.id.delete_card:{
                 Toast.makeText(getApplicationContext(), "카드를 삭제합니다", Toast.LENGTH_SHORT).show();
+
                 FileDeleteTask fileTask = new FileDeleteTask(getApplicationContext(), title);
                 fileTask.execute();
                 cardChanged="delete";
+
+                adapterACTF.deleteCardSetToFolder(title);
+
                 intent = new Intent();
                 intent.putExtra("changed", cardChanged);
                 intent.putExtra("title", title);

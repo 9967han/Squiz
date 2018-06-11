@@ -255,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
             else if(cardChanged.equals("delete")) {
                 cardTitle = data.getStringExtra("title");
                 leftFragment.DeleteCardSetData(cardTitle);
-                //adapterACTF.deleteCardSetToFolder(cardTitle);//Todo 김하은 0611
             }
         }
     }
@@ -265,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void savefolder_data(String folder_name) throws IOException {
-        boolean success = false;
+        boolean success;
         success = rightFragment.saveFolderData(folder_name);
         if(success){
             Toast.makeText(getApplicationContext(),"폴더 저장완료", Toast.LENGTH_SHORT).show();

@@ -119,22 +119,22 @@ public class AdapterACTF extends RecyclerView.Adapter<ViewHolder_ACTF>  {
         return folderLists;
     }
 
-    public void deleteCardSetToFolder(String title){//Todo 김하은 0611
+    public void deleteCardSetToFolder(String title){
         this.folderLists = readFile();
-
+        int pos=0;
         for(FolderList folderList : folderLists){
-            if(folderList.getFoldertitle().equals(title)){
-                ArrayList<String> arrayList = new ArrayList<>();
-                arrayList = folderList.getCardsetInFolder();
-                if(arrayList.contains(title)){
-                    int pos = arrayList.indexOf(title);
-                    arrayList.remove(pos);
-                }
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList = folderList.getCardsetInFolder();
+            if(arrayList.contains(title)){
+                pos = arrayList.indexOf(title);
+                arrayList.remove(pos);
             }
         }
+
+        notifyItemRemoved(pos);
+
         FileOutTask fileOutTask = new FileOutTask(folderLists);
         fileOutTask.execute();
-
     }
 
     public void addCardSetToFolder(String title) {
