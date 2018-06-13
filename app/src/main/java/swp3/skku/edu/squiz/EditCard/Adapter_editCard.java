@@ -128,6 +128,8 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         holder.editTextWord.setText(cardItem.getWord());
         holder.editTextMean.setText(cardItem.getMeaning());
         holder.position = position;
+        //holder.editTextWord.requestFocus();
+
     }
 
     @Override

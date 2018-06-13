@@ -37,8 +37,11 @@ public class InsideFolderActivity extends AppCompatActivity{
     RecyclerView FolderPage_RV;
     Adapter_InsideFolder adapter_insideFolder;
     String title;
+    String mode;
     Intent myIntent;
     int count;
+    final static int REQUEST_DataItemSet = 1;
+    final static int REQUEST_EditItemSet = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +68,36 @@ public class InsideFolderActivity extends AppCompatActivity{
         FolderToolbar=findViewById(R.id.my_toolbar);
         TitleTextView = findViewById(R.id.InsideFolderTitle);
         FolderPage_RV = findViewById(R.id.InsideFolderRV);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK){
+            return;
+        }
+        if(requestCode == REQUEST_EditItemSet) {
+            Intent intent = new Intent();
+
+            mode = data.getStringExtra("changed");
+            if(mode.equals("true")) {
+                count = Integer.valueOf(data.getStringExtra("count"));
+                adapter_insideFolder.editCardSetCount(title, count);
+
+                intent.putExtra("title", data.getStringExtra("title"));
+                intent.putExtra("count", data.getStringExtra("count"));
+                intent.putExtra("changed", data.getStringExtra("changed"));
+                setResult(RESULT_OK, intent);
+            }
+            else if(mode.equals("delete")) {
+                adapter_insideFolder.deleteCardSetCount(title);
+
+                intent.putExtra("title", data.getStringExtra("title"));
+                intent.putExtra("changed", data.getStringExtra("changed"));
+
+                setResult(RESULT_OK, intent);
+
+            }
+        }
     }
 }

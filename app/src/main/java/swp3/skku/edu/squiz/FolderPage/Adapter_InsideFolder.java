@@ -80,5 +80,36 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
         FileInitTask fileInitTask = new FileInitTask(cardSetItemList);
         fileInitTask.execute();
     }
+
+    public void editCardSetCount(String Cardtitle, int count) {
+        loadFolderData(title);
+        loadFileData();
+       /*int i = 0;
+        int size = cardSetItemList.size();
+        while (i < size) {
+            if(cardSetItemList.get(i).getTitle().equals(title)) {
+                cardSetItemList.get(i).setCount(count);
+                break;
+            }
+            i+=1;
+        }
+        notifyDataSetChanged();*/
+    }
+
+    public void deleteCardSetCount(String Cardtitle) {
+        loadFolderData(title);
+        loadFileData();
+        /*int i = 0;
+        int size = cardSetItemList.size();
+        while (i < size) {
+            if(cardSetItemList.get(i).getTitle().equals(title)) {
+                cardSetItemList.remove(i);
+                break;
+            }
+            i+=1;
+        }
+        notifyDataSetChanged();*/
+
+    }
 }
 

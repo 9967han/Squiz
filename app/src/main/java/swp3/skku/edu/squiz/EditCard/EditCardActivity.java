@@ -51,11 +51,14 @@ public class EditCardActivity extends AppCompatActivity {
         title = editIntent.getStringExtra("title");
         cardTitle.setText(title);
 
+
         try {
             adapter_editCard.loadCardData(title);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //cardTitle.requestFocus();
     }
 
     public void onEditCardFloatingClick(View view) {

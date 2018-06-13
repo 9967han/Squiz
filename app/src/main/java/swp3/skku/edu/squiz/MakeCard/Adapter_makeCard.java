@@ -22,6 +22,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
     private int contentLayout;
     private Context context;
     AppCompatActivity appCompatActivity;
+    private ViewHolder_makeCard viewHolder_makeCard;
     public Adapter_makeCard(int contentLayout, Context context, AppCompatActivity appCompatActivity) {
         this.contentLayout = contentLayout;
         this.context = context;
@@ -36,7 +37,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         View makeCard_view;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         makeCard_view = inflater.inflate(contentLayout, parent, false);
-        final ViewHolder_makeCard viewHolder_makeCard = new ViewHolder_makeCard(makeCard_view);
+        viewHolder_makeCard = new ViewHolder_makeCard(makeCard_view);
 
         //word 입력 후 focus 변환 시 데이터 입력
         viewHolder_makeCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener(){
@@ -113,6 +114,8 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
     public void addItem(CardItem cardItem){
         cardItemList.add(cardItem);
         notifyItemInserted(cardItemList.size()-1);
+        //viewHolder_makeCard.editTextWord.requestFocus(cardItemList.size()-1);
+
     }
 
     //생성된 뷰에 데이터 할당.
@@ -122,6 +125,8 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         holder.editTextWord.setText(cardItem.getWord());
         holder.editTextMean.setText(cardItem.getMeaning());
         holder.position = position;
+        holder.editTextWord.requestFocus();
+
     }
 
     @Override

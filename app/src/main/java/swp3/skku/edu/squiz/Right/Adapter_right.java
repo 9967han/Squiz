@@ -45,7 +45,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
                 Intent intent = new Intent(activity, InsideFolderActivity.class);
                 intent.putExtra("title", title);
 //                intent.putExtra("count", count);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 2);
             }
         });
         return viewHolder_right;

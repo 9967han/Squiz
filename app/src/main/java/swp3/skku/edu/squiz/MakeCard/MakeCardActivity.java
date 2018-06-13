@@ -58,6 +58,7 @@ public class MakeCardActivity extends AppCompatActivity {
         adapter_makeCard = new Adapter_makeCard(R.layout.make_card_content, this, this);
         makeCardRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         makeCardRecyclerView.setAdapter(adapter_makeCard);
+        cardTitle.requestFocus();
 
     }
 

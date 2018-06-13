@@ -100,7 +100,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
             }
             i+=1;
         }
-        notifyItemChanged(i);
+        notifyDataSetChanged();
         //firstSearch = true;
         oriNumberOfItems = getItemCount();
     }
@@ -117,7 +117,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
             }
             i+=1;
         }
-        notifyItemRemoved(i);
+        notifyDataSetChanged();
         //firstSearch = true;
         oriNumberOfItems = getItemCount();
     }
