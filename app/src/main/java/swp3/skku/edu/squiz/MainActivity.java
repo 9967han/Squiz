@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         if(viewPager.getCurrentItem() == 0){
             Toast.makeText(getApplicationContext(), "카드만들기", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
+            intent.putExtra("cardSet", leftFragment.returnCardSet());
             startActivityForResult(intent, REQUEST_DataItemSet);
         }
 

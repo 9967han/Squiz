@@ -1,12 +1,13 @@
 package swp3.skku.edu.squiz.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by LG on 2018-05-07.
  */
 
-public class CardSetItem {
+public class CardSetItem implements Serializable {
     int count;
     String title;
     String folder;

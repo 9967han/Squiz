@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardSetItem;
 
@@ -56,6 +58,9 @@ public class LeftFragment extends android.support.v4.app.Fragment {
     /*public void notSearchSet() {
         adapter_left.notSearchSet();
     }*/
+    public ArrayList<CardSetItem> returnCardSet() {
+        return adapter_left.returnCardSet();
+    }
 
 
 }
