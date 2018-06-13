@@ -18,6 +18,7 @@ import swp3.skku.edu.squiz.model.FolderList;
 
 public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     private ArrayList<FolderItem> folderItemList = new ArrayList<>();
+    private ArrayList<FolderItem> oriFolderList = new ArrayList<>();
     private int contentLayout;
     private Context context;
     Activity activity;
@@ -63,7 +64,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     }
 
     public void initFolderSetData(){
-        FileInitTask fileInitTask = new FileInitTask(folderItemList,1);
+        FileInitTask fileInitTask = new FileInitTask(folderItemList, oriFolderList, 1);
         fileInitTask.execute();
     }
 
@@ -74,7 +75,29 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
             }
         }
         folderItemList.add(folderItem);
+        oriFolderList.add(folderItem);
         notifyItemInserted(folderItemList.size()-1);
         return true;
+    }
+
+    public void searchSet(String str) {
+
+
+        if(str.length() == 0) {
+            folderItemList.clear();
+            folderItemList.addAll(oriFolderList);
+        }
+        else {
+            folderItemList.clear();
+            for (int i = 0; i <oriFolderList.size(); i++) {
+                if (oriFolderList.get(i).getFolder_name().toLowerCase().contains(str.toLowerCase())) {
+                    folderItemList.add(oriFolderList.get(i));
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+
+
     }
 }
