@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.R;
 import swp3.skku.edu.squiz.model.CardItem;
+import swp3.skku.edu.squiz.model.CardSetItem;
 
 public class MakeCardActivity extends AppCompatActivity {
 
@@ -38,7 +39,9 @@ public class MakeCardActivity extends AppCompatActivity {
     String title;
     int count;
     AppCompatActivity MakeCardActivity;
-    //ArrayList<String> titleList;
+    ArrayList<CardSetItem> titleList;
+    boolean check;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class MakeCardActivity extends AppCompatActivity {
 
         setContentView(R.layout.make_card);
         MakeCardActivity = this;
+
+        titleList = (ArrayList<CardSetItem>) getIntent().getSerializableExtra("cardSet");
 
         RecyclerView makeCardRecyclerView = findViewById(R.id.makeCardRV);
         cardTitle = findViewById(R.id.makeCardTitle);
@@ -91,9 +96,20 @@ public class MakeCardActivity extends AppCompatActivity {
     }
 
     public void onMakeCardSaveButtonClick(View view) {
+        check = false;
         constraintLayout.setFocusableInTouchMode(true);
         constraintLayout.requestFocus();
         title = cardTitle.getText().toString();
+        for(int i=0; i<titleList.size(); i++) {
+            if (title.equals(titleList.get(i).getTitle())) {
+                check = true;
+            }
+        }
+        if(check) {
+            Toast.makeText(this, "이미 존재하는 카드명입니다", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(title != null && !title.equals("")){
             try {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
