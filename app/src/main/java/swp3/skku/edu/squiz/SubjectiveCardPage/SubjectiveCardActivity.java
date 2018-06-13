@@ -40,7 +40,7 @@ public class SubjectiveCardActivity extends AppCompatActivity {
             userAnswerList.add(userAnswerItem);
         }
 
-        adapter_subjective = new Adapter_subjective(R.layout.subjectivepage_content, this, subjectiveItemList, userAnswerList, SubjectiveCardActivity.this);
+        adapter_subjective = new Adapter_subjective(title, R.layout.subjectivepage_content, this, subjectiveItemList, userAnswerList, SubjectiveCardActivity.this);
         subjectiveRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         subjectiveRV.setAdapter(adapter_subjective);
     }

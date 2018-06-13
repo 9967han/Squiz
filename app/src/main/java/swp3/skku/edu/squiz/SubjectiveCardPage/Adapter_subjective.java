@@ -29,8 +29,10 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
     private Context context;
     private int correct_num;
     private SubjectiveCardActivity subjectiveCardActivity;
+    private String title;
 
-    public Adapter_subjective(int subjectivepage_content, Context context, ArrayList<CardItem> subjectiveItemList, ArrayList<UserAnswerItem> userAnswerList, SubjectiveCardActivity subjectiveCardActivity) {
+    public Adapter_subjective(String title, int subjectivepage_content, Context context, ArrayList<CardItem> subjectiveItemList, ArrayList<UserAnswerItem> userAnswerList, SubjectiveCardActivity subjectiveCardActivity) {
+        this.title=title;
         subjective_content = subjectivepage_content;
         this.context = context;
         this.subjectiveItemList = subjectiveItemList;
@@ -60,6 +62,8 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
                          correct_num++;
                          if(correct_num == subjectiveItemList.size()){
                              Intent intent = new Intent(subjectiveCardActivity, EndPageActivity.class);
+                             intent.putExtra("title", title);
+                             intent.putExtra("cardSet", subjectiveItemList);
                              subjectiveCardActivity.startActivity(intent);
                              correct_num--;
                          }
