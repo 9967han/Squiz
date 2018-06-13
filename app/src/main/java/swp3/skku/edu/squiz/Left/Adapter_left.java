@@ -32,6 +32,8 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
     private Context context; // 이거맞나
     Activity activity;
     int oriNumberOfItems;
+    boolean nowSearch = false;
+    private String searchQuery;
     //boolean firstSearch = true;
     private ArrayList<CardSetItem> oriCardSetList = new ArrayList<>();
 
@@ -83,39 +85,59 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
     }
 
     public void addCardSetData(CardSetItem cardSetItem) {
-        cardSetItemList.add(cardSetItem);
         oriCardSetList.add(cardSetItem);
+        if(nowSearch) {
+            searchSet(searchQuery);
+        }
+        else {
+            cardSetItemList.add(cardSetItem);
+        }
         notifyItemInserted(cardSetItemList.size()-1);
         //firstSearch = true;
         oriNumberOfItems = getItemCount();
     }
     public void editCountCardSet(String title, int count) {
         int i = 0;
-        int size = cardSetItemList.size();
+        int size = oriCardSetList.size();
         while (i < size) {
-            if(cardSetItemList.get(i).getTitle().equals(title)) {
-                cardSetItemList.get(i).setCount(count);
+            if(oriCardSetList.get(i).getTitle().equals(title)) {
                 oriCardSetList.get(i).setCount(count);
                 break;
             }
             i+=1;
         }
+        if(nowSearch) {
+            searchSet(searchQuery);
+        }
+        else {
+            cardSetItemList.clear();
+            cardSetItemList.addAll(oriCardSetList);
+
+        }
+
         notifyDataSetChanged();
         //firstSearch = true;
         oriNumberOfItems = getItemCount();
     }
 
     public void deleteCardSetData(String title) {
-        Iterator<CardSetItem> iter = cardSetItemList.iterator();
+        Iterator<CardSetItem> iter = oriCardSetList.iterator();
         int i=0;
         while(iter.hasNext()){
             CardSetItem cardSetItem = iter.next();
             if(cardSetItem.getTitle().equals(title)){
                 iter.remove();
-                oriCardSetList.remove(i);
                 break;
             }
             i+=1;
+        }
+        if(nowSearch) {
+            searchSet(searchQuery);
+        }
+        else {
+            cardSetItemList.clear();
+            cardSetItemList.addAll(oriCardSetList);
+
         }
         notifyDataSetChanged();
         //firstSearch = true;
@@ -123,9 +145,10 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
     }
 
     public void searchSet(String str) {
-
+        searchQuery = str;
 
         if(str.length() == 0) {
+            nowSearch = false;
             /*if(firstSearch) {
                 oriCardSetList.clear();
                 oriCardSetList.addAll(cardSetItemList);
@@ -137,6 +160,7 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
             cardSetItemList.addAll(oriCardSetList);
         }
         else {
+            nowSearch = true;
             cardSetItemList.clear();
             for (int i = 0; i <oriCardSetList.size(); i++) {
                 if (oriCardSetList.get(i).getTitle().toLowerCase().contains(str.toLowerCase())) {
