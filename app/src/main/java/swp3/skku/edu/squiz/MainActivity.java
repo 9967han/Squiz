@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     String searchingStr = "";
     String searchStrRight = "";
     int position=0;
+    TabLayout tabLayout;
 
     final Context context=this;
     private ArrayList<FolderItem> FolderItemList = new ArrayList<>();
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         searchSet = findViewById(R.id.search_set);
 
         viewPager = findViewById(R.id.main_view_pager);
-        final TabLayout tabLayout = findViewById(R.id.main_tab_layout);
+        tabLayout = findViewById(R.id.main_tab_layout);
 
         fragments_array = new Fragment[2];
         fragments_array[0] = new LeftFragment();
@@ -285,4 +287,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(position == 1) {
+            viewPager.setCurrentItem(0);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }
