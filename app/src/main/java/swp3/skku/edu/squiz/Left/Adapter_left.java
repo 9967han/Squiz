@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -151,6 +153,12 @@ public class Adapter_left extends RecyclerView.Adapter<ViewHolder_left>  {
         oriCardSetList.clear();
         oriCardSetList.addAll(cardSetItemList);
         oriNumberOfItems = getItemCount();
+    }
+
+    public ArrayList<CardSetItem> returnCardSet() {
+        ArrayList<CardSetItem> temp = new ArrayList<>();
+        temp.addAll(oriCardSetList);
+        return temp;
     }
 }
 
