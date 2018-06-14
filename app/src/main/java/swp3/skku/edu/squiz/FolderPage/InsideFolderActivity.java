@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class InsideFolderActivity extends AppCompatActivity{
     TextView TitleTextView;
     RecyclerView FolderPage_RV;
     Adapter_InsideFolder adapter_insideFolder;
+    ImageView folderModify;
     String title;
     String mode;
     Intent myIntent;
@@ -62,6 +64,14 @@ public class InsideFolderActivity extends AppCompatActivity{
 
         FolderPage_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         FolderPage_RV.setAdapter(adapter_insideFolder);
+
+        folderModify = findViewById(R.id.insideFolderModify);
+        folderModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void findViews(){
