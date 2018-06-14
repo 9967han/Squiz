@@ -1,5 +1,6 @@
 package swp3.skku.edu.squiz;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -32,6 +34,7 @@ import swp3.skku.edu.squiz.MakeCard.MakeCardActivity;
 import swp3.skku.edu.squiz.Right.RightFragment;
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderItem;
+import swp3.skku.edu.squiz.navigation.AddCardSetFrag;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -113,11 +116,12 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 item.setChecked(true);
-                drawerLayout.closeDrawers();
                 FragmentManager manager = getFragmentManager();
+                android.app.FragmentTransaction transaction = manager.beginTransaction();
                 int id = item.getItemId();
                 // 각 메뉴 클릭시 이뤄지는 이벤트
                 switch (id){
@@ -127,8 +131,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_add_card:
-                        Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
-                        startActivityForResult(intent, REQUEST_DataItemSet);
+                        AddCardSetFrag fragment = new AddCardSetFrag(cardTitle);
+                        transaction.add(R.layout.fragment_add_card_set, fragment).commit();
+                        //Intent intent = new Intent(MainActivity.this, MakeCardActivity.class);
+                        //startActivityForResult(intent, REQUEST_DataItemSet);
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
 
@@ -141,6 +147,14 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
                 }
+                /*if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_fragment_layout, fragment);
+                    ft.commit();
+                }*/
+
+                drawerLayout.closeDrawers();
+
 
                 return true;
             }
