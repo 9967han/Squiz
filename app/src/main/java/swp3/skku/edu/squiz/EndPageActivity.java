@@ -26,7 +26,7 @@ public class EndPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);;
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.endpage);
         restartSubjective = findViewById(R.id.restartSub);
         restartCardPage = findViewById(R.id.restartCardPage);
@@ -41,18 +41,19 @@ public class EndPageActivity extends AppCompatActivity {
                 intenta.putExtra("title", tempa.getStringExtra("title"));
                 intenta.putExtra("list", tempa.getSerializableExtra("cardSet"));
                 startActivity(intenta);
+                finish();
             }
         });
 
         restartCardPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentb = new Intent(getApplicationContext(), CardPageActivity.class);
+                /*Intent intentb = new Intent(getApplicationContext(), CardPageActivity.class);
                 Intent tempb = getIntent();
                 intentb.putExtra("title", tempb.getStringExtra("title"));
                 intentb.putExtra("count", String.valueOf(((ArrayList<CardItem>)tempb.getSerializableExtra("cardSet")).size()));
-                startActivity(intentb);
-
+                startActivity(intentb);*/
+                finish();
             }
         });
 
@@ -64,18 +65,19 @@ public class EndPageActivity extends AppCompatActivity {
                 intenta.putExtra("title", tempa.getStringExtra("title"));
                 intenta.putExtra("list", tempa.getSerializableExtra("cardSet"));
                 startActivity(intenta);
+                finish();
             }
         });
 
         end_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentb = new Intent(getApplicationContext(), CardPageActivity.class);
+                /*Intent intentb = new Intent(getApplicationContext(), CardPageActivity.class);
                 Intent tempb = getIntent();
                 intentb.putExtra("title", tempb.getStringExtra("title"));
                 intentb.putExtra("count", String.valueOf(((ArrayList<CardItem>)tempb.getSerializableExtra("cardSet")).size()));
-                startActivity(intentb);
-
+                startActivity(intentb);*/
+                finish();
             }
         });
 

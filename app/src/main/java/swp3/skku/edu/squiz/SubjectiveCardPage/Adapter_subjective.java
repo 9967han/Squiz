@@ -66,6 +66,7 @@ public class Adapter_subjective extends RecyclerView.Adapter<ViewHolder_subjecti
                              intent.putExtra("cardSet", subjectiveItemList);
                              subjectiveCardActivity.startActivity(intent);
                              correct_num--;
+                             subjectiveCardActivity.finish();
                          }
                      }else{
                          Toast.makeText(context, "오답입니다", Toast.LENGTH_SHORT).show();

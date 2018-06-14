@@ -125,7 +125,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         holder.editTextWord.setText(cardItem.getWord());
         holder.editTextMean.setText(cardItem.getMeaning());
         holder.position = position;
-        holder.editTextWord.requestFocus();
+        //holder.editTextWord.requestFocus();
 
     }
 
