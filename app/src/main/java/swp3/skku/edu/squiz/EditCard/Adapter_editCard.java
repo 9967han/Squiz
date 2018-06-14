@@ -49,14 +49,19 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         viewHolder_editCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                String word = viewHolder_editCard.editTextWord.getText().toString();
-                if(!hasFocus) {
-                    int position = viewHolder_editCard.position;
-                    Log.w("word", String.valueOf(position));
-                    if(position!=-1) {
-                        CardItem carditem = cardItemList.get(position);
-                        carditem.setWord(word);
+                try {
+                    String word = viewHolder_editCard.editTextWord.getText().toString();
+                    if (!hasFocus) {
+                        int position = viewHolder_editCard.position;
+                        Log.w("word", String.valueOf(position));
+                        if (position != -1) {
+                            CardItem carditem = cardItemList.get(position);
+                            carditem.setWord(word);
+                        }
                     }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -65,13 +70,19 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         viewHolder_editCard.editTextMean.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                String mean = viewHolder_editCard.editTextMean.getText().toString();
-                if(!hasFocus){
-                    int position = viewHolder_editCard.position;
-                    if(position!=-1) {
-                        CardItem carditem = cardItemList.get(position);
-                        carditem.setMeaning(mean);
+                try {
+                    String mean = viewHolder_editCard.editTextMean.getText().toString();
+                    if (!hasFocus) {
+                        int position = viewHolder_editCard.position;
+                        if (position != -1) {
+                            CardItem carditem = cardItemList.get(position);
+                            carditem.setMeaning(mean);
+                        }
+
                     }
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -98,6 +109,7 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
                 }
             }
         });
+
         return viewHolder_editCard;
     }
 

@@ -21,6 +21,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
     private ArrayList<CardItem> cardItemList = new ArrayList<>();
     private int contentLayout;
     private Context context;
+    boolean deleteNow = false;
     AppCompatActivity appCompatActivity;
     private ViewHolder_makeCard viewHolder_makeCard;
     public Adapter_makeCard(int contentLayout, Context context, AppCompatActivity appCompatActivity) {
@@ -43,29 +44,21 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         viewHolder_makeCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                String word = viewHolder_makeCard.editTextWord.getText().toString();
-                if(!hasFocus){
-                    int position = viewHolder_makeCard.position;
-                    Log.w("word", String.valueOf(position));
-                    if(position!=-1) {
-                        CardItem carditem = cardItemList.get(position);
-                        carditem.setWord(word);
+                try {
+
+                    String word = viewHolder_makeCard.editTextWord.getText().toString();
+                    if (!hasFocus) {
+                        int position = viewHolder_makeCard.position;
+                        Log.w("word", String.valueOf(position));
+                        if (position != -1) {
+                            CardItem carditem = cardItemList.get(position);
+                            carditem.setWord(word);
+                        }
+
                     }
                 }
-            }
-        });
-
-        //mean 입력 후 focus 변환 시 데이터 입력
-        viewHolder_makeCard.editTextMean.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                String mean = viewHolder_makeCard.editTextMean.getText().toString();
-                if(!hasFocus){
-                    int position = viewHolder_makeCard.position;
-                    if(position!=-1) {
-                        CardItem carditem = cardItemList.get(position);
-                        carditem.setMeaning(mean);
-                    }
+                catch(Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -80,6 +73,31 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
                 }
             }
         });
+
+        //mean 입력 후 focus 변환 시 데이터 입력
+        viewHolder_makeCard.editTextMean.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                try {
+                    String mean = viewHolder_makeCard.editTextMean.getText().toString();
+                    if (!hasFocus) {
+                        int position = viewHolder_makeCard.position;
+                        if (position != -1) {
+                            CardItem carditem = cardItemList.get(position);
+                            carditem.setMeaning(mean);
+
+
+                        }
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
+
 
         //다시쓰기 누를 시 에딧텍스트 값 비우기
         viewHolder_makeCard.rewrite.setOnClickListener(new View.OnClickListener(){

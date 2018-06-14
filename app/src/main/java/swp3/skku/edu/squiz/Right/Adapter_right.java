@@ -22,6 +22,8 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     private int contentLayout;
     private Context context;
     Activity activity;
+    boolean searchNow = false;
+    String searchQuery = "";
     //final static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Squiz/logfile.txt";
 
     public Adapter_right(int contentLayout, Context context, FragmentActivity activity){
@@ -45,7 +47,7 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
                 Intent intent = new Intent(activity, InsideFolderActivity.class);
                 intent.putExtra("title", title);
 //                intent.putExtra("count", count);
-                activity.startActivityForResult(intent, 2);
+                activity.startActivityForResult(intent, 3);
             }
         });
         return viewHolder_right;
@@ -69,25 +71,34 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
     }
 
     public boolean addFolderData(FolderItem folderItem) {
-        for(FolderItem folderItem1 : folderItemList){
+        for(FolderItem folderItem1 : oriFolderList){
             if(folderItem.getFolder_name().equals(folderItem1.getFolder_name())){
                 return false;
             }
         }
-        folderItemList.add(folderItem);
         oriFolderList.add(folderItem);
+        if(!searchNow) {
+            folderItemList.clear();
+            folderItemList.addAll(oriFolderList);
+        }
+        else {
+            searchSet(searchQuery);
+        }
         notifyItemInserted(folderItemList.size()-1);
         return true;
     }
 
     public void searchSet(String str) {
+        searchQuery = str;
 
 
         if(str.length() == 0) {
+            searchNow = false;
             folderItemList.clear();
             folderItemList.addAll(oriFolderList);
         }
         else {
+            searchNow = true;
             folderItemList.clear();
             for (int i = 0; i <oriFolderList.size(); i++) {
                 if (oriFolderList.get(i).getFolder_name().toLowerCase().contains(str.toLowerCase())) {
@@ -99,5 +110,26 @@ public class Adapter_right extends RecyclerView.Adapter<ViewHolder_right>  {
         notifyDataSetChanged();
 
 
+    }
+
+    public void editFolderName(String title, String newTitle) {
+        for (int i = 0; i < oriFolderList.size(); i++) {
+            if (oriFolderList.get(i).getFolder_name().equals(title)) {
+                oriFolderList.get(i).setFolder_name(newTitle);
+                break;
+            }
+
+
+
+
+        }
+        if (!searchNow) {
+            folderItemList.clear();
+            folderItemList.addAll(oriFolderList);
+        } else {
+            searchSet(searchQuery);
+        }
+
+        notifyDataSetChanged();
     }
 }
