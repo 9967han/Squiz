@@ -64,5 +64,9 @@ public class RightFragment extends android.support.v4.app.Fragment {
         adapter_right.searchSet(str);
     }
 
+    public void EditFolderName(String title, String newTitle) {
+        adapter_right.editFolderName(title, newTitle);
+    }
+
 
 }

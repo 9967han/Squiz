@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 
 import swp3.skku.edu.squiz.CardPage.CardPageActivity;
 import swp3.skku.edu.squiz.FileInitTask;
+import swp3.skku.edu.squiz.FileOutTask;
 import swp3.skku.edu.squiz.FolderLoadTask;
 import swp3.skku.edu.squiz.model.CardSetItem;
 import swp3.skku.edu.squiz.model.FolderList;
@@ -71,14 +71,20 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
         return FolderLists.size();
     }
 
-    public void loadFolderData(String title) {
-        FolderLoadTask folderLoadTask = new FolderLoadTask(title, FolderLists);
-        folderLoadTask.execute();
+    public ArrayList<FolderList> getFolderData() {
+        return FolderLists;
     }
 
-    public void loadFileData() {
+    public ArrayList<FolderList> loadFolderData(String title) {
+        FolderLoadTask folderLoadTask = new FolderLoadTask(title, FolderLists);
+        folderLoadTask.execute();
+        return FolderLists;
+    }
+
+    public ArrayList<CardSetItem> loadFileData() {
         FileInitTask fileInitTask = new FileInitTask(cardSetItemList);
         fileInitTask.execute();
+        return cardSetItemList;
     }
 
     public void editCardSetCount(String Cardtitle, int count) {
@@ -109,6 +115,18 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
             i+=1;
         }
         notifyDataSetChanged();*/
+
+    }
+
+    public void editFolderData(String title, String newTitle) {
+        for(int i=0; i<FolderLists.size(); i++) {
+            if(FolderLists.get(i).getFoldertitle().equals(title)) {
+                FolderLists.get(i).setFoldertitle(newTitle);
+                break;
+            }
+        }
+        FileOutTask foldertask = new FileOutTask(FolderLists);
+        foldertask.execute();
 
     }
 }

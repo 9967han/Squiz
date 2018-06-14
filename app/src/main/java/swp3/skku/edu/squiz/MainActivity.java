@@ -48,9 +48,13 @@ public class MainActivity extends AppCompatActivity {
     AdapterACTF adapterACTF;
     final static int REQUEST_DataItemSet = 1;
     final static int REQUEST_EditItemSet = 2;
+    final static int REQUEST_EditFolderName = 3;
     String cardTitle;
     int cardCount;
     String cardChanged;
+    String FolderChanged;
+    String FolderTitle;
+    String FolderChangeTitle;
     String searchingStr = "";
     String searchStrRight = "";
     int position=0;
@@ -281,6 +285,27 @@ public class MainActivity extends AppCompatActivity {
             else if(cardChanged.equals("delete")) {
                 cardTitle = data.getStringExtra("title");
                 leftFragment.DeleteCardSetData(cardTitle);
+            }
+        }
+        if(requestCode == REQUEST_EditFolderName) {
+            cardChanged = data.getStringExtra("changed").trim();
+            FolderChanged = data.getStringExtra("folderchanged").trim();
+            if(cardChanged.equals("true")) {
+                cardTitle = data.getStringExtra("title");
+                cardCount = Integer.valueOf(data.getStringExtra("count"));
+                leftFragment.EditCountCardSet(cardTitle, cardCount);
+            }
+            else if(cardChanged.equals("delete")) {
+                cardTitle = data.getStringExtra("title");
+                leftFragment.DeleteCardSetData(cardTitle);
+            }
+            if(FolderChanged.equals("true")) {
+                FolderTitle = data.getStringExtra("foldertitle");
+                FolderChangeTitle = data.getStringExtra("folderchangetitle");
+                rightFragment.EditFolderName(FolderTitle, FolderChangeTitle);
+            }
+            else if(FolderChanged.equals("delete")) {
+
             }
         }
     }
