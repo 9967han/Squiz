@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView MainTitle=(TextView)findViewById(R.id.main_title);
         MainTitle.setText("카드");
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
         searchSet = findViewById(R.id.search_set);
 
         viewPager = findViewById(R.id.main_view_pager);
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_message_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_folder_notselected_24dp);
-
+        /*
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -147,11 +145,11 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                         break;
                 }
-                /*if (fragment != null) {
+               if (fragment != null) {
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_fragment_layout, fragment);
                     ft.commit();
-                }*/
+                }
 
                 drawerLayout.closeDrawers();
 
@@ -159,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        */
 
         searchSet.addTextChangedListener(new TextWatcher() {
             @Override
@@ -286,9 +285,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onOptionItemSelected(View view) {
+    /*public void onOptionItemSelected(View view) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
+    */
 
     public void savefolder_data(String folder_name) throws IOException {
         boolean success;
