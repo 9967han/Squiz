@@ -44,7 +44,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         viewHolder_makeCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                try {
+                //try {
 
                     String word = viewHolder_makeCard.editTextWord.getText().toString();
                     if (!hasFocus) {
@@ -56,10 +56,10 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
                         }
 
                     }
-                }
-                catch(Exception e) {
-                    e.printStackTrace();
-                }
+                //}
+                //catch(Exception e) {
+                //    e.printStackTrace();
+                //}
             }
         });
 
@@ -78,7 +78,7 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         viewHolder_makeCard.editTextMean.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                try {
+                //try {
                     String mean = viewHolder_makeCard.editTextMean.getText().toString();
                     if (!hasFocus) {
                         int position = viewHolder_makeCard.position;
@@ -89,10 +89,10 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
 
                         }
                     }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                //}
+                //catch (Exception e) {
+                //    e.printStackTrace();
+                //}
             }
 
         });

@@ -49,7 +49,7 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         viewHolder_editCard.editTextWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                try {
+                //try {
                     String word = viewHolder_editCard.editTextWord.getText().toString();
                     if (!hasFocus) {
                         int position = viewHolder_editCard.position;
@@ -59,10 +59,10 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
                             carditem.setWord(word);
                         }
                     }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                //}
+                //catch (Exception e) {
+                //    e.printStackTrace();
+                //}
             }
         });
 
@@ -70,7 +70,7 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
         viewHolder_editCard.editTextMean.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                try {
+                //try {
                     String mean = viewHolder_editCard.editTextMean.getText().toString();
                     if (!hasFocus) {
                         int position = viewHolder_editCard.position;
@@ -80,10 +80,10 @@ public class Adapter_editCard extends RecyclerView.Adapter<ViewHolder_editCard> 
                         }
 
                     }
-                }
-                catch(Exception e) {
-                    e.printStackTrace();
-                }
+                //}
+                //catch(Exception e) {
+                //    e.printStackTrace();
+                //}
             }
         });
 
