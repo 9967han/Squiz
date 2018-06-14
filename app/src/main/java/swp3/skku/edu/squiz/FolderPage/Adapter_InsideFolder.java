@@ -100,6 +100,7 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
             i+=1;
         }
         notifyDataSetChanged();*/
+        notifyDataSetChanged();
     }
 
     public void deleteCardSetCount(String Cardtitle) {
@@ -115,10 +116,12 @@ public class Adapter_InsideFolder extends RecyclerView.Adapter<ViewHolder_Inside
             i+=1;
         }
         notifyDataSetChanged();*/
+        notifyDataSetChanged();
 
     }
 
     public void editFolderData(String title, String newTitle) {
+
         for(int i=0; i<FolderLists.size(); i++) {
             if(FolderLists.get(i).getFoldertitle().equals(title)) {
                 FolderLists.get(i).setFoldertitle(newTitle);

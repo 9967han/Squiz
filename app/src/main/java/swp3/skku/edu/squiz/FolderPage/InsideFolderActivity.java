@@ -101,14 +101,9 @@ public class InsideFolderActivity extends AppCompatActivity{
                                 }
 
                                 else {
+                                    Toast.makeText(context, "폴더명 수정완료", Toast.LENGTH_SHORT).show();
                                     TitleTextView.setText(folder_name);
-                                    ArrayList<FolderList> FolderLists = adapter_insideFolder.getFolderData();
-                                    for(int j=0; j<FolderLists.size(); j++) {
-                                        if(FolderLists.get(j).getFoldertitle().equals(title)) {
-                                            FolderLists.get(j).setFoldertitle(folder_name);
-                                            break;
-                                        }
-                                    }
+
                                     oriTitle = title;
                                     adapter_insideFolder.editFolderData(oriTitle, folder_name);
 
