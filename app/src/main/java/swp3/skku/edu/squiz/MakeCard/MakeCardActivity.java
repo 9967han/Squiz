@@ -41,15 +41,13 @@ public class MakeCardActivity extends AppCompatActivity {
     AppCompatActivity MakeCardActivity;
     ArrayList<CardSetItem> titleList;
     boolean check;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkVerify();
         setContentView(R.layout.make_card);
         MakeCardActivity = this;
-
         titleList = (ArrayList<CardSetItem>) getIntent().getSerializableExtra("cardSet");
 
         RecyclerView makeCardRecyclerView = findViewById(R.id.makeCardRV);
@@ -113,18 +111,7 @@ public class MakeCardActivity extends AppCompatActivity {
 
         if(title != null && !title.equals("")){
             try {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    checkVerify();
-                }else{
-                    /*returnTitleList();
-                    if(titleList.contains(title)) {
-                        Toast.makeText(this, "이미 있는 카드제목입니다", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-
-                    }*/
                     adapter_makeCard.saveCardData(title);
-                }
             } catch (IOException e) {
                 Toast.makeText(this, "카드저장실패", Toast.LENGTH_SHORT).show();
             }
@@ -149,12 +136,6 @@ public class MakeCardActivity extends AppCompatActivity {
             }
             //권한 팝업을 요청하는 메서드 (Write/Read 권한 요청)
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }else{
-            try {
-                adapter_makeCard.saveCardData(title);
-            } catch (IOException e) {
-                Toast.makeText(this, "카드저장실패", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
@@ -182,11 +163,6 @@ public class MakeCardActivity extends AppCompatActivity {
                         }).setCancelable(false).show();
                         return;
                     }
-                }
-                try {
-                    adapter_makeCard.saveCardData(title);
-                } catch (IOException e) {
-                    Toast.makeText(this, "카드저장실패", Toast.LENGTH_SHORT).show();
                 }
             }
         }

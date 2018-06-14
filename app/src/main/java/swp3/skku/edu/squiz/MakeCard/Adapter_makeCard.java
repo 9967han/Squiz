@@ -140,8 +140,5 @@ public class Adapter_makeCard extends RecyclerView.Adapter<ViewHolder_makeCard> 
         fileTask.execute();
     }
 
-
-
-
 }
 
