@@ -35,10 +35,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+
+                    android:id="@+id/insideFolderModify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:onClick="onInsideFolderModifyButtonClick"
                     android:src="@drawable/ic_create_white_24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.9"
