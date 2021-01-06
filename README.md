@@ -1,2 +1,2 @@
-# SoftwarePractice3
-## 소프트웨어실습3 'squiz' 공유 프로젝트 입니다
+# Squiz
+## 퀴즈 학습 도구 'squiz' 공유 프로젝트 입니다
